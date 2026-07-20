@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f7f4ee" />
+    <title>윤슬 & 도현의 결혼식</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root { --ink:#3f3d38; --soft:#8f8a80; --cream:#f7f4ee; --line:#e1dcd2; --olive:#7b8062; --rose:#b57d70; }
+      * { box-sizing:border-box; }
+      html { background:#e8e5de; }
+      body { margin:0; min-height:100vh; color:var(--ink); background:var(--cream); font-family:"Noto Sans KR",sans-serif; }
+      .page { overflow:hidden; max-width:560px; margin:0 auto; background:var(--cream); min-height:100vh; }
+      .hero { position:relative; min-height:100svh; padding:44px 27px max(30px, env(safe-area-inset-bottom)); display:flex; flex-direction:column; text-align:center; isolation:isolate; }
+      .hero::before { content:""; position:absolute; z-index:-2; inset:0; background:linear-gradient(158deg,#f2eee5 0%,#f9f7f1 48%,#ebe7dc 100%); }
+      .arch { position:absolute; z-index:-1; width:94%; height:57%; left:3%; top:15%; border-radius:250px 250px 0 0; background:linear-gradient(130deg,rgba(213,204,187,.82),rgba(243,238,225,.28)); opacity:.65; }
+      .arch::after { content:""; position:absolute; inset:13px; border:1px solid rgba(255,255,255,.6); border-bottom:0; border-radius:240px 240px 0 0; }
+      .topline { display:flex; justify-content:space-between; align-items:center; font-size:10px; letter-spacing:.14em; color:var(--soft); }
+      .topline span:last-child { letter-spacing:.06em; }
+      .intro { margin-top:11vh; letter-spacing:.26em; font-size:11px; color:var(--olive); font-weight:600; }
+      h1 { margin:16px 0 10px; font-family:"Gowun Batang",serif; font-size:37px; font-weight:400; line-height:1.35; letter-spacing:.06em; }
+      h1 i { display:block; color:var(--rose); font-family:"DM Serif Display",serif; font-size:21px; font-style:italic; letter-spacing:0; margin:4px 0; }
+      .date { font-family:"DM Serif Display",serif; font-size:15px; letter-spacing:.13em; color:#5d5a53; }
+      .floral { flex:1; display:flex; align-items:flex-end; justify-content:center; min-height:220px; padding-bottom:12px; }
+      .floral svg { width:min(100%,345px); height:auto; filter:drop-shadow(0 13px 10px rgba(95,85,67,.1)); }
+      .notice { margin:4px auto 0; font-family:"Gowun Batang",serif; font-size:13px; line-height:1.8; color:#68645c; }
+      .scroll { margin:23px auto 0; display:flex; flex-direction:column; gap:7px; align-items:center; color:var(--soft); font-size:9px; letter-spacing:.2em; }
+      .scroll::after { content:""; height:30px; width:1px; background:var(--olive); animation:down 1.8s ease-in-out infinite; transform-origin:top; }
+      @keyframes down { 0%,100% { transform:scaleY(.35); opacity:.35 } 50% { transform:scaleY(1); opacity:1 } }
+      .details { padding:76px 28px 88px; background:#fffdfa; text-align:center; }
+      .eyebrow { color:var(--rose); font:italic 20px "DM Serif Display",serif; }
+      h2 { font:400 25px "Gowun Batang",serif; letter-spacing:.08em; margin:8px 0 27px; }
+      .message { font-family:"Gowun Batang",serif; font-size:14px; line-height:2.15; color:#5e5a53; word-break:keep-all; }
+      .divider { border:0; border-top:1px solid var(--line); margin:39px 0 27px; }
+      .schedule { font:500 15px "Gowun Batang",serif; line-height:2; }
+      .schedule strong { display:block; font-size:18px; font-weight:700; }
+      .location { color:var(--soft); font-size:12px; margin-top:5px; }
+      .buttons { display:flex; gap:9px; margin-top:28px; }
+      .button { flex:1; min-height:47px; display:flex; align-items:center; justify-content:center; gap:7px; border:1px solid var(--line); color:var(--ink); text-decoration:none; font-size:12px; border-radius:2px; }
+      .button.primary { background:var(--olive); color:white; border-color:var(--olive); }
+      .button svg { width:15px; height:15px; }
+      @media (min-width:561px) { body { padding:24px; } .page { box-shadow:0 18px 45px rgba(47,44,36,.16); } }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <div class="arch"></div>
+        <div class="topline"><span>THE WEDDING DAY</span><span>2026. 10. 17</span></div>
+        <p class="intro">WE ARE GETTING MARRIED</p>
+        <h1>윤슬 <i>&amp;</i> 도현</h1>
+        <p class="date">SATURDAY · OCTOBER 17 · 2026</p>
+        <div class="floral" aria-hidden="true">
+          <svg viewBox="0 0 360 287" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M181 272C180 207 164 154 111 105M184 272C197 187 229 147 279 106M181 272C151 216 101 192 46 187M181 272C214 218 281 198 333 207" stroke="#788064" stroke-width="1.5"/>
+            <path d="M118 111C91 91 78 60 85 30C112 49 127 79 118 111ZM105 154C75 147 52 125 47 98C77 100 99 121 105 154ZM244 142C250 108 270 82 300 75C298 107 278 133 244 142ZM275 174C304 152 332 151 352 164C327 184 299 186 275 174Z" fill="#9CA184" opacity=".82"/>
+            <path d="M111 106C103 82 108 58 128 40C143 62 137 89 111 106ZM224 157C217 132 225 111 246 98C257 121 248 145 224 157ZM88 190C66 180 54 161 58 139C82 147 94 166 88 190ZM287 203C306 189 328 190 343 205C323 219 302 218 287 203Z" fill="#C3C7A9"/>
+            <g fill="#D8A8A0"><path d="M115 102c-18-21 13-36 21-8 12-25 39 0 17 17-14 11-29 5-38-9Z"/><path d="M235 148c-13-19 13-29 20-6 13-19 34 5 13 17-14 8-27 2-33-11Z"/><path d="M82 184c-11-17 11-26 18-6 11-17 30 3 11 14-12 7-23 3-29-8Z"/><path d="M280 197c-12-18 12-29 20-7 12-18 33 4 13 16-13 8-26 3-33-9Z"/></g>
+            <path d="M181 272c-8-54-12-104 2-160M183 183c17-30 34-50 59-71M177 198c-17-30-32-53-60-77" stroke="#687053" stroke-width="1.25"/>
+            <path d="M173 116c-16-25 17-42 27-10 15-27 47 3 21 23-17 13-37 7-48-13Z" fill="#B57D70"/><circle cx="196" cy="117" r="5" fill="#F2D8B3"/>
+          </svg>
+        </div>
+        <p class="notice">서로의 가장 빛나는 순간을<br />함께해 주시면 감사하겠습니다.</p>
+        <div class="scroll">SCROLL</div>
+      </section>
+      <section class="details">
+        <div class="eyebrow">Invitation</div>
+        <h2>소중한 분들을 초대합니다</h2>
+        <p class="message">오랜 시간 서로를 바라보며 걸어온 두 사람이<br />이제 같은 길을 함께 걸어가려 합니다.<br />따뜻한 마음으로 축복해 주시면 감사하겠습니다.</p>
+        <hr class="divider" />
+        <div class="schedule"><strong>2026년 10월 17일 토요일 오후 1시</strong>라루체 웨딩홀 5층 그레이스홀</div>
+        <p class="location">서울특별시 중구 퇴계로 18길 46</p>
+        <div class="buttons">
+          <a class="button" href="#location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>오시는 길</a>
+          <a class="button primary" href="tel:010-0000-0000"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg>마음 전하기</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
