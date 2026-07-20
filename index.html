@@ -9,56 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./sections/calendar.css" />
   </head>
   <body>
-    <main class="page">
-      <section class="hero">
-        <div class="arch"></div>
-        <div class="topline"><span>THE WEDDING DAY</span><span data-wedding="shortDate"></span></div>
-        <figure class="photo-frame">
-          <img data-wedding-image="heroPhoto" data-wedding-alt="heroPhotoAlt" />
-        </figure>
-        <p class="intro" data-wedding="heroLabel"></p>
-        <h1><span data-wedding="groomName"></span><i>&amp;</i><span data-wedding="brideName"></span></h1>
-        <p class="date" data-wedding="englishDate"></p>
-        <div class="floral" aria-hidden="true">
-          <svg viewBox="0 0 360 287" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M181 272C180 207 164 154 111 105M184 272C197 187 229 147 279 106M181 272C151 216 101 192 46 187M181 272C214 218 281 198 333 207" stroke="#788064" stroke-width="1.5"/><path d="M118 111C91 91 78 60 85 30C112 49 127 79 118 111ZM105 154C75 147 52 125 47 98C77 100 99 121 105 154ZM244 142C250 108 270 82 300 75C298 107 278 133 244 142ZM275 174C304 152 332 151 352 164C327 184 299 186 275 174Z" fill="#9CA184" opacity=".82"/><path d="M111 106C103 82 108 58 128 40C143 62 137 89 111 106ZM224 157C217 132 225 111 246 98C257 121 248 145 224 157ZM88 190C66 180 54 161 58 139C82 147 94 166 88 190ZM287 203C306 189 328 190 343 205C323 219 302 218 287 203Z" fill="#C3C7A9"/><g fill="#D8A8A0"><path d="M115 102c-18-21 13-36 21-8 12-25 39 0 17 17-14 11-29 5-38-9Z"/><path d="M235 148c-13-19 13-29 20-6 13-19 34 5 13 17-14 8-27 2-33-11Z"/><path d="M82 184c-11-17 11-26 18-6 11-17 30 3 11 14-12 7-23 3-29-8Z"/><path d="M280 197c-12-18 12-29 20-7 12-18 33 4 13 16-13 8-26 3-33-9Z"/></g><path d="M181 272c-8-54-12-104 2-160M183 183c17-30 34-50 59-71M177 198c-17-30-32-53-60-77" stroke="#687053" stroke-width="1.25"/><path d="M173 116c-16-25 17-42 27-10 15-27 47 3 21 23-17 13-37 7-48-13Z" fill="#B57D70"/><circle cx="196" cy="117" r="5" fill="#F2D8B3"/></svg>
-        </div>
-        <p class="notice" data-wedding="heroMessage"></p>
-        <div class="scroll">SCROLL</div>
-      </section>
-      <div class="ribbon-divider" aria-hidden="true">
-        <svg viewBox="0 0 360 132" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="ribbon" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#617E76"/><stop offset=".42" stop-color="#284B47"/><stop offset=".7" stop-color="#193C3A"/><stop offset="1" stop-color="#52726B"/></linearGradient>
-            <linearGradient id="knot" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#76958B"/><stop offset=".45" stop-color="#193D39"/><stop offset="1" stop-color="#0F2C2A"/></linearGradient>
-            <filter id="shadow" x="-15%" y="-25%" width="130%" height="160%"><feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#243C38" flood-opacity=".35"/></filter>
-          </defs>
-          <g filter="url(#shadow)">
-            <path d="M0 42H156L177 62L156 83H0Z" fill="url(#ribbon)"/>
-            <path d="M360 42H204L183 62L204 83H360Z" fill="url(#ribbon)"/>
-            <path d="M0 43H156" stroke="#9DB5A9" stroke-opacity=".5"/>
-            <path d="M204 43H360" stroke="#9DB5A9" stroke-opacity=".5"/>
-            <path d="M158 76L176 65L149 124L98 111L119 92Z" fill="#214642"/>
-            <path d="M202 76L184 65L211 124L262 111L241 92Z" fill="#183B38"/>
-            <path d="M156 68C157 43 168 37 180 38C192 37 203 43 204 68C204 85 194 95 180 95C166 95 156 85 156 68Z" fill="url(#knot)"/>
-            <path d="M165 48C176 42 187 42 196 49M163 79C176 87 187 87 198 79" stroke="#9AB3A7" stroke-opacity=".35" fill="none"/>
-            <path d="M155 78L176 68L149 123" stroke="#87A197" stroke-opacity=".25" fill="none"/>
-            <path d="M205 78L184 68L211 123" stroke="#87A197" stroke-opacity=".2" fill="none"/>
-          </g>
-        </svg>
-      </div>
-      <section class="details" id="location">
-        <div class="eyebrow">Invitation</div>
-        <h2 data-wedding="invitationTitle"></h2>
-        <p class="message" data-wedding="invitationMessage"></p>
-        <hr class="divider" />
-        <div class="schedule"><strong data-wedding="koreanDate"></strong><span data-wedding="venue"></span></div>
-        <p class="location" data-wedding="address"></p>
-        <div class="buttons"><a class="button" href="#location" data-wedding="locationButton"></a><a class="button primary" data-wedding="contactLink"><span data-wedding="contactButton"></span></a></div>
-      </section>
-    </main>
-    <script src="./wedding.config.js"></script>
-    <script src="./app.js"></script>
+    <main class="page" id="invitation"></main>
+    <script type="module" src="./app.js"></script>
   </body>
 </html>

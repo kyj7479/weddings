@@ -1,8 +1,8 @@
 /**
- * 모바일 청첩장 기본 정보
- * 이 파일의 값만 바꾸면 페이지 전반에 자동으로 반영됩니다.
+ * 청첩장 내용 설정
+ * 이름, 일정, 문구, 사진 경로는 이 파일에서 관리합니다.
  */
-window.WEDDING_CONFIG = {
+const weddingConfig = {
   groomLastName: "김",
   groomFirstName: "영진",
   brideLastName: "장",
@@ -21,3 +21,5 @@ window.WEDDING_CONFIG = {
   locationButton: "오시는 길",
   contactButton: "마음 전하기",
 };
+
+export default weddingConfig;
