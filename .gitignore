@@ -1,6 +1,7 @@
 # photos
 /photos/
 *.jpg
+*.png
 
 # 운영체제 파일
 .DS_Store
