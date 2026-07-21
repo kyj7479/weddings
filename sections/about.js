@@ -8,7 +8,7 @@ function createPortrait(profile, name) {
 
 function createProfile(role, name, profile) {
   return `
-    <article class="about-profile">
+    <article class="about-profile ${role.toLowerCase()}-profile">
       <div class="portrait">${createPortrait(profile, name)}</div>
       <div class="profile-copy">
         <p class="profile-role">${role}</p>
