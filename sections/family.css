@@ -1,0 +1,19 @@
+.family-section {
+  padding: 59px 28px 76px;
+  background: #fdfcf8;
+  color: #2f4d45;
+  text-align: center;
+}
+
+.family-rule {
+  width: 42px;
+  height: 1px;
+  margin: 0 auto 28px;
+  background: #cfd8d2;
+}
+
+.family-section p {
+  margin: 0;
+  font: 400 15px/2.05 "Gowun Batang", serif;
+  word-break: keep-all;
+}

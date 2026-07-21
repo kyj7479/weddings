@@ -3,12 +3,14 @@ import sectionOrder from "./data/sections.config.js";
 import createHero from "./sections/hero.js";
 import createInvitation from "./sections/invitation.js";
 import createCalendar from "./sections/calendar.js";
+import createFamily from "./sections/family.js";
 import formatWedding from "./lib/format-wedding.js";
 
 const sectionRegistry = {
   hero: createHero,
   invitation: createInvitation,
   calendar: createCalendar,
+  family: createFamily,
 };
 
 const content = formatWedding(weddingConfig);

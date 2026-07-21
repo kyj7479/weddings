@@ -7,6 +7,14 @@ const weddingConfig = {
   groomFirstName: "영진",
   brideLastName: "장",
   brideFirstName: "예슬",
+  groomParents: {
+    father: "김승환",
+    mother: "송은봉",
+  },
+  brideParents: {
+    father: "장자성",
+    mother: "이인덕",
+  },
   date: "2026-11-22T12:20:00+09:00",
   venueName: "스타시티아트홀",
   hallName: "",
