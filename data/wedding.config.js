@@ -15,6 +15,20 @@ const weddingConfig = {
     father: "장자성",
     mother: "이인덕",
   },
+  about: {
+    title: "ABOUT US",
+    subtitle: "서로의 일상에 스며든\n두 사람을 소개합니다.",
+    groom: {
+      photo: "",
+      photoAlt: "김영진의 사진",
+      introduction: "김영진입니다.\n새로운 시작을 기다리고 있습니다.",
+    },
+    bride: {
+      photo: "./photos/PYD01455.jpg",
+      photoAlt: "장예슬의 사진",
+      introduction: "장예슬입니다.\n설레는 마음으로 인사드립니다.",
+    },
+  },
   date: "2026-11-22T12:20:00+09:00",
   venueName: "스타시티아트홀",
   hallName: "",

@@ -4,6 +4,7 @@ import createHero from "./sections/hero.js";
 import createInvitation from "./sections/invitation.js";
 import createCalendar from "./sections/calendar.js";
 import createFamily from "./sections/family.js";
+import createAbout from "./sections/about.js";
 import formatWedding from "./lib/format-wedding.js";
 
 const sectionRegistry = {
@@ -11,6 +12,7 @@ const sectionRegistry = {
   invitation: createInvitation,
   calendar: createCalendar,
   family: createFamily,
+  about: createAbout,
 };
 
 const content = formatWedding(weddingConfig);

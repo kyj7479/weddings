@@ -1,0 +1,75 @@
+.about-section {
+  padding: 76px 32px 88px;
+  background: #fdfcf8;
+  color: #2f4d45;
+}
+
+.about-heading { text-align: center; }
+
+.about-heading h2 {
+  margin: 0;
+  color: #2f4d45;
+  font: 400 31px "DM Serif Display", serif;
+  letter-spacing: .04em;
+}
+
+.about-heading p {
+  margin: 19px 0 48px;
+  color: #60786e;
+  font: 400 14px/1.85 "Gowun Batang", serif;
+  white-space: pre-line;
+}
+
+.about-profiles { display: grid; gap: 31px; }
+
+.about-profile {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  align-items: center;
+  gap: 20px;
+}
+
+.portrait {
+  width: 112px;
+  height: 112px;
+  padding: 4px;
+  overflow: hidden;
+  border: 1px solid #cda466;
+  border-radius: 50%;
+  background: #fdfcf8;
+}
+
+.portrait img, .portrait-placeholder {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.portrait img {
+  object-fit: cover;
+  object-position: 50% 37%;
+  filter: saturate(.82) contrast(.96) brightness(1.04);
+}
+
+.portrait-placeholder {
+  place-items: center;
+  border: 1px solid rgba(61, 97, 88, .35);
+  background: #f4f1e8;
+  color: #718178;
+  font: 10px/1.6 "DM Serif Display", serif;
+  letter-spacing: .08em;
+  text-align: center;
+}
+
+.profile-copy { min-width: 0; }
+.profile-role { margin: 0 0 4px; color: #bd8c52; font: 400 11px "DM Serif Display", serif; letter-spacing: .15em; }
+.profile-copy h3 { margin: 0; color: #2f4d45; font: 400 22px "Gowun Batang", serif; }
+.profile-introduction { margin: 10px 0 0; color: #456056; font: 400 13px/1.75 "Gowun Batang", serif; white-space: pre-line; word-break: keep-all; }
+
+@media (max-width: 370px) {
+  .about-section { padding-right: 27px; padding-left: 27px; }
+  .about-profile { grid-template-columns: 98px minmax(0, 1fr); gap: 16px; }
+  .portrait { width: 98px; height: 98px; }
+  .profile-copy h3 { font-size: 20px; }
+}
