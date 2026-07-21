@@ -1,0 +1,51 @@
+/* 마지막에 불러오는 공통 테마 조정값 */
+:root {
+  --ink: #2f4d45;
+  --soft: #61786e;
+  --olive: #3d6158;
+}
+
+body {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.photo-frame {
+  width: min(72vw, 270px);
+}
+
+h1 {
+  font-size: 32px;
+}
+
+.topline,
+.date,
+.location {
+  color: #506b61;
+}
+
+.notice {
+  color: #b78443;
+}
+
+.message {
+  color: #405e54;
+}
+
+.schedule {
+  color: #38564d;
+}
+
+.calendar-section,
+.calendar-title,
+.calendar-korean-date,
+.calendar-weekdays,
+.calendar-day,
+.countdown-message {
+  color: #2f4d45;
+}
+
+.calendar-english-date,
+.countdown-item span {
+  color: #6a8177;
+}
