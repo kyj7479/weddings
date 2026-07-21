@@ -24,7 +24,7 @@ const weddingConfig = {
       introduction: "1994년 5월 서울 출생\n따스하고 한결같은 이과소년",
     },
     bride: {
-      photo: "./photos/thumbs/PYD02330_thumb.webp",
+      photo: "./photos/thumbs/PYD01455_thumb.webp",
       photoAlt: "장예슬의 사진",
       introduction: "1998년 1월 서울 출생\n섬세하고 아름다운 문과소녀",
     },
