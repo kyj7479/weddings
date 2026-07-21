@@ -5,6 +5,7 @@ import createInvitation from "./sections/invitation.js";
 import createCalendar from "./sections/calendar.js";
 import createFamily from "./sections/family.js";
 import createAbout from "./sections/about.js";
+import createGallery from "./sections/gallery.js";
 import formatWedding from "./lib/format-wedding.js";
 
 const sectionRegistry = {
@@ -13,6 +14,7 @@ const sectionRegistry = {
   calendar: createCalendar,
   family: createFamily,
   about: createAbout,
+  gallery: createGallery,
 };
 
 const content = formatWedding(weddingConfig);

@@ -1,0 +1,23 @@
+.gallery-section { padding: 78px 0 88px; overflow: hidden; background: #fdfcf8; }
+.gallery-heading { padding: 0 32px; text-align: center; }
+.gallery-heading h2 { margin: 0; color: #2f4d45; font: 400 30px "DM Serif Display", serif; letter-spacing: .05em; }
+.gallery-heading p { margin: 18px 0 38px; color: #60786e; font: 400 14px/1.85 "Gowun Batang", serif; white-space: pre-line; }
+.gallery-feature { position: relative; display: block; width: calc(100% - 48px); aspect-ratio: 1.28 / 1; margin: 0 auto 30px; padding: 4px; overflow: hidden; border: 1px solid #cda466; background: #fdfcf8; cursor: zoom-in; }
+.gallery-feature-image { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 41%; transition: opacity .25s ease; }
+.gallery-feature-count { position: absolute; right: 14px; bottom: 13px; color: #fff; font: 400 12px "DM Serif Display", serif; letter-spacing: .1em; text-shadow: 0 1px 5px rgba(0, 0, 0, .4); }
+.gallery-carousel { overflow-x: auto; cursor: grab; scrollbar-width: none; -webkit-overflow-scrolling: touch; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.gallery-carousel::-webkit-scrollbar { display: none; }
+.gallery-carousel.is-dragging { cursor: grabbing; user-select: none; }
+.gallery-carousel-track { display: flex; width: max-content; gap: 14px; padding-block: 11px 17px; }
+.gallery-carousel-item { width: clamp(84px, 25vw, 116px); aspect-ratio: 1; flex: 0 0 auto; padding: 3px; overflow: hidden; border: 1px solid rgba(205, 164, 102, .7); border-radius: 50%; background: #fdfcf8; cursor: pointer; opacity: .42; transform: scale(.82); transition: opacity .32s ease, transform .32s ease, border-color .32s ease; }
+.gallery-carousel-item.is-active { border-color: #c9985b; opacity: 1; transform: scale(1); }
+.gallery-carousel-item img { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: 50% 35%; pointer-events: none; }
+.gallery-hint { margin: 18px 0 0; color: #83958c; font: 400 9px "DM Serif Display", serif; letter-spacing: .15em; text-align: center; }
+.gallery-lightbox { width: 100%; max-width: 560px; height: 100dvh; max-height: none; margin: 0 auto; padding: 52px 17px 35px; border: 0; background: rgba(24, 52, 47, .97); color: #fff; }
+.gallery-lightbox::backdrop { background: rgba(15, 28, 26, .72); backdrop-filter: blur(4px); }
+.lightbox-image { display: block; width: 100%; height: calc(100dvh - 130px); object-fit: contain; }
+.lightbox-close, .lightbox-arrow { position: absolute; border: 0; background: transparent; color: #fff; cursor: pointer; }
+.lightbox-close { top: 15px; right: 19px; font: 300 35px/1 sans-serif; }
+.lightbox-arrow { top: 50%; z-index: 1; padding: 13px; font: 300 45px/1 "DM Serif Display", serif; transform: translateY(-50%); }
+.lightbox-arrow.previous { left: 0; }.lightbox-arrow.next { right: 0; }
+.lightbox-count { position: absolute; right: 0; bottom: 15px; left: 0; margin: 0; color: rgba(255, 255, 255, .72); font: 400 12px "DM Serif Display", serif; letter-spacing: .15em; text-align: center; }

@@ -9,6 +9,7 @@ const sectionOrder = [
   { id: "calendar", enabled: true },
   { id: "family", enabled: true },
   { id: "about", enabled: true },
+  { id: "gallery", enabled: true },
 ];
 
 export default sectionOrder;
