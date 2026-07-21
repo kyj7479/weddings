@@ -36,6 +36,13 @@ h1 {
   color: #38564d;
 }
 
+.schedule span {
+  display: block;
+  color: #b9874e;
+  font-size: 18px;
+  font-weight: 700;
+}
+
 .calendar-section,
 .calendar-title,
 .calendar-korean-date,
