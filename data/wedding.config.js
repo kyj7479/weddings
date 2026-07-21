@@ -19,14 +19,14 @@ const weddingConfig = {
     title: "ABOUT US",
     subtitle: "서로의 일상에 스며든\n두 사람을 소개합니다.",
     groom: {
-      photo: "",
+      photo: "./photos/PYD02324.jpg",
       photoAlt: "김영진의 사진",
-      introduction: "김영진입니다.\n새로운 시작을 기다리고 있습니다.",
+      introduction: "1994년 5월 서울 출생\n따스하고 한결같은 이과소년",
     },
     bride: {
       photo: "./photos/PYD01455.jpg",
       photoAlt: "장예슬의 사진",
-      introduction: "장예슬입니다.\n설레는 마음으로 인사드립니다.",
+      introduction: "1998년 1월 서울 출생\n섬세하고 아름다운 문과소녀",
     },
   },
   date: "2026-11-22T12:20:00+09:00",
