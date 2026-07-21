@@ -116,6 +116,18 @@ export default function createGallery(content) {
     counter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(photos.length).padStart(2, "0")}`;
   };
 
+  const updateLightboxHistory = (method) => {
+    const state = { galleryLightbox: true, photoIndex: activeIndex };
+    const url = `#gallery-${activeIndex + 1}`;
+    window.history[method](state, "", url);
+  };
+
+  const openLightbox = () => {
+    updateLightbox();
+    updateLightboxHistory("pushState");
+    dialog.showModal();
+  };
+
   carousel.addEventListener("scroll", onScroll, { passive: true });
   carousel.addEventListener("pointerdown", (event) => {
     if (event.pointerType === "touch") return;
@@ -155,18 +167,19 @@ export default function createGallery(content) {
   });
 
   feature.addEventListener("click", () => {
-    updateLightbox();
-    dialog.showModal();
+    openLightbox();
   });
 
   section.querySelector(".lightbox-close").addEventListener("click", () => dialog.close());
   section.querySelector(".previous").addEventListener("click", () => {
     activeIndex = (activeIndex - 1 + photos.length) % photos.length;
     updateLightbox();
+    updateLightboxHistory("replaceState");
   });
   section.querySelector(".next").addEventListener("click", () => {
     activeIndex = (activeIndex + 1) % photos.length;
     updateLightbox();
+    updateLightboxHistory("replaceState");
   });
   dialog.addEventListener("click", (event) => {
     if (event.target === dialog) dialog.close();
@@ -174,6 +187,19 @@ export default function createGallery(content) {
   dialog.addEventListener("keydown", (event) => {
     if (event.key === "ArrowLeft") section.querySelector(".previous").click();
     if (event.key === "ArrowRight") section.querySelector(".next").click();
+  });
+  dialog.addEventListener("close", () => {
+    if (window.history.state?.galleryLightbox) window.history.back();
+  });
+  window.addEventListener("popstate", (event) => {
+    const { state } = event;
+    if (state?.galleryLightbox) {
+      activeIndex = state.photoIndex;
+      updateLightbox();
+      if (!dialog.open) dialog.showModal();
+    } else if (dialog.open) {
+      dialog.close();
+    }
   });
 
   window.requestAnimationFrame(initializeCarousel);
