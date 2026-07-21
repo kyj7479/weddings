@@ -19,6 +19,13 @@ const sectionRegistry = {
 
 const content = formatWedding(weddingConfig);
 const invitation = document.querySelector("#invitation");
+const sectionObserver = "IntersectionObserver" in window ? new IntersectionObserver((entries, observer) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add("is-visible");
+    observer.unobserve(entry.target);
+  });
+}, { threshold: 0.12 }) : null;
 
 document.title = "김앤장웨딩청첩장";
 
@@ -32,5 +39,9 @@ sectionOrder
       return;
     }
 
-    invitation.append(createSection(content));
+    const sectionElement = createSection(content);
+    sectionElement.classList.add("section-reveal");
+    invitation.append(sectionElement);
+    if (sectionObserver) sectionObserver.observe(sectionElement);
+    else sectionElement.classList.add("is-visible");
   });

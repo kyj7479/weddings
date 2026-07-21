@@ -10,6 +10,33 @@ body {
   overflow-wrap: break-word;
 }
 
+html::after {
+  content: "";
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  pointer-events: none;
+  opacity: .025;
+  background-image:
+    radial-gradient(circle at 25% 30%, #1c342e 0 .6px, transparent .8px),
+    radial-gradient(circle at 70% 65%, #b8874d 0 .5px, transparent .8px);
+  background-size: 5px 5px, 7px 7px;
+  mix-blend-mode: multiply;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .section-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .72s ease, transform .72s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .section-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .photo-frame {
   width: min(72vw, 270px);
 }
