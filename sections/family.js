@@ -7,7 +7,8 @@ export default function createFamily(content) {
       <p class="family-row">
         <span class="parent-name father">${content.groomParents.father}</span>
         <span class="separator">·</span>
-        <span class="parent-name mother">${content.groomParents.mother}의</span>
+        <span class="parent-name mother">${content.groomParents.mother}</span>
+        <span class="possessive">의</span>
         <span class="relationship">아들</span>
         <span class="role">신랑</span>
         <span class="name">${content.groomName}</span>
@@ -15,7 +16,8 @@ export default function createFamily(content) {
       <p class="family-row">
         <span class="parent-name father">${content.brideParents.father}</span>
         <span class="separator">·</span>
-        <span class="parent-name mother">${content.brideParents.mother}의</span>
+        <span class="parent-name mother">${content.brideParents.mother}</span>
+        <span class="possessive">의</span>
         <span class="relationship">딸</span>
         <span class="role">신부</span>
         <span class="name">${content.brideName}</span>

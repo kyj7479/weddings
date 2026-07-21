@@ -35,7 +35,8 @@
 
 .family-row .father { padding-left: 0; text-align: right; }
 .family-row .separator { padding-right: 0; padding-left: 6px; }
-.family-row .mother { padding-left: 6px; }
+.family-row .mother { width: 3.15em; padding-left: 6px; }
+.family-row .possessive { padding-left: 0; }
 .family-row .relationship { text-align: right; }
 
 @media (max-width: 370px) {
