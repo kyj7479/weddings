@@ -13,24 +13,29 @@
 }
 
 .family-list {
-  display: grid;
-  gap: 5px;
+  display: table;
+  margin: 0 auto;
+  border-spacing: 0 5px;
 }
 
 .family-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto auto;
-  align-items: baseline;
-  column-gap: 8px;
+  display: table-row;
   margin: 0;
   color: #2f4d45;
   font: 400 15px/2.05 "Gowun Batang", serif;
   word-break: keep-all;
 }
 
-.parents { text-align: right; }
-.relationship, .role, .name { text-align: left; }
+.family-row span {
+  display: table-cell;
+  padding-left: 8px;
+  text-align: left;
+  vertical-align: baseline;
+}
+
+.family-row .parents { padding-left: 0; text-align: right; }
 
 @media (max-width: 370px) {
-  .family-row { column-gap: 5px; font-size: 14px; }
+  .family-row { font-size: 14px; }
+  .family-row span { padding-left: 5px; }
 }
