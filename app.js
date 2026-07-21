@@ -18,7 +18,7 @@ const sectionRegistry = {
 const content = formatWedding(weddingConfig);
 const invitation = document.querySelector("#invitation");
 
-document.title = `${content.groomName} & ${content.brideName}의 결혼식`;
+document.title = "김앤장웨딩청첩장";
 
 sectionOrder
   .filter((section) => section.enabled)
