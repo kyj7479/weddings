@@ -28,14 +28,18 @@
 
 .family-row span {
   display: table-cell;
-  padding-left: 8px;
+  padding-left: 10px;
   text-align: left;
   vertical-align: baseline;
 }
 
-.family-row .parents { padding-left: 0; text-align: right; }
+.family-row .father { padding-left: 0; text-align: right; }
+.family-row .separator { padding-right: 0; padding-left: 6px; }
+.family-row .mother { padding-left: 6px; }
+.family-row .relationship { text-align: right; }
 
 @media (max-width: 370px) {
   .family-row { font-size: 14px; }
-  .family-row span { padding-left: 5px; }
+  .family-row span { padding-left: 7px; }
+  .family-row .separator, .family-row .mother { padding-left: 4px; }
 }

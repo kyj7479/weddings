@@ -5,13 +5,17 @@ export default function createFamily(content) {
     <div class="family-rule"></div>
     <div class="family-list">
       <p class="family-row">
-        <span class="parents">${content.groomParents.father} · ${content.groomParents.mother}의</span>
+        <span class="parent-name father">${content.groomParents.father}</span>
+        <span class="separator">·</span>
+        <span class="parent-name mother">${content.groomParents.mother}의</span>
         <span class="relationship">아들</span>
         <span class="role">신랑</span>
         <span class="name">${content.groomName}</span>
       </p>
       <p class="family-row">
-        <span class="parents">${content.brideParents.father} · ${content.brideParents.mother}의</span>
+        <span class="parent-name father">${content.brideParents.father}</span>
+        <span class="separator">·</span>
+        <span class="parent-name mother">${content.brideParents.mother}의</span>
         <span class="relationship">딸</span>
         <span class="role">신부</span>
         <span class="name">${content.brideName}</span>
