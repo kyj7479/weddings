@@ -12,8 +12,25 @@
   background: #cfd8d2;
 }
 
-.family-section p {
+.family-list {
+  display: grid;
+  gap: 5px;
+}
+
+.family-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto auto;
+  align-items: baseline;
+  column-gap: 8px;
   margin: 0;
+  color: #2f4d45;
   font: 400 15px/2.05 "Gowun Batang", serif;
   word-break: keep-all;
+}
+
+.parents { text-align: right; }
+.relationship, .role, .name { text-align: left; }
+
+@media (max-width: 370px) {
+  .family-row { column-gap: 5px; font-size: 14px; }
 }
