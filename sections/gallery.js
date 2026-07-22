@@ -51,6 +51,7 @@ export default function createGallery(content) {
   let dragStartX = 0;
   let dragStartScroll = 0;
   let animationFrame;
+  let lightboxSwipeStartX = null;
 
   const getItemStep = () => {
     const item = items[0];
@@ -128,6 +129,18 @@ export default function createGallery(content) {
     dialog.showModal();
   };
 
+  const showPreviousPhoto = () => {
+    activeIndex = (activeIndex - 1 + photos.length) % photos.length;
+    updateLightbox();
+    updateLightboxHistory("replaceState");
+  };
+
+  const showNextPhoto = () => {
+    activeIndex = (activeIndex + 1) % photos.length;
+    updateLightbox();
+    updateLightboxHistory("replaceState");
+  };
+
   carousel.addEventListener("scroll", onScroll, { passive: true });
   carousel.addEventListener("pointerdown", (event) => {
     if (event.pointerType === "touch") return;
@@ -172,21 +185,30 @@ export default function createGallery(content) {
 
   section.querySelector(".lightbox-close").addEventListener("click", () => dialog.close());
   section.querySelector(".previous").addEventListener("click", () => {
-    activeIndex = (activeIndex - 1 + photos.length) % photos.length;
-    updateLightbox();
-    updateLightboxHistory("replaceState");
+    showPreviousPhoto();
   });
   section.querySelector(".next").addEventListener("click", () => {
-    activeIndex = (activeIndex + 1) % photos.length;
-    updateLightbox();
-    updateLightboxHistory("replaceState");
+    showNextPhoto();
   });
   dialog.addEventListener("click", (event) => {
     if (event.target === dialog) dialog.close();
   });
   dialog.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowLeft") section.querySelector(".previous").click();
-    if (event.key === "ArrowRight") section.querySelector(".next").click();
+    if (event.key === "ArrowLeft") showPreviousPhoto();
+    if (event.key === "ArrowRight") showNextPhoto();
+  });
+  dialog.addEventListener("pointerdown", (event) => {
+    if (event.pointerType === "touch" && !event.target.closest(".lightbox-close")) {
+      lightboxSwipeStartX = event.clientX;
+    }
+  });
+  dialog.addEventListener("pointerup", (event) => {
+    if (event.pointerType !== "touch" || lightboxSwipeStartX === null) return;
+    const swipeDistance = event.clientX - lightboxSwipeStartX;
+    lightboxSwipeStartX = null;
+    if (Math.abs(swipeDistance) < 42) return;
+    if (swipeDistance < 0) showNextPhoto();
+    else showPreviousPhoto();
   });
   dialog.addEventListener("close", () => {
     if (window.history.state?.galleryLightbox) window.history.back();

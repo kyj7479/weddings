@@ -20,11 +20,13 @@ const weddingConfig = {
     subtitle: "서로의 일상에 스며든\n두 사람을 소개합니다.",
     groom: {
       photo: "./photos/thumbs/PYD02330_thumb.webp",
+      fullPhoto: "./photos/PYD02330.webp",
       photoAlt: "김영진의 사진",
       introduction: "1994년 5월 서울 출생\n따스하고 한결같은 이과소년",
     },
     bride: {
       photo: "./photos/thumbs/PYD01455_thumb.webp",
+      fullPhoto: "./photos/PYD01455.webp",
       photoAlt: "장예슬의 사진",
       introduction: "1998년 1월 서울 출생\n섬세하고 아름다운 문과소녀",
     },

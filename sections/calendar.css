@@ -4,8 +4,8 @@
 .calendar-english-date { margin: 8px 0 31px; color: #9ba39d; font-size: 11px; }
 .calendar-rule { height: 1px; margin: 0 0 27px; background: #dde1dc; }
 .calendar-weekdays, .calendar-days { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 19px; align-items: center; }
-.calendar-weekdays { margin-bottom: 25px; color: #40504b; font: 500 13px "Gowun Batang", serif; }
-.calendar-day { display: grid; width: 29px; height: 29px; margin: auto; place-items: center; color: #40504b; font: 400 13px "DM Serif Display", serif; }
+.calendar-weekdays { margin-bottom: 25px; color: #40504b; font: 500 15px "Gowun Batang", serif; }
+.calendar-day { display: grid; width: 34px; height: 34px; margin: auto; place-items: center; color: #40504b; font: 400 16px "DM Serif Display", serif; }
 .sunday { color: #dc7b75; }
 .calendar-day.wedding-day { border-radius: 50%; background: #d6ae5e; color: #fff; font-family: "Noto Sans KR", sans-serif; }
 .bottom-rule { margin: 37px 0 28px; }
