@@ -110,11 +110,17 @@ export default function createGallery(content) {
     });
   };
 
-  const updateLightbox = () => {
+  const updateLightbox = (direction) => {
     const photo = photos[activeIndex];
     lightboxImage.src = photo.src;
     lightboxImage.alt = photo.alt;
     counter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(photos.length).padStart(2, "0")}`;
+
+    if (direction) {
+      lightboxImage.classList.remove("slide-from-next", "slide-from-previous");
+      void lightboxImage.offsetWidth;
+      lightboxImage.classList.add(direction === "next" ? "slide-from-next" : "slide-from-previous");
+    }
   };
 
   const updateLightboxHistory = (method) => {
@@ -131,13 +137,13 @@ export default function createGallery(content) {
 
   const showPreviousPhoto = () => {
     activeIndex = (activeIndex - 1 + photos.length) % photos.length;
-    updateLightbox();
+    updateLightbox("previous");
     updateLightboxHistory("replaceState");
   };
 
   const showNextPhoto = () => {
     activeIndex = (activeIndex + 1) % photos.length;
-    updateLightbox();
+    updateLightbox("next");
     updateLightboxHistory("replaceState");
   };
 
