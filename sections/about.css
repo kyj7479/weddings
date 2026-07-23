@@ -72,9 +72,10 @@ button.portrait { display: block; cursor: zoom-in; }
 .profile-copy h3 { margin: 0; color: #2f4d45; font: 400 22px "Gowun Batang", serif; }
 .profile-introduction { margin: 10px 0 0; color: #456056; font: 400 13px/1.75 "Gowun Batang", serif; white-space: pre-line; word-break: keep-all; }
 
-.about-lightbox { width: 100%; max-width: 560px; height: 100dvh; max-height: none; margin: 0 auto; padding: 52px 17px 35px; border: 0; background: rgba(24, 52, 47, .97); }
+.about-lightbox { width: 100%; max-width: 560px; height: 100dvh; max-height: none; margin: 0 auto; padding: 52px 17px 35px; overflow: hidden; border: 0; background: rgba(24, 52, 47, .97); }
 .about-lightbox::backdrop { background: rgba(15, 28, 26, .72); backdrop-filter: blur(4px); }
-.about-lightbox-image { display: block; width: 100%; height: calc(100dvh - 100px); object-fit: contain; }
+.about-lightbox-image { display: block; width: 100%; height: calc(100dvh - 100px); object-fit: contain; transform-origin: center; }
+.about-lightbox-image.is-zoomed { cursor: zoom-out; }
 .about-lightbox-close { position: absolute; top: 15px; right: 19px; border: 0; background: transparent; color: #fff; cursor: pointer; font: 300 35px/1 sans-serif; }
 
 @media (max-width: 370px) {

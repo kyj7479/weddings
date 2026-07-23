@@ -13,9 +13,10 @@
 .gallery-carousel-item.is-active { border-color: #c9985b; opacity: 1; transform: scale(1); }
 .gallery-carousel-item img { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: 50% 35%; pointer-events: none; }
 .gallery-hint { margin: 18px 0 0; color: #83958c; font: 400 9px "DM Serif Display", serif; letter-spacing: .15em; text-align: center; }
-.gallery-lightbox { width: 100%; max-width: 560px; height: 100dvh; max-height: none; margin: 0 auto; padding: 52px 17px 35px; border: 0; background: rgba(24, 52, 47, .97); color: #fff; touch-action: pan-y; }
+.gallery-lightbox { width: 100%; max-width: 560px; height: 100dvh; max-height: none; margin: 0 auto; padding: 52px 17px 35px; border: 0; background: rgba(24, 52, 47, .97); color: #fff; touch-action: none; }
 .gallery-lightbox::backdrop { background: rgba(15, 28, 26, .72); backdrop-filter: blur(4px); }
-.lightbox-image { display: block; width: 100%; height: calc(100dvh - 130px); object-fit: contain; }
+.lightbox-image { display: block; width: 100%; height: calc(100dvh - 130px); object-fit: contain; transform-origin: center; }
+.lightbox-image.is-zoomed { cursor: grab; }
 .lightbox-image.slide-from-next { animation: lightbox-slide-from-next .34s cubic-bezier(.22, 1, .36, 1); }
 .lightbox-image.slide-from-previous { animation: lightbox-slide-from-previous .34s cubic-bezier(.22, 1, .36, 1); }
 @keyframes lightbox-slide-from-next { from { opacity: 0; transform: translateX(28px) scale(.985); } to { opacity: 1; transform: translateX(0) scale(1); } }

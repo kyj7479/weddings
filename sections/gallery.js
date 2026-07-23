@@ -51,7 +51,15 @@ export default function createGallery(content) {
   let dragStartX = 0;
   let dragStartScroll = 0;
   let animationFrame;
-  let lightboxSwipeStartX = null;
+  const lightboxTouches = new Map();
+  let swipeStart = null;
+  let panStart = null;
+  let pinchStartDistance = 0;
+  let pinchStartScale = 1;
+  let zoomScale = 1;
+  let zoomX = 0;
+  let zoomY = 0;
+  let lastTapTime = 0;
 
   const getItemStep = () => {
     const item = items[0];
@@ -123,6 +131,26 @@ export default function createGallery(content) {
     }
   };
 
+  const resetZoom = () => {
+    zoomScale = 1;
+    zoomX = 0;
+    zoomY = 0;
+    lightboxImage.style.transform = "";
+    lightboxImage.classList.remove("is-zoomed");
+  };
+
+  const applyZoom = () => {
+    if (zoomScale <= 1) {
+      resetZoom();
+      return;
+    }
+    lightboxImage.style.transform = `translate(${zoomX}px, ${zoomY}px) scale(${zoomScale})`;
+    lightboxImage.classList.add("is-zoomed");
+  };
+
+  const getTouchPoints = () => [...lightboxTouches.values()];
+  const getDistance = ([first, second]) => Math.hypot(second.x - first.x, second.y - first.y);
+
   const updateLightboxHistory = (method) => {
     const state = { galleryLightbox: true, photoIndex: activeIndex };
     const url = `#gallery-${activeIndex + 1}`;
@@ -136,12 +164,14 @@ export default function createGallery(content) {
   };
 
   const showPreviousPhoto = () => {
+    resetZoom();
     activeIndex = (activeIndex - 1 + photos.length) % photos.length;
     updateLightbox("previous");
     updateLightboxHistory("replaceState");
   };
 
   const showNextPhoto = () => {
+    resetZoom();
     activeIndex = (activeIndex + 1) % photos.length;
     updateLightbox("next");
     updateLightboxHistory("replaceState");
@@ -203,20 +233,76 @@ export default function createGallery(content) {
     if (event.key === "ArrowLeft") showPreviousPhoto();
     if (event.key === "ArrowRight") showNextPhoto();
   });
+  dialog.addEventListener("wheel", (event) => {
+    if (event.target.closest(".lightbox-close")) return;
+    event.preventDefault();
+    zoomScale = Math.min(3, Math.max(1, zoomScale + (event.deltaY < 0 ? .16 : -.16)));
+    applyZoom();
+  }, { passive: false });
   dialog.addEventListener("pointerdown", (event) => {
-    if (event.pointerType === "touch" && !event.target.closest(".lightbox-close")) {
-      lightboxSwipeStartX = event.clientX;
+    if (event.pointerType !== "touch" || event.target.closest(".lightbox-close")) return;
+    dialog.setPointerCapture(event.pointerId);
+    lightboxTouches.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    const points = getTouchPoints();
+
+    if (points.length === 1) {
+      const now = Date.now();
+      if (now - lastTapTime < 260) resetZoom();
+      lastTapTime = now;
+      swipeStart = { x: event.clientX, y: event.clientY };
+      panStart = { x: event.clientX, y: event.clientY, zoomX, zoomY };
+    }
+
+    if (points.length === 2) {
+      swipeStart = null;
+      pinchStartDistance = getDistance(points);
+      pinchStartScale = zoomScale;
+    }
+  });
+  dialog.addEventListener("pointermove", (event) => {
+    if (event.pointerType !== "touch" || !lightboxTouches.has(event.pointerId)) return;
+    lightboxTouches.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    const points = getTouchPoints();
+
+    if (points.length >= 2) {
+      zoomScale = Math.min(3, Math.max(1, pinchStartScale * (getDistance(points) / pinchStartDistance)));
+      applyZoom();
+      return;
+    }
+
+    if (zoomScale > 1 && panStart) {
+      zoomX = panStart.zoomX + event.clientX - panStart.x;
+      zoomY = panStart.zoomY + event.clientY - panStart.y;
+      applyZoom();
     }
   });
   dialog.addEventListener("pointerup", (event) => {
-    if (event.pointerType !== "touch" || lightboxSwipeStartX === null) return;
-    const swipeDistance = event.clientX - lightboxSwipeStartX;
-    lightboxSwipeStartX = null;
-    if (Math.abs(swipeDistance) < 42) return;
-    if (swipeDistance < 0) showNextPhoto();
-    else showPreviousPhoto();
+    if (event.pointerType !== "touch" || !lightboxTouches.has(event.pointerId)) return;
+    const touchStart = swipeStart;
+    lightboxTouches.delete(event.pointerId);
+
+    if (lightboxTouches.size === 0 && zoomScale === 1 && touchStart) {
+      const swipeX = event.clientX - touchStart.x;
+      const swipeY = event.clientY - touchStart.y;
+      if (Math.abs(swipeX) > 42 && Math.abs(swipeX) > Math.abs(swipeY)) {
+        if (swipeX < 0) showNextPhoto();
+        else showPreviousPhoto();
+      }
+    }
+
+    if (lightboxTouches.size < 2) {
+      const [remainingTouch] = getTouchPoints();
+      if (remainingTouch) panStart = { x: remainingTouch.x, y: remainingTouch.y, zoomX, zoomY };
+    }
+    swipeStart = null;
+  });
+  dialog.addEventListener("pointercancel", (event) => {
+    lightboxTouches.delete(event.pointerId);
+    swipeStart = null;
   });
   dialog.addEventListener("close", () => {
+    lightboxTouches.clear();
+    resetZoom();
     if (window.history.state?.galleryLightbox) window.history.back();
   });
   window.addEventListener("popstate", (event) => {

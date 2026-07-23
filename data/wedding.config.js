@@ -28,7 +28,7 @@ const weddingConfig = {
       photo: "./photos/thumbs/PYD01455_thumb.webp",
       fullPhoto: "./photos/PYD01455.webp",
       photoAlt: "장예슬의 사진",
-      introduction: "1998년 1월 서울 출생\n섬세하고 아름다운 문과소녀",
+      introduction: "1998년 1월 서울 출생\n섬세하고 아름다운 문과소녀\n붙임성 있고 정이 많은 ",
     },
   },
   galleryTitle: "OUR MOMENTS",
