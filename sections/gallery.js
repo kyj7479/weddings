@@ -61,6 +61,14 @@ export default function createGallery(content) {
   let zoomY = 0;
   let lastTapTime = 0;
 
+  // Keep the full-size images warm in the browser cache so a swipe never waits
+  // for the next image file before the transition can begin.
+  photos.forEach(({ src }) => {
+    const image = new Image();
+    image.src = src;
+    image.decode?.().catch(() => {});
+  });
+
   const getItemStep = () => {
     const item = items[0];
     const gap = Number.parseFloat(getComputedStyle(track).gap) || 0;
@@ -124,11 +132,28 @@ export default function createGallery(content) {
     lightboxImage.alt = photo.alt;
     counter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(photos.length).padStart(2, "0")}`;
 
-    if (direction) {
-      lightboxImage.classList.remove("slide-from-next", "slide-from-previous");
-      void lightboxImage.offsetWidth;
-      lightboxImage.classList.add(direction === "next" ? "slide-from-next" : "slide-from-previous");
-    }
+    if (!direction || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    lightboxImage.getAnimations().forEach((animation) => animation.cancel());
+    const offset = direction === "next" ? 22 : -22;
+    window.requestAnimationFrame(() => {
+      lightboxImage.animate([
+        { opacity: .15, transform: `translateX(${offset}px) scale(.99)` },
+        { opacity: 1, transform: "translateX(0) scale(1)" },
+      ], {
+        duration: 220,
+        easing: "cubic-bezier(.22, 1, .36, 1)",
+      });
+    });
+  };
+
+  const syncCarouselToActivePhoto = () => {
+    const activeItem = items[photos.length + activeIndex];
+    if (!activeItem) return;
+    carousel.scrollTo({
+      left: activeItem.offsetLeft - (carousel.clientWidth - activeItem.offsetWidth) / 2,
+      behavior: "auto",
+    });
   };
 
   const resetZoom = () => {
@@ -166,6 +191,8 @@ export default function createGallery(content) {
   const showPreviousPhoto = () => {
     resetZoom();
     activeIndex = (activeIndex - 1 + photos.length) % photos.length;
+    updateFeature();
+    syncCarouselToActivePhoto();
     updateLightbox("previous");
     updateLightboxHistory("replaceState");
   };
@@ -173,6 +200,8 @@ export default function createGallery(content) {
   const showNextPhoto = () => {
     resetZoom();
     activeIndex = (activeIndex + 1) % photos.length;
+    updateFeature();
+    syncCarouselToActivePhoto();
     updateLightbox("next");
     updateLightboxHistory("replaceState");
   };
