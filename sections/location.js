@@ -6,9 +6,9 @@ function loadKakaoMapSdk(appKey) {
 
   kakaoMapSdk = new Promise((resolve, reject) => {
     const script = document.createElement("script");
-    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${appKey}&libraries=services`;
+    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${appKey}&libraries=services&autoload=false`;
     script.async = true;
-    script.onload = () => resolve(window.kakao);
+    script.onload = () => window.kakao.maps.load(() => resolve(window.kakao));
     script.onerror = () => reject(new Error("Kakao Map SDK could not be loaded."));
     document.head.append(script);
   });
