@@ -1,7 +1,7 @@
 export default function createInvitation(content) {
   const section = document.createElement("section");
   section.className = "details";
-  section.id = "location";
+  section.id = "invitation";
   section.innerHTML = `
     <div class="eyebrow">Invitation</div>
     <h2>${content.invitationTitle}</h2>

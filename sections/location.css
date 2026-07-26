@@ -20,7 +20,19 @@
 .transport-row:last-child { border-bottom: 1px solid rgba(133, 151, 142, .28); }
 .transport-row strong { padding-top: 2px; color: #3d6158; font: 400 11px "DM Serif Display", serif; letter-spacing: .08em; }
 .transport-row p { margin: 0; color: #526b61; font: 400 13px/1.75 "Gowun Batang", serif; word-break: keep-all; }
+.subway-guide { min-width: 0; }
+.subway-station { display: flex; align-items: center; gap: 5px; min-height: 25px; }
+.subway-station b { margin-left: 4px; color: #2f4d45; font: 700 15px "Gowun Batang", serif; }
+.subway-badge { display: inline-grid; width: 20px; height: 20px; place-items: center; border-radius: 50%; color: #fff; font: 600 12px "Noto Sans KR", sans-serif; }
+.subway-badge.line-2 { background: #5f9a72; }
+.subway-badge.line-7 { background: #85905c; }
+.subway-guide p { margin-top: 9px; color: #526b61; }
+.subway-guide small { display: block; margin-top: 4px; color: #89978f; font: 400 11px/1.65 "Gowun Batang", serif; }
 .bus-list { margin: 13px 0 0; }
-.bus-list div { display: grid; grid-template-columns: 37px 1fr; gap: 5px; margin-top: 4px; }
-.bus-list dt { color: #9d753d; font: 400 12px/1.7 "Gowun Batang", serif; }
-.bus-list dd { margin: 0; color: #61786e; font: 400 12px/1.7 "Gowun Batang", serif; }
+.bus-list div { display: grid; grid-template-columns: 38px 1fr; gap: 8px; margin-top: 7px; }
+.bus-list dt { display: grid; min-height: 21px; place-items: center; border: 1px solid currentColor; border-radius: 3px; font: 500 10px "Noto Sans KR", sans-serif; }
+.bus-list dd { margin: 1px 0 0; color: #61786e; font: 400 12px/1.7 "Gowun Batang", serif; }
+.bus-list .bus-trunk { color: #547d9e; }
+.bus-list .bus-branch { color: #5c9474; }
+.bus-list .bus-express { color: #b6844d; }
+.bus-list .bus-airport { color: #6d99a4; }

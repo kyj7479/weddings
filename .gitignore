@@ -1,6 +1,7 @@
 # 디자인 참고 이미지 (배포 제외)
 /364.jpg
 /sample.png
+/photos/infos/*.png
 
 # 운영체제 파일
 .DS_Store

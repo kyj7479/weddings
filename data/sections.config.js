@@ -11,6 +11,7 @@ const sectionOrder = [
   { id: "about", enabled: true },
   { id: "gallery", enabled: true },
   { id: "location", enabled: true },
+  { id: "venueGuide", enabled: true },
 ];
 
 export default sectionOrder;

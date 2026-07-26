@@ -66,6 +66,7 @@ export default function createLocation(content) {
   const { location } = content;
   const section = document.createElement("section");
   section.className = "location-section";
+  section.id = "location";
   section.innerHTML = `
     <header class="location-heading">
       <h2>${location.title}</h2>
@@ -85,16 +86,23 @@ export default function createLocation(content) {
     <div class="location-rule"></div>
     <div class="transport-guide">
       <h3>${location.transitTitle}</h3>
-      <div class="transport-row">
+      <div class="transport-row subway-row">
         <strong>SUBWAY</strong>
-        <p>${location.subway}</p>
+        <div class="subway-guide">
+          <div class="subway-station">
+            ${location.subway.lines.map((line) => `<span class="subway-badge line-${line.number}">${line.number}</span>`).join("")}
+            <b>${location.subway.station}</b>
+          </div>
+          <p>${location.subway.lines.map((line) => `${line.label} ${line.exit}`).join(" · ")}</p>
+          <small>${location.subway.description}</small>
+        </div>
       </div>
       <div class="transport-row bus-row">
         <strong>BUS</strong>
         <div>
           <p>${location.busStop}</p>
           <dl class="bus-list">
-            ${location.buses.map(([type, routes]) => `<div><dt>${type}</dt><dd>${routes}</dd></div>`).join("")}
+            ${location.buses.map((bus) => `<div class="bus-${bus.style}"><dt>${bus.type}</dt><dd>${bus.routes}</dd></div>`).join("")}
           </dl>
         </div>
       </div>

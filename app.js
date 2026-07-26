@@ -7,6 +7,7 @@ import createFamily from "./sections/family.js";
 import createAbout from "./sections/about.js";
 import createGallery from "./sections/gallery.js";
 import createLocation from "./sections/location.js";
+import createVenueGuide from "./sections/venue-guide.js";
 import formatWedding from "./lib/format-wedding.js";
 
 const sectionRegistry = {
@@ -17,6 +18,7 @@ const sectionRegistry = {
   about: createAbout,
   gallery: createGallery,
   location: createLocation,
+  venueGuide: createVenueGuide,
 };
 
 const content = formatWedding(weddingConfig);
