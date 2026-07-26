@@ -34,9 +34,10 @@ const weddingConfig = {
   galleryTitle: "OUR MOMENTS",
   galleryIntro: "두 사람이 함께한\n아름다운 순간들",
   gallery: [
-    "PYD00070.jpg", "PYD00360.jpg", "PYD00466.jpg", "PYD00559.jpg", "PYD00907.jpg",
-    "PYD01191.jpg", "PYD01265.jpg", "PYD01455.jpg", "PYD01823.jpg", "PYD01890.jpg",
-    "PYD02034.jpg", "PYD02330.jpg", "PYD02349.jpg", "PYD03255.jpg", "PYD03331.jpg",
+    "PYD00055.jpg", "PYD00410.jpg", "PYD01794.jpg", "PYD00907.jpg", "PYD01191.jpg",
+    "PYD01731.jpg", "PYD01890.jpg", "PYD01360.jpg", "PYD02349.jpg", "PYD02795_R.jpg",
+    "KKO000EX.jpg", "PYD03245.jpg", "PYD03374.jpg", "PYD03089.jpg", "PYD03464.jpg",
+    "PYD03719.jpg", "PYD03871.jpg", "PYD04301.jpg",
   ].map((fileName, index) => ({
     src: `./photos/${fileName.replace(".jpg", ".webp")}`,
     thumb: `./photos/thumbs/${fileName.replace(".jpg", "_thumb.webp")}`,

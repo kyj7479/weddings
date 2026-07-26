@@ -232,16 +232,30 @@ export default function createGallery(content) {
     carousel.classList.remove("is-dragging");
   });
 
-  items.forEach((item) => {
-    item.addEventListener("click", () => {
-      if (isDragging || dragMoved) return;
-      activeIndex = Number(item.dataset.galleryIndex);
-      updateFeature();
-      carousel.scrollTo({
-        left: item.offsetLeft - (carousel.clientWidth - item.offsetWidth) / 2,
-        behavior: "smooth",
-      });
+  const centerCarouselItem = (item) => {
+    carousel.scrollTo({
+      left: item.offsetLeft - (carousel.clientWidth - item.offsetWidth) / 2,
+      behavior: "smooth",
     });
+  };
+
+  carousel.addEventListener("click", (event) => {
+    if (isDragging || dragMoved) return;
+
+    const clickedItem = event.target.closest(".gallery-carousel-item");
+    if (clickedItem) {
+      activeIndex = Number(clickedItem.dataset.galleryIndex);
+      updateFeature();
+      centerCarouselItem(clickedItem);
+      return;
+    }
+
+    const bounds = carousel.getBoundingClientRect();
+    activeIndex = event.clientX < bounds.left + bounds.width / 2
+      ? (activeIndex - 1 + photos.length) % photos.length
+      : (activeIndex + 1) % photos.length;
+    updateFeature();
+    centerCarouselItem(items[photos.length + activeIndex]);
   });
 
   feature.addEventListener("click", () => {
