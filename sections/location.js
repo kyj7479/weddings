@@ -20,13 +20,7 @@ function renderKakaoMap(container, content) {
   loadKakaoMapSdk(content.location.kakaoMapKey)
     .then((kakao) => {
       const geocoder = new kakao.maps.services.Geocoder();
-      geocoder.addressSearch(content.address, (results, status) => {
-        if (status !== kakao.maps.services.Status.OK || !results[0]) {
-          container.classList.add("map-unavailable");
-          return;
-        }
-
-        const position = new kakao.maps.LatLng(results[0].y, results[0].x);
+      const createMap = (position) => {
         const map = new kakao.maps.Map(container, {
           center: position,
           level: 3,
@@ -40,9 +34,32 @@ function renderKakaoMap(container, content) {
           content: `<div class="location-map-label">${content.venue}</div>`,
           map,
         });
+      };
+
+      const searchVenue = () => {
+        const places = new kakao.maps.services.Places();
+        places.keywordSearch(content.venueName, (results, status) => {
+          if (status !== kakao.maps.services.Status.OK || !results[0]) {
+            container.classList.add("map-unavailable");
+            container.querySelector("p").textContent = "지도를 불러오지 못했습니다.";
+            return;
+          }
+          createMap(new kakao.maps.LatLng(results[0].y, results[0].x));
+        });
+      };
+
+      geocoder.addressSearch(content.address, (results, status) => {
+        if (status !== kakao.maps.services.Status.OK || !results[0]) {
+          searchVenue();
+          return;
+        }
+        createMap(new kakao.maps.LatLng(results[0].y, results[0].x));
       });
     })
-    .catch(() => container.classList.add("map-unavailable"));
+    .catch(() => {
+      container.classList.add("map-unavailable");
+      container.querySelector("p").textContent = "지도를 불러오지 못했습니다.";
+    });
 }
 
 export default function createLocation(content) {
