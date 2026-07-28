@@ -106,6 +106,12 @@ const weddingConfig = {
       },
     ],
   },
+  guestbook: {
+    title: "GUESTBOOK",
+    intro: "두 사람의 새로운 시작을 축복하는\n따뜻한 마음을 남겨주세요.",
+    endpoint: "https://script.google.com/macros/s/AKfycbwBxYpoG9qaSa8Jg9E95tVzQsRb4fZuvbnkFcKxhv8it7EKoMdNM5eUbdaBe2Lf31gCyg/exec",
+    submitLabel: "축하의 마음 남기기",
+  },
   contactPhone: "010-0000-0000",
   heroPhoto: "./photos/PYD00070.webp",
   heroPhotoAlt: "김영진과 장예슬의 웨딩 사진",

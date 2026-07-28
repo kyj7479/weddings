@@ -1,0 +1,29 @@
+.guestbook-section { padding: 78px 30px 88px; background: #f7f6f0; color: #2f4d45; }
+.guestbook-heading { text-align: center; }
+.guestbook-heading h2 { margin: 0; font: 400 30px "DM Serif Display", serif; letter-spacing: .05em; }
+.guestbook-heading p { margin: 17px 0 34px; color: #647b71; font: 400 14px/1.8 "Gowun Batang", serif; white-space: pre-line; }
+.guestbook-form { display: grid; gap: 15px; padding: 27px 23px 22px; border: 1px solid #ddd7ca; background: #fdfcf8; }
+.guestbook-form label { display: grid; gap: 7px; }
+.guestbook-form label > span, .guestbook-list-header { color: #a47a42; font: 400 10px "DM Serif Display", serif; letter-spacing: .13em; }
+.guestbook-form input, .guestbook-form textarea { width: 100%; box-sizing: border-box; border: 0; border-bottom: 1px solid #d7ddd7; border-radius: 0; outline: 0; background: transparent; color: #2f4d45; font: 400 13px "Gowun Batang", serif; }
+.guestbook-form input { height: 36px; }
+.guestbook-form textarea { min-height: 74px; padding: 8px 0; resize: vertical; line-height: 1.7; }
+.guestbook-form input::placeholder, .guestbook-form textarea::placeholder { color: #aab4ae; }
+.guestbook-form button { min-height: 48px; margin-top: 6px; border: 1px solid #45655a; background: #45655a; color: #fff; font: 500 12px "Noto Sans KR", sans-serif; cursor: pointer; }
+.guestbook-form button:disabled { opacity: .65; cursor: wait; }
+.guestbook-form-notice { margin: 0; color: #84938b; font: 400 10px/1.65 "Gowun Batang", serif; text-align: center; }
+.guestbook-honeypot, .guestbook-delete-form, .guestbook-submit-frame { position: absolute; width: 1px !important; height: 1px; overflow: hidden; opacity: 0; pointer-events: none; }
+.guestbook-rule { height: 1px; margin: 53px 0 20px; background: #d9ddd7; }
+.guestbook-list-header { display: flex; justify-content: space-between; }
+.guestbook-status { color: #819087; font-size: 9px; letter-spacing: .08em; }
+.guestbook-list { margin-top: 15px; }
+.guestbook-message { padding: 18px 0; border-top: 1px solid rgba(133, 151, 142, .28); }
+.guestbook-message:last-child { border-bottom: 1px solid rgba(133, 151, 142, .28); }
+.guestbook-message-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.guestbook-message-identity { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+.guestbook-message-meta strong { color: #3d6158; font: 700 13px "Gowun Batang", serif; }
+.guestbook-message-meta time { color: #97a39c; font: 400 10px "DM Serif Display", serif; letter-spacing: .05em; white-space: nowrap; }
+.guestbook-delete-button { flex: 0 0 auto; border: 0; padding: 2px 0; background: transparent; color: #97a39c; font: 400 10px "Gowun Batang", serif; cursor: pointer; }
+.guestbook-delete-button:hover { color: #45655a; }
+.guestbook-message p { margin: 8px 0 0; color: #5b7067; font: 400 13px/1.75 "Gowun Batang", serif; white-space: pre-wrap; word-break: keep-all; }
+.guestbook-empty { margin: 0; padding: 27px 0; border-top: 1px solid rgba(133, 151, 142, .28); border-bottom: 1px solid rgba(133, 151, 142, .28); color: #88978e; font: 400 12px "Gowun Batang", serif; text-align: center; }
