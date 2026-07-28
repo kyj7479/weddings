@@ -19,6 +19,7 @@ export default function createGallery(content) {
     <button class="gallery-feature" type="button" aria-label="대표 사진 크게 보기">
       <img class="gallery-feature-image" src="${photos[0].src}" alt="${photos[0].alt}" />
       <span class="gallery-feature-count">01 / ${String(photos.length).padStart(2, "0")}</span>
+      <span class="gallery-unretouched-mark" ${photos[0].isRetouched ? "hidden" : ""} aria-hidden="true"><small ${photos[0].photoNumber ? "" : "hidden"}>${photos[0].photoNumber || ""}</small>김앤장<br />미보정</span>
     </button>
     <div class="gallery-carousel" aria-label="웨딩 사진 갤러리">
       <div class="gallery-carousel-track">
@@ -30,6 +31,7 @@ export default function createGallery(content) {
       <button class="lightbox-close" type="button" aria-label="닫기">×</button>
       <button class="lightbox-arrow previous" type="button" aria-label="이전 사진">‹</button>
       <img class="lightbox-image" alt="" />
+      <span class="lightbox-unretouched-mark" aria-hidden="true"><small></small>김앤장<br />미보정</span>
       <button class="lightbox-arrow next" type="button" aria-label="다음 사진">›</button>
       <p class="lightbox-count"></p>
     </dialog>
@@ -40,9 +42,13 @@ export default function createGallery(content) {
   const feature = section.querySelector(".gallery-feature");
   const featureImage = section.querySelector(".gallery-feature-image");
   const featureCount = section.querySelector(".gallery-feature-count");
+  const featureMark = section.querySelector(".gallery-unretouched-mark");
+  const featureMarkNumber = featureMark.querySelector("small");
   const dialog = section.querySelector(".gallery-lightbox");
   const lightboxImage = section.querySelector(".lightbox-image");
   const counter = section.querySelector(".lightbox-count");
+  const lightboxMark = section.querySelector(".lightbox-unretouched-mark");
+  const lightboxMarkNumber = lightboxMark.querySelector("small");
   const items = [...section.querySelectorAll(".gallery-carousel-item")];
   let activeIndex = 0;
   let itemStep = 0;
@@ -80,6 +86,9 @@ export default function createGallery(content) {
     featureImage.src = photo.src;
     featureImage.alt = photo.alt;
     featureCount.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(photos.length).padStart(2, "0")}`;
+    featureMark.hidden = photo.isRetouched;
+    featureMarkNumber.hidden = !photo.photoNumber;
+    featureMarkNumber.textContent = photo.photoNumber || "";
   };
 
   const updateFocusedItem = () => {
@@ -131,6 +140,9 @@ export default function createGallery(content) {
     lightboxImage.src = photo.src;
     lightboxImage.alt = photo.alt;
     counter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(photos.length).padStart(2, "0")}`;
+    lightboxMark.hidden = photo.isRetouched;
+    lightboxMarkNumber.hidden = !photo.photoNumber;
+    lightboxMarkNumber.textContent = photo.photoNumber || "";
 
     if (!direction || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 

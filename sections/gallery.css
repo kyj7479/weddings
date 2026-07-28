@@ -5,6 +5,9 @@
 .gallery-feature { position: relative; display: block; width: calc(100% - 80px); aspect-ratio: 4 / 5; margin: 0 auto 30px; padding: 4px; overflow: hidden; border: 1px solid #cda466; background: #fdfcf8; cursor: zoom-in; }
 .gallery-feature-image { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; transition: opacity .25s ease; }
 .gallery-feature-count { position: absolute; right: 14px; bottom: 13px; color: #fff; font: 400 12px "DM Serif Display", serif; letter-spacing: .1em; text-shadow: 0 1px 5px rgba(0, 0, 0, .4); }
+.gallery-unretouched-mark, .lightbox-unretouched-mark { position: absolute; top: 50%; right: 14px; color: rgba(255, 255, 255, .76); font: 400 30pt/1.13 "Gowun Batang", serif; letter-spacing: -.06em; text-align: right; text-shadow: 0 1px 5px rgba(20, 35, 31, .38); transform: translateY(-50%); pointer-events: none; }
+.gallery-unretouched-mark small, .lightbox-unretouched-mark small { display: block; margin-bottom: 4px; font: 400 12pt/1 "DM Serif Display", serif; letter-spacing: .12em; }
+.gallery-unretouched-mark[hidden], .lightbox-unretouched-mark[hidden] { display: none; }
 .gallery-carousel { overflow-x: auto; cursor: grab; scrollbar-width: none; -webkit-overflow-scrolling: touch; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
 .gallery-carousel::-webkit-scrollbar { display: none; }
 .gallery-carousel.is-dragging { cursor: grabbing; user-select: none; }
@@ -22,3 +25,4 @@
 .lightbox-arrow { top: 50%; z-index: 1; padding: 13px; font: 300 45px/1 "DM Serif Display", serif; transform: translateY(-50%); }
 .lightbox-arrow.previous { left: 0; }.lightbox-arrow.next { right: 0; }
 .lightbox-count { position: absolute; right: 0; bottom: 15px; left: 0; margin: 0; color: rgba(255, 255, 255, .72); font: 400 12px "DM Serif Display", serif; letter-spacing: .15em; text-align: center; }
+.lightbox-unretouched-mark { right: 27px; }

@@ -34,13 +34,15 @@ const weddingConfig = {
   galleryTitle: "OUR MOMENTS",
   galleryIntro: "두 사람이 함께한\n아름다운 순간들",
   gallery: [
-    "PYD00055.jpg", "PYD00410.jpg", "PYD01654.jpg", "PYD01794.jpg", "PYD00907.jpg", "PYD01191.jpg",
-    "PYD01731.jpg", "PYD01890.jpg", "PYD01360.jpg", "PYD02349.jpg", "PYD01959.jpg", "PYD02795_R.jpg",
-    "KKO000EX.jpg", "PYD03089.jpg", "PYD03245.jpg", "PYD03374.jpg", "PYD03464.jpg",
+    "PYD00052_R.jpg", "PYD00410_R.jpg", "PYD01700_R.jpg", "PYD01623_R.jpg", "PYD01794_R.jpg", "PYD00907.jpg",
+    "PYD01191.jpg", "PYD01731.jpg", "PYD01890_R.jpg", "PYD01360.jpg", "PYD02349_R.jpg", "PYD02795_R.jpg",
+    "KKO000EX.jpg", "PYD03089.jpg", "PYD03168_R.jpg", "PYD03374.jpg", "PYD03481_R.jpg",
     "PYD03966.jpg",
   ].map((fileName, index) => ({
     src: `./photos/${fileName.replace(".jpg", ".webp")}`,
     thumb: `./photos/thumbs/${fileName.replace(".jpg", "_thumb.webp")}`,
+    isRetouched: fileName.includes("_R."),
+    photoNumber: fileName.startsWith("PYD") ? fileName.match(/\d{5}/)[0].slice(-4) : null,
     alt: `김영진과 장예슬의 웨딩 사진 ${index + 1}`,
   })),
   date: "2026-11-22T12:20:00+09:00",
