@@ -65,11 +65,13 @@ export default function createGuestbook(content) {
 
   const form = section.querySelector(".guestbook-form");
   const deleteForm = section.querySelector(".guestbook-delete-form");
+  const submitFrame = section.querySelector(".guestbook-submit-frame");
   const submitButton = form.querySelector("button");
   const notice = form.querySelector(".guestbook-form-notice");
   const list = section.querySelector(".guestbook-list");
   const status = section.querySelector(".guestbook-status");
   let pendingDeletionId = null;
+  let submittedMessage = false;
 
   const showEmpty = (text) => {
     const empty = document.createElement("p");
@@ -126,14 +128,19 @@ export default function createGuestbook(content) {
   loadMessages();
 
   form.addEventListener("submit", () => {
+    submittedMessage = true;
     submitButton.disabled = true;
     submitButton.textContent = "마음을 전달하고 있습니다";
     notice.textContent = "소중한 메시지가 바로 공개되었습니다.";
-    window.setTimeout(() => {
-      form.reset();
-      submitButton.disabled = false;
-      submitButton.textContent = guestbook.submitLabel;
-    }, 900);
+  });
+
+  submitFrame.addEventListener("load", () => {
+    if (!submittedMessage) return;
+    submittedMessage = false;
+    form.reset();
+    submitButton.disabled = false;
+    submitButton.textContent = guestbook.submitLabel;
+    loadMessages();
   });
 
   return section;

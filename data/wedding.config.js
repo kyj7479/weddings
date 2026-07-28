@@ -36,7 +36,7 @@ const weddingConfig = {
   gallery: [
     "PYD00052_R.jpg", "PYD00410_R.jpg", "PYD01700_R.jpg", "PYD01623_R.jpg", "PYD01794_R.jpg", "PYD00907.jpg",
     "PYD01191.jpg", "PYD01731.jpg", "PYD01890_R.jpg", "PYD01360.jpg", "PYD02349_R.jpg", "PYD02795_R.jpg",
-    "KKO000EX.jpg", "PYD03089.jpg", "PYD03168_R.jpg", "PYD03374.jpg", "PYD03481_R.jpg",
+    "KKO000EX.jpg", "PYD03061_R.jpg", "PYD03168_R.jpg", "PYD03374.jpg", "PYD03481_R.jpg",
     "PYD03966.jpg",
   ].map((fileName, index) => ({
     src: `./photos/${fileName.replace(".jpg", ".webp")}`,
