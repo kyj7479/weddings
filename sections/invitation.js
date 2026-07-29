@@ -1,26 +1,27 @@
-function renderAccount(person, allowContact = false) {
-  const phone = person.phone?.replace(/[^0-9+]/g, "");
-
+function renderAccount(person) {
   return `
     <article class="heart-account-card">
       <div class="heart-account-heading">
         <span>${person.role}</span>
         <strong>${person.name}</strong>
       </div>
-      ${allowContact ? `
-        <div class="heart-contact-actions">
-          <a href="tel:${phone}">통화</a>
-          <a href="sms:${phone}">문자</a>
-        </div>
-      ` : ""}
       <div class="heart-account-detail">
-        <span>${person.bank} · ${person.holder}</span>
+        <span>${person.bank}</span>
         <div>
           <b>${person.account}</b>
           <button type="button" data-copy-account="${person.account}">복사</button>
         </div>
       </div>
     </article>
+  `;
+}
+
+function renderFamily(family) {
+  return `
+    <section class="heart-family-panel">
+      ${renderAccount(family.couple)}
+      ${family.parents.map(renderAccount).join("")}
+    </section>
   `;
 }
 
@@ -52,18 +53,12 @@ function createHeartSheet(content) {
     <div class="heart-sheet-backdrop"></div>
     <section class="heart-sheet-card" role="dialog" aria-modal="true" aria-labelledby="heart-sheet-title">
       <button class="heart-sheet-close" type="button" aria-label="마음 전하기 닫기">×</button>
-      <header>
-        <span>WITH LOVE</span>
-        <h2 id="heart-sheet-title">${content.heart.title}</h2>
-        <p>${content.heart.intro}</p>
-      </header>
-      <div class="heart-sheet-group">
-        <h3>GROOM & BRIDE</h3>
-        ${content.heart.couple.map((person) => renderAccount(person, true)).join("")}
+      <h2 id="heart-sheet-title" class="heart-sheet-title">${content.heart.title}</h2>
+      <div class="heart-tabs" role="tablist" aria-label="계좌 안내 구분">
+        ${content.heart.families.map((family, index) => `<button type="button" role="tab" aria-selected="${index === 0}" data-heart-tab="${index}">${family.title}</button>`).join("")}
       </div>
-      <div class="heart-sheet-group heart-sheet-family">
-        <h3>FAMILY</h3>
-        ${content.heart.family.map((person) => renderAccount(person)).join("")}
+      <div class="heart-family-panels">
+        ${content.heart.families.map(renderFamily).join("")}
       </div>
     </section>
   `;
@@ -98,6 +93,14 @@ function createHeartSheet(content) {
   sheet.querySelectorAll("[data-copy-account]").forEach((button) => {
     button.addEventListener("click", () => copyAccount(button.dataset.copyAccount, button));
   });
+  const tabs = [...sheet.querySelectorAll("[data-heart-tab]")];
+  const panels = [...sheet.querySelectorAll(".heart-family-panel")];
+  const selectFamily = (index) => {
+    tabs.forEach((tab, tabIndex) => tab.setAttribute("aria-selected", String(tabIndex === index)));
+    panels.forEach((panel, panelIndex) => { panel.hidden = panelIndex !== index; });
+  };
+  tabs.forEach((tab, index) => tab.addEventListener("click", () => selectFamily(index)));
+  selectFamily(0);
   window.addEventListener("popstate", () => close(true));
   window.addEventListener("keydown", (event) => {
     if (event.key === "Escape") close();
