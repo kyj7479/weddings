@@ -17,12 +17,12 @@ const weddingConfig = {
   },
   about: {
     title: "ABOUT US",
-    subtitle: "서로의 일상에 스며든\n두 사람을 소개합니다.",
+    subtitle: "서로의 영화 속에 걸어들어온\n두 사람을 소개합니다.",
     groom: {
       photo: "./photos/thumbs/PYD02330_thumb.webp",
       fullPhoto: "./photos/PYD02330.webp",
       photoAlt: "김영진의 사진",
-      introduction: "1994년 5월, 햇살이 짙어지던 날\n그날의 따스함을 닮아 따뜻한 마음을 가진 한결같은 이과소년",
+      introduction: "1994년 5월, 햇살이 짙어지던 날\n그날의 따스한 햇살을 받아\n온화하고 한결같은 마음을 가진 이과소년",
     },
     bride: {
       photo: "./photos/thumbs/PYD01455_thumb.webp",
