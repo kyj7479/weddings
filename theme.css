@@ -87,3 +87,89 @@ h1 {
 .countdown-item span {
   color: #6a8177;
 }
+
+/* 초대 문구와 첫 번째 일정 섹션 사이의 여백을 다른 섹션과 맞춥니다. */
+.details {
+  padding: 52px 36px 78px;
+}
+
+.heart-sheet-trigger {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.heart-sheet {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  display: grid;
+  align-items: end;
+}
+
+.heart-sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(24, 52, 47, .5);
+  opacity: 0;
+  transition: opacity .23s ease;
+}
+
+.heart-sheet-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 560px);
+  max-height: min(83dvh, 720px);
+  margin: 0 auto;
+  padding: 36px 28px calc(28px + env(safe-area-inset-bottom));
+  overflow-y: auto;
+  border: 1px solid #cda466;
+  border-bottom: 0;
+  background: #fdfcf8;
+  color: #2f4d45;
+  box-shadow: 0 -16px 40px rgba(21, 48, 42, .2);
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .23s ease, transform .3s cubic-bezier(.22, 1, .36, 1);
+}
+
+.heart-sheet.is-open .heart-sheet-backdrop,
+.heart-sheet.is-open .heart-sheet-card {
+  opacity: 1;
+}
+
+.heart-sheet.is-open .heart-sheet-card {
+  transform: translateY(0);
+}
+
+.heart-sheet-close {
+  position: absolute;
+  top: 17px;
+  right: 19px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  background: transparent;
+  color: #60786e;
+  font: 300 29px/1 "DM Serif Display", serif;
+  cursor: pointer;
+}
+
+.heart-sheet-card header { padding: 1px 30px 27px; text-align: center; }
+.heart-sheet-card header > span,
+.heart-sheet-group h3 { color: #a47a42; font: 400 10px "DM Serif Display", serif; letter-spacing: .14em; }
+.heart-sheet-card header h2 { margin: 8px 0 10px; font: 400 27px "Gowun Batang", serif; letter-spacing: .08em; }
+.heart-sheet-card header p { margin: 0; color: #71857b; font: 400 12px/1.7 "Gowun Batang", serif; white-space: pre-line; }
+.heart-sheet-group + .heart-sheet-group { margin-top: 27px; }
+.heart-sheet-group h3 { margin: 0 0 9px; }
+.heart-account-card { padding: 16px 0; border-top: 1px solid #d9ddd7; }
+.heart-account-card:last-child { border-bottom: 1px solid #d9ddd7; }
+.heart-account-heading { display: flex; align-items: baseline; gap: 8px; }
+.heart-account-heading span { color: #a47a42; font: 400 10px "DM Serif Display", serif; letter-spacing: .1em; }
+.heart-account-heading strong { color: #36584f; font: 700 15px "Gowun Batang", serif; }
+.heart-contact-actions { display: flex; gap: 7px; margin-top: 12px; }
+.heart-contact-actions a { min-width: 58px; padding: 6px 10px; border: 1px solid #bdc9c1; color: #527067; font: 500 11px "Noto Sans KR", sans-serif; text-align: center; text-decoration: none; }
+.heart-account-detail { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-top: 13px; }
+.heart-account-detail > span { color: #819087; font: 400 11px "Gowun Batang", serif; }
+.heart-account-detail > div { display: flex; align-items: center; gap: 8px; }
+.heart-account-detail b { color: #456258; font: 400 12px "DM Serif Display", serif; letter-spacing: .03em; white-space: nowrap; }
+.heart-account-detail button { padding: 4px 0; border: 0; background: transparent; color: #a47a42; font: 500 10px "Noto Sans KR", sans-serif; cursor: pointer; }

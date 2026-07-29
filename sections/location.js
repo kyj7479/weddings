@@ -84,6 +84,16 @@ export default function createLocation(content) {
       <a href="${location.naverDirections}" target="_blank" rel="noreferrer">네이버지도 길찾기</a>
     </div>
     <div class="location-rule"></div>
+    <div class="driving-guide">
+      <h3>${location.driving.title}</h3>
+      <div class="transport-row driving-row">
+        <strong>${location.driving.label}</strong>
+        <div>
+          <p>${location.driving.description}</p>
+          <small>${location.driving.capacity}</small>
+        </div>
+      </div>
+    </div>
     <div class="transport-guide">
       <h3>${location.transitTitle}</h3>
       <div class="transport-row subway-row">

@@ -20,16 +20,16 @@ function createCard(card) {
     `;
   }
 
-  if (card.instagramUrl) {
+  if (card.images) {
     return `
-      <article class="venue-guide-card venue-guide-instagram-card">
+      <article class="venue-guide-card venue-guide-dining-card">
         <div class="venue-guide-card-content">
           <span class="venue-guide-card-label">${card.label}</span>
           <h3>${card.title}</h3>
-          <p class="venue-guide-instagram-description">${card.description}</p>
-          <blockquote class="instagram-media" data-instgrm-permalink="${card.instagramUrl}" data-instgrm-version="14">
-            <a href="${card.instagramUrl}" target="_blank" rel="noreferrer">Instagram에서 릴스 보기</a>
-          </blockquote>
+          <p class="venue-guide-dining-description">${card.description}</p>
+          <div class="venue-guide-dining-images">
+            ${card.images.map((image) => `<img src="${image.src}" alt="${image.alt}" loading="lazy" />`).join("")}
+          </div>
         </div>
       </article>
     `;
@@ -53,28 +53,6 @@ function createCard(card) {
       </div>
     </article>
   `;
-}
-
-let instagramEmbedLoader;
-
-function loadInstagramEmbeds() {
-  if (window.instgrm?.Embeds) {
-    window.instgrm.Embeds.process();
-    return;
-  }
-  if (instagramEmbedLoader) return;
-
-  instagramEmbedLoader = new Promise((resolve) => {
-    const script = document.createElement("script");
-    script.src = "https://www.instagram.com/embed.js";
-    script.async = true;
-    script.onload = () => {
-      window.instgrm?.Embeds?.process();
-      resolve();
-    };
-    script.onerror = () => resolve();
-    document.head.append(script);
-  });
 }
 
 export default function createVenueGuide(content) {
@@ -153,10 +131,6 @@ export default function createVenueGuide(content) {
   carousel.addEventListener("click", (event) => {
     if (dragMoved) event.preventDefault();
   });
-
-  if (section.querySelector(".instagram-media")) {
-    window.requestAnimationFrame(loadInstagramEmbeds);
-  }
 
   return section;
 }
