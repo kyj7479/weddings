@@ -25,7 +25,7 @@ function renderKakaoMap(container, content) {
           center: position,
           level: 3,
           draggable: false,
-          zoomable: false,
+          zoomable: true,
         });
         new kakao.maps.Marker({ position, map });
         new kakao.maps.CustomOverlay({
