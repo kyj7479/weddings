@@ -106,6 +106,10 @@ h1 {
   align-items: end;
 }
 
+.heart-sheet[hidden] {
+  display: none;
+}
+
 .heart-sheet-backdrop {
   position: absolute;
   inset: 0;
