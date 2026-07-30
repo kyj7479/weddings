@@ -13,6 +13,7 @@ const sectionOrder = [
   { id: "location", enabled: true },
   { id: "venueGuide", enabled: true },
   { id: "guestbook", enabled: true },
+  { id: "share", enabled: true },
 ];
 
 export default sectionOrder;

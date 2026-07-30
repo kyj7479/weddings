@@ -121,6 +121,13 @@ const weddingConfig = {
     endpoint: "https://script.google.com/macros/s/AKfycbwBxYpoG9qaSa8Jg9E95tVzQsRb4fZuvbnkFcKxhv8it7EKoMdNM5eUbdaBe2Lf31gCyg/exec",
     submitLabel: "축하의 마음 남기기",
   },
+  share: {
+    title: "SHARE WITH LOVE",
+    intro: "두 사람의 시작을 함께 나눠주세요.",
+    url: "https://kyj7479.github.io/weddings/",
+    kakaoJavaScriptKey: "886e9a6033ce9ce9d2a60e10e2f7dcc0",
+    imageUrl: "https://kyj7479.github.io/weddings/assets/kakao-preview.jpg",
+  },
   heart: {
     title: "마음 전하기",
     intro: "축하의 마음을 전해주시는 분들을 위해\n계좌 정보를 안내드립니다.",

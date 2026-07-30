@@ -1,0 +1,9 @@
+.share-section { padding: 0 30px calc(58px + env(safe-area-inset-bottom)); background: #f7f6f0; color: #2f4d45; }
+.share-rule { height: 1px; background: #d9ddd7; }
+.share-heading { padding: 45px 0 25px; text-align: center; }
+.share-heading h2 { margin: 0; font: 400 22px "DM Serif Display", serif; letter-spacing: .08em; }
+.share-heading p { margin: 11px 0 0; color: #71857b; font: 400 12px "Gowun Batang", serif; }
+.share-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.share-actions button { min-height: 49px; border: 1px solid #b7c2bb; background: #fdfcf8; color: #3f6157; font: 500 11px "Noto Sans KR", sans-serif; cursor: pointer; }
+.share-actions .share-kakao { border-color: #fee500; background: #fee500; color: #3c3724; }
+.share-status { min-height: 18px; margin: 11px 0 0; color: #89978f; font: 400 10px "Gowun Batang", serif; text-align: center; }

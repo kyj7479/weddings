@@ -66,6 +66,8 @@ export default function createGallery(content) {
   let zoomX = 0;
   let zoomY = 0;
   let lastTapTime = 0;
+  let featureSwipeStart = null;
+  let featureWasSwiped = false;
 
   // Keep the full-size images warm in the browser cache so a swipe never waits
   // for the next image file before the transition can begin.
@@ -200,20 +202,22 @@ export default function createGallery(content) {
     dialog.showModal();
   };
 
-  const showPreviousPhoto = () => {
-    resetZoom();
-    activeIndex = (activeIndex - 1 + photos.length) % photos.length;
+  const moveActivePhoto = (direction) => {
+    activeIndex = (activeIndex + direction + photos.length) % photos.length;
     updateFeature();
     syncCarouselToActivePhoto();
+  };
+
+  const showPreviousPhoto = () => {
+    resetZoom();
+    moveActivePhoto(-1);
     updateLightbox("previous");
     updateLightboxHistory("replaceState");
   };
 
   const showNextPhoto = () => {
     resetZoom();
-    activeIndex = (activeIndex + 1) % photos.length;
-    updateFeature();
-    syncCarouselToActivePhoto();
+    moveActivePhoto(1);
     updateLightbox("next");
     updateLightboxHistory("replaceState");
   };
@@ -270,7 +274,30 @@ export default function createGallery(content) {
     centerCarouselItem(items[photos.length + activeIndex]);
   });
 
-  feature.addEventListener("click", () => {
+  feature.addEventListener("pointerdown", (event) => {
+    if (event.pointerType !== "touch") return;
+    featureSwipeStart = { x: event.clientX, y: event.clientY };
+    featureWasSwiped = false;
+  });
+  feature.addEventListener("pointerup", (event) => {
+    if (event.pointerType !== "touch" || !featureSwipeStart) return;
+    const swipeX = event.clientX - featureSwipeStart.x;
+    const swipeY = event.clientY - featureSwipeStart.y;
+    featureSwipeStart = null;
+
+    if (Math.abs(swipeX) < 38 || Math.abs(swipeX) <= Math.abs(swipeY)) return;
+    featureWasSwiped = true;
+    moveActivePhoto(swipeX < 0 ? 1 : -1);
+  });
+  feature.addEventListener("pointercancel", () => {
+    featureSwipeStart = null;
+  });
+  feature.addEventListener("click", (event) => {
+    if (featureWasSwiped) {
+      event.preventDefault();
+      featureWasSwiped = false;
+      return;
+    }
     openLightbox();
   });
 
