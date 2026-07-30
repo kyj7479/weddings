@@ -28,7 +28,7 @@ const weddingConfig = {
       photo: "./photos/thumbs/PYD01455_thumb.webp",
       fullPhoto: "./photos/PYD01455.webp",
       photoAlt: "장예슬의 사진",
-      introduction: "1998년 1월, 새해가 찾아와 반기던 날\n그날의 설렘처럼 소중한 사람과 새로운 시작을 맞이하는 문과소녀",
+      introduction: "1998년 1월, 설날의 설렘이 채 가시지 않은 날\n새해의 따스한 복을 품고 태어나\n정이 많고 세심한 마음을 가진 문과소녀",
     },
   },
   galleryTitle: "OUR MOMENTS",
@@ -149,7 +149,7 @@ const weddingConfig = {
   heroLabel: "WE ARE GETTING MARRIED",
   heroMessage: "두 사람이 함께 써 내려갈 영화의 첫 장면,\n그 자리에 여러분을 초대합니다.",
   invitationTitle: "소중한 분들을 초대합니다",
-  invitationMessage: "저마다의 인생이라는 영화의 주인공이었던 두 사람이\n우연히 서로의 영화 속으로 걸어 들어와\n웃고, 때론 기대며, 서로의 영화에 없어서는 안 될 사람이 되어갔습니다.\n이제 두 사람은 평생이라는 새로운 영화를 함께 만들어가려 합니다.\n그 첫 장면을 여는 날,\n소중한 여러분께서 함께하시어 축복해 주신다면\n두 사람에게 더없는 기쁨으로 오래도록 기억될 것입니다.",
+  invitationMessage: "저마다의 인생이라는 영화의 주인공이었던 두 사람이\n우연히 서로의 영화 속으로 걸어 들어와\n웃고, 때론 기대며,\n서로의 영화에 없어서는 안 될 사람이 되어갔습니다.\n이제 두 사람은 평생이라는 새로운 영화를\n함께 만들어가려 합니다.\n그 첫 장면을 여는 날,\n소중한 여러분께서 함께하시어 축복해 주신다면\n두 사람에게 더없는 기쁨으로 오래도록 기억될 것입니다.",
   locationButton: "오시는 길",
   contactButton: "마음 전하기",
 };

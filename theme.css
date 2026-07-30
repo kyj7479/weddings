@@ -88,6 +88,11 @@ h1 {
   color: #6a8177;
 }
 
+.calendar-weekdays .sunday,
+.calendar-day.sunday {
+  color: #c66d69;
+}
+
 /* 초대 문구와 첫 번째 일정 섹션 사이의 여백을 다른 섹션과 맞춥니다. */
 .details {
   padding: 52px 36px 78px;
@@ -216,5 +221,20 @@ h1 {
 
   .details .message {
     font-size: 12px;
+  }
+
+  .details .schedule strong {
+    font-size: 15px;
+    letter-spacing: -.02em;
+    white-space: nowrap;
+  }
+
+  .details .schedule span {
+    font-size: 16px;
+  }
+
+  .details .location {
+    font-size: 11px;
+    line-height: 1.7;
   }
 }
