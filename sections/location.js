@@ -24,7 +24,7 @@ function renderKakaoMap(container, content) {
         const map = new kakao.maps.Map(container, {
           center: position,
           level: 3,
-          draggable: false,
+          draggable: true,
           zoomable: true,
         });
         new kakao.maps.Marker({ position, map });
