@@ -2,8 +2,7 @@ function renderAccount(person) {
   return `
     <article class="heart-account-card">
       <div class="heart-account-heading">
-        <span>${person.role}</span>
-        <strong>${person.name}</strong>
+        <strong>${person.name}<small>(${person.role})</small></strong>
       </div>
       <div class="heart-account-detail">
         <span>${person.bank}</span>

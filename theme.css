@@ -207,6 +207,7 @@ h1 {
 .heart-family-panel .heart-account-heading { justify-content: space-between; gap: 10px; }
 .heart-family-panel .heart-account-heading span { color: #2f4d45; font: 400 12px "Gowun Batang", serif; letter-spacing: 0; }
 .heart-family-panel .heart-account-heading strong { color: #3c4d47; font: 400 13px "Gowun Batang", serif; }
+.heart-family-panel .heart-account-heading small { margin-left: 5px; color: #7b8982; font: 400 11px "Gowun Batang", serif; }
 .heart-family-panel .heart-account-detail { display: block; margin-top: 15px; padding: 9px 12px; border-radius: 8px; background: #f3f3f3; }
 .heart-family-panel .heart-account-detail > span { display: block; color: #89938e; font: 400 10px "Gowun Batang", serif; }
 .heart-family-panel .heart-account-detail > div { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 2px; }
