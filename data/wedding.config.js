@@ -41,7 +41,7 @@ const weddingConfig = {
   ].map((fileName, index) => ({
     src: `./photos/${fileName.replace(".jpg", ".webp")}`,
     thumb: `./photos/thumbs/${fileName.replace(".jpg", "_thumb.webp")}`,
-    isRetouched: fileName.includes("_R."),
+    isRetouched: true,
     photoNumber: fileName.startsWith("PYD") ? fileName.match(/\d{5}/)[0].slice(-4) : null,
     alt: `김영진과 장예슬의 웨딩 사진 ${index + 1}`,
   })),
