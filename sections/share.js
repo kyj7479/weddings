@@ -16,7 +16,7 @@ function copyText(value) {
 }
 
 function loadKakaoSdk(appKey) {
-  if (window.Kakao?.Share) return Promise.resolve(window.Kakao);
+  if (window.Kakao?.isInitialized?.() && window.Kakao?.Share) return Promise.resolve(window.Kakao);
   if (kakaoSdk) return kakaoSdk;
 
   kakaoSdk = new Promise((resolve, reject) => {
@@ -24,12 +24,14 @@ function loadKakaoSdk(appKey) {
     script.src = "https://t1.kakaocdn.net/kakao_js_sdk/2.8.1/kakao.min.js";
     script.async = true;
     script.onload = () => {
-      if (!window.Kakao?.Share) {
-        reject(new Error("Kakao SDK could not be initialized."));
-        return;
+      try {
+        if (!window.Kakao) throw new Error("Kakao SDK could not be loaded.");
+        if (!window.Kakao.isInitialized()) window.Kakao.init(appKey);
+        if (!window.Kakao.Share) throw new Error("Kakao Share could not be initialized.");
+        resolve(window.Kakao);
+      } catch (error) {
+        reject(error);
       }
-      if (!window.Kakao.isInitialized()) window.Kakao.init(appKey);
-      resolve(window.Kakao);
     };
     script.onerror = () => reject(new Error("Kakao SDK could not be loaded."));
     document.head.append(script);
