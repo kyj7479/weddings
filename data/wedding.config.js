@@ -92,7 +92,7 @@ const weddingConfig = {
           },
           {
             title: "주차 공간",
-            description: "같은 건물 지하 4층과 지하 5층에 약 1,000대 규모의 주차장이 마련되어 있습니다. (2시간 무료 주차)\n인근 건대병원 주차장도 1시간 30분 무료로 이용할 수 있습니다.\n주차권은 5층 주차 확인 데스크에서 받아가실 수 있습니다.",
+            description: "동 건물 B1~B5층에 주차장이 마련되어 있습니다. (2시간 무료 주차) 인근 건대병원 주차장도 이용할 수 있습니다. (1시간 30분 무료 주차) 총 1,000대의 넉넉한 규모 입니다.\n주차권은 5층 주차 확인 데스크에서 받아가실 수 있습니다.",
             actionLabel: "주차 · 대중교통 영상 보기",
             actionUrl: "https://www.youtube.com/watch?v=2RpMauyPUWU",
           },
@@ -107,7 +107,7 @@ const weddingConfig = {
       {
         label: "STAR CITY ART HALL",
         title: "식사 안내",
-        description: "식사는 한식 한상 차림 & 세미 뷔페입니다.\n예식 30분 전(오전 11시 50분)부터 2시간 이용 가능합니다.",
+        description: "식사는 한식 한상 차림 & 세미 뷔페입니다.\n예식 30분 전(오전 11시 50분)부터 2시간 이용 가능합니다.\n대인은 식권이 필요하며, 소인은 무료입니다.",
         images: [
           { src: "./photos/infos/dining1.webp", alt: "스타시티아트홀 한상 차림" },
           { src: "./photos/infos/dining2.webp", alt: "스타시티아트홀 세미 뷔페" },
