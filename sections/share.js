@@ -58,6 +58,18 @@ export default function createShare(content) {
   const status = section.querySelector(".share-status");
   const copyButton = section.querySelector(".share-link-copy");
   const kakaoButton = section.querySelector(".share-kakao");
+  kakaoButton.disabled = true;
+  kakaoButton.textContent = "카카오톡 준비 중";
+
+  loadKakaoSdk(share.kakaoJavaScriptKey)
+    .then(() => {
+      kakaoButton.disabled = false;
+      kakaoButton.textContent = "카카오톡 공유하기";
+    })
+    .catch(() => {
+      kakaoButton.textContent = "카카오톡 공유 불가";
+      status.textContent = "카카오톡 공유를 준비하지 못했습니다.";
+    });
 
   copyButton.addEventListener("click", () => {
     copyText(share.url).then(() => {
@@ -67,29 +79,26 @@ export default function createShare(content) {
   });
 
   kakaoButton.addEventListener("click", () => {
-    status.textContent = "카카오톡 공유를 준비하고 있습니다.";
-    loadKakaoSdk(share.kakaoJavaScriptKey)
-      .then((kakao) => {
-        kakao.Share.sendDefault({
-          objectType: "feed",
-          content: {
-            title: "김영진 & 장예슬의 결혼식",
-            description: `${content.koreanDate} · ${content.venue}`,
-            imageUrl: share.imageUrl,
-            imageWidth: 1200,
-            imageHeight: 630,
-            link: { mobileWebUrl: share.url, webUrl: share.url },
-          },
-          buttons: [{
-            title: "청첩장 보기",
-            link: { mobileWebUrl: share.url, webUrl: share.url },
-          }],
-        });
-        status.textContent = "";
-      })
-      .catch(() => {
-        status.textContent = "카카오톡 공유를 불러오지 못했습니다.";
+    try {
+      window.Kakao.Share.sendDefault({
+        objectType: "feed",
+        content: {
+          title: "김영진 & 장예슬의 결혼식",
+          description: `${content.koreanDate} · ${content.venue}`,
+          imageUrl: share.imageUrl,
+          imageWidth: 1200,
+          imageHeight: 630,
+          link: { mobileWebUrl: share.url, webUrl: share.url },
+        },
+        buttons: [{
+          title: "청첩장 보기",
+          link: { mobileWebUrl: share.url, webUrl: share.url },
+        }],
       });
+      status.textContent = "";
+    } catch {
+      status.textContent = "카카오톡 공유를 열지 못했습니다.";
+    }
   });
 
   return section;

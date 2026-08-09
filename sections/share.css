@@ -6,4 +6,5 @@
 .share-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
 .share-actions button { min-height: 49px; border: 1px solid #b7c2bb; background: #fdfcf8; color: #3f6157; font: 500 11px "Noto Sans KR", sans-serif; cursor: pointer; }
 .share-actions .share-kakao { border-color: #fee500; background: #fee500; color: #3c3724; }
+.share-actions button:disabled { cursor: wait; opacity: .68; }
 .share-status { min-height: 18px; margin: 11px 0 0; color: #89978f; font: 400 10px "Gowun Batang", serif; text-align: center; }

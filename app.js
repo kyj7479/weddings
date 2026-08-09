@@ -27,6 +27,23 @@ const sectionRegistry = {
 
 const content = formatWedding(weddingConfig);
 const invitation = document.querySelector("#invitation");
+const topButton = document.createElement("button");
+topButton.className = "floating-top";
+topButton.type = "button";
+topButton.setAttribute("aria-label", "맨 위로 이동");
+topButton.innerHTML = '<span aria-hidden="true">↑</span><small>TOP</small>';
+document.body.append(topButton);
+
+const updateTopButton = () => {
+  topButton.classList.toggle("is-visible", window.scrollY > 420);
+};
+
+topButton.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+window.addEventListener("scroll", updateTopButton, { passive: true });
+updateTopButton();
+
 const sectionObserver = "IntersectionObserver" in window ? new IntersectionObserver((entries, observer) => {
   entries.forEach((entry) => {
     if (!entry.isIntersecting) return;
