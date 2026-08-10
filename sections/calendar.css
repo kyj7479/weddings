@@ -7,7 +7,7 @@
 .calendar-weekdays { margin-bottom: 25px; color: #40504b; font: 500 15px "Gowun Batang", serif; }
 .calendar-day { display: grid; width: 34px; height: 34px; margin: auto; place-items: center; color: #40504b; font: 400 16px "DM Serif Display", serif; }
 .sunday { color: #dc7b75; }
-.calendar-day.wedding-day { border-radius: 50%; background: #d6ae5e; color: #fff; font-family: "Noto Sans KR", sans-serif; }
+.calendar-day.wedding-day { border-radius: 50%; background: #d6ae5e; color: #fff; }
 .bottom-rule { margin: 37px 0 28px; }
 .countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
 .countdown-item { min-height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 7px; background: #fff; box-shadow: 0 7px 12px rgba(48, 64, 58, .12); }

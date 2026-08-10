@@ -241,6 +241,20 @@ h1 {
 .floating-top small { margin-top: -5px; font: 400 8px "DM Serif Display", serif; letter-spacing: .08em; }
 .floating-top.is-visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
+.viewport-debug {
+  position: fixed;
+  z-index: 100;
+  top: 12px;
+  left: 12px;
+  padding: 6px 9px;
+  border-radius: 3px;
+  background: rgba(33, 55, 50, .78);
+  color: #fff;
+  font: 600 11px/1 "Noto Sans KR", sans-serif;
+  letter-spacing: .02em;
+  pointer-events: none;
+}
+
 @media (max-width: 370px) {
   .details {
     padding-right: 24px;

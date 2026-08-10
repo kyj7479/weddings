@@ -79,52 +79,29 @@ button.portrait { display: block; cursor: zoom-in; }
 .about-lightbox-image.is-zoomed { cursor: zoom-out; }
 .about-lightbox-close { position: absolute; top: 15px; right: 19px; border: 0; background: transparent; color: #fff; cursor: pointer; font: 300 35px/1 sans-serif; }
 
+@media (min-width: 439px) and (max-width: 480px) {
+  .about-section { padding-right: 22px; padding-left: 22px; }
+  .about-profile { gap: 14px; }
+}
+
 @media (max-width: 438px) {
   .about-section { padding-right: 15px; padding-left: 15px; }
-  .about-profile { grid-template-columns: 90px minmax(0, 1fr); grid-template-areas: "photo role" "photo name" "photo intro"; column-gap: 12px; row-gap: 0; }
+  .about-profile { grid-template-columns: clamp(58px, calc(20.5vw - 2px), 86px) minmax(0, 1fr); grid-template-areas: "photo role" "photo name" "photo intro"; column-gap: 12px; row-gap: 0; }
   .profile-copy { display: contents; }
-  .portrait { width: 90px; height: 90px; }
+  .portrait { width: clamp(58px, calc(20.5vw - 2px), 86px); height: clamp(58px, calc(20.5vw - 2px), 86px); }
   .about-profile .portrait { grid-area: photo; order: 0; }
   .profile-role { grid-area: role; }
   .profile-copy h3 { grid-area: name; }
   .profile-role { align-self: end; }
-  .profile-copy h3 { align-self: start; font-size: 19px; }
-  .profile-introduction { grid-area: intro; margin-top: 6px; font-size: 12.5px; line-height: 1.68; }
+  .profile-copy h3 { align-self: start; font-size: clamp(17px, calc(2.56vw + 8.8px), 19px); }
+  .profile-introduction { grid-area: intro; margin-top: 6px; font-size: clamp(9.5px, calc(1.28vw + 6.4px), 12px); line-height: 1.68; }
   .profile-introduction-line { white-space: nowrap; letter-spacing: -.035em; }
-  .bride-profile { grid-template-columns: minmax(0, 1fr) 90px; grid-template-areas: "role photo" "name photo" "intro photo"; }
+  .bride-profile { grid-template-columns: minmax(0, 1fr) clamp(58px, calc(20.5vw - 2px), 86px); grid-template-areas: "role photo" "name photo" "intro photo"; }
+  .groom-profile { margin-right: -8px; }
+  .bride-profile { margin-left: -8px; }
+  .groom-profile .portrait { transform: translateX(4px); }
+  .bride-profile .portrait { transform: translateX(-4px); }
   .bride-profile .portrait { grid-area: photo; order: 0; }
   .bride-profile .profile-role, .bride-profile .profile-copy h3 { text-align: right; }
   .bride-profile .profile-introduction { grid-area: intro; text-align: right; }
-}
-
-@media (max-width: 400px) {
-  .about-profile { grid-template-columns: 82px minmax(0, 1fr); }
-  .portrait { width: 82px; height: 82px; }
-  .profile-introduction { font-size: 12px; }
-  .profile-introduction-line { letter-spacing: -.05em; }
-  .bride-profile { grid-template-columns: minmax(0, 1fr) 82px; }
-}
-
-@media (max-width: 379px) {
-  .about-profile { grid-template-columns: 72px minmax(0, 1fr); }
-  .portrait { width: 72px; height: 72px; }
-  .profile-introduction { font-size: 11px; }
-  .bride-profile { grid-template-columns: minmax(0, 1fr) 72px; }
-}
-
-@media (max-width: 359px) {
-  .about-profile { grid-template-columns: 68px minmax(0, 1fr); grid-template-areas: "photo role" "photo name" "photo intro"; column-gap: 12px; }
-  .portrait { width: 68px; height: 68px; }
-  .profile-copy h3 { font-size: 18px; }
-  .profile-introduction { font-size: 10.5px; }
-  .profile-introduction-line { white-space: nowrap; letter-spacing: -.05em; }
-  .bride-profile { grid-template-columns: minmax(0, 1fr) 68px; grid-template-areas: "role photo" "name photo" "intro photo"; }
-}
-
-@media (max-width: 339px) {
-  .about-profile { grid-template-columns: 60px minmax(0, 1fr); column-gap: 10px; }
-  .portrait { width: 60px; height: 60px; }
-  .profile-copy h3 { font-size: 17px; }
-  .profile-introduction { font-size: 10px; }
-  .bride-profile { grid-template-columns: minmax(0, 1fr) 60px; }
 }

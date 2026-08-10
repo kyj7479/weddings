@@ -27,6 +27,19 @@ const sectionRegistry = {
 
 const content = formatWedding(weddingConfig);
 const invitation = document.querySelector("#invitation");
+
+if (new URLSearchParams(window.location.search).get("debug") === "viewport") {
+  const viewportBadge = document.createElement("output");
+  viewportBadge.className = "viewport-debug";
+  viewportBadge.setAttribute("aria-label", "현재 반응형 화면 크기");
+  const updateViewportBadge = () => {
+    viewportBadge.textContent = `${window.innerWidth}px × ${window.innerHeight}px`;
+  };
+  updateViewportBadge();
+  window.addEventListener("resize", updateViewportBadge);
+  document.body.append(viewportBadge);
+}
+
 const topButton = document.createElement("button");
 topButton.className = "floating-top";
 topButton.type = "button";
