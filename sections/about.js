@@ -11,13 +11,18 @@ function createPortrait(profile, name, profileId) {
 }
 
 function createProfile(role, name, profile) {
+  const introduction = profile.introduction
+    .split("\n")
+    .map((line) => `<span class="profile-introduction-line">${line}</span>`)
+    .join("");
+
   return `
     <article class="about-profile ${role.toLowerCase()}-profile">
       ${createPortrait(profile, name, role.toLowerCase())}
       <div class="profile-copy">
         <p class="profile-role">${role}</p>
         <h3>${name}</h3>
-        <p class="profile-introduction">${profile.introduction}</p>
+        <p class="profile-introduction">${introduction}</p>
       </div>
     </article>
   `;

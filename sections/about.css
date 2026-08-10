@@ -71,6 +71,7 @@ button.portrait { display: block; cursor: zoom-in; }
 .profile-role { margin: 0 0 4px; color: #bd8c52; font: 400 11px "DM Serif Display", serif; letter-spacing: .15em; }
 .profile-copy h3 { margin: 0; color: #2f4d45; font: 400 22px "Gowun Batang", serif; }
 .profile-introduction { margin: 10px 0 0; color: #456056; font: 400 13px/1.75 "Gowun Batang", serif; white-space: pre-line; word-break: keep-all; }
+.profile-introduction-line { display: block; }
 
 .about-lightbox { width: 100%; max-width: 560px; height: 100dvh; max-height: none; margin: 0 auto; padding: 52px 17px 35px; overflow: hidden; border: 0; background: rgba(24, 52, 47, .97); }
 .about-lightbox::backdrop { background: rgba(15, 28, 26, .72); backdrop-filter: blur(4px); }
@@ -79,7 +80,7 @@ button.portrait { display: block; cursor: zoom-in; }
 .about-lightbox-close { position: absolute; top: 15px; right: 19px; border: 0; background: transparent; color: #fff; cursor: pointer; font: 300 35px/1 sans-serif; }
 
 @media (max-width: 370px) {
-  .about-section { padding-right: 27px; padding-left: 27px; }
+  .about-section { padding-right: 15px; padding-left: 15px; }
   .about-profile { grid-template-columns: 88px minmax(0, 1fr); column-gap: 16px; row-gap: 0; }
   .profile-copy { display: contents; }
   .portrait { width: 88px; height: 88px; }
@@ -91,4 +92,5 @@ button.portrait { display: block; cursor: zoom-in; }
   .bride-profile .portrait { grid-column: 2; grid-row: 1 / span 2; order: 0; }
   .bride-profile .profile-role, .bride-profile .profile-copy h3 { grid-column: 1; text-align: right; }
   .bride-profile .profile-introduction { text-align: right; }
+  .bride-profile .profile-introduction-line:first-child { white-space: nowrap; letter-spacing: -.025em; }
 }
