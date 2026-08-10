@@ -79,7 +79,7 @@ button.portrait { display: block; cursor: zoom-in; }
 .about-lightbox-image.is-zoomed { cursor: zoom-out; }
 .about-lightbox-close { position: absolute; top: 15px; right: 19px; border: 0; background: transparent; color: #fff; cursor: pointer; font: 300 35px/1 sans-serif; }
 
-@media (max-width: 370px) {
+@media (max-width: 430px) {
   .about-section { padding-right: 15px; padding-left: 15px; }
   .about-profile { grid-template-columns: 88px minmax(0, 1fr); column-gap: 16px; row-gap: 0; }
   .profile-copy { display: contents; }
