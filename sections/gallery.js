@@ -1,4 +1,4 @@
-function createGalleryWallItem(photo, index, position, navigationNumber) {
+function createGalleryWallItem(photo, index, position, navigationNumber, useFullImage = false) {
   const debugIndex = document.documentElement.dataset.debug === "viewport"
     ? `<span class="gallery-debug-index">${String(navigationNumber).padStart(2, "0")}</span>`
     : "";
@@ -6,13 +6,14 @@ function createGalleryWallItem(photo, index, position, navigationNumber) {
     photo.frameRatio && `--gallery-frame-ratio: ${photo.frameRatio}`,
     photo.thumbnailObjectPosition && `--thumbnail-position: ${photo.thumbnailObjectPosition}`,
     photo.thumbnailZoom && `--thumbnail-scale: ${photo.thumbnailZoom}`,
+    photo.thumbnailHoverZoom && `--thumbnail-hover-scale: ${photo.thumbnailHoverZoom}`,
   ].filter(Boolean);
   const frameStyle = styleValues.length ? ` style="${styleValues.join("; ")}"` : "";
   const thumbnailClass = photo.thumbnailLandscape ? " is-landscape-thumbnail" : "";
 
   return `
     <button class="gallery-wall-item gallery-wall-item--${position}${thumbnailClass}${index === 0 ? " is-active" : ""}" type="button" data-gallery-index="${index}"${frameStyle} aria-label="${photo.alt} 크게 보기">
-      <img src="${photo.thumb || photo.src}" alt="${photo.alt}" loading="lazy" draggable="false" />
+      <span class="gallery-wall-image"><img src="${useFullImage ? photo.src : (photo.thumb || photo.src)}" alt="${photo.alt}" loading="lazy" draggable="false" /></span>
       ${debugIndex}
     </button>
   `;
@@ -32,7 +33,11 @@ function createGalleryWall(photos, navigation) {
   return clusters.map((cluster, clusterIndex) => {
     return `
       <div class="gallery-wall-cluster gallery-wall-cluster--${clusterIndex + 1}${cluster.wide ? " gallery-wall-cluster--wide-grid" : ""}">
-        ${cluster.photos.map((photo, index) => createGalleryWallItem(photo, cluster.startIndex + index, index + 1, navigation.indexOf(photo) + 1)).join("")}
+        ${cluster.photos.map((photo, index) => {
+          const position = index + 1;
+          const useFullImage = position === 3 || (cluster.wide && position === 6);
+          return createGalleryWallItem(photo, cluster.startIndex + index, position, navigation.indexOf(photo) + 1, useFullImage);
+        }).join("")}
       </div>
     `;
   }).join("");

@@ -1,14 +1,15 @@
 .gallery-section { padding: 66px 0 72px; overflow: hidden; background: #fdfcf8; }
 .gallery-heading { padding: 0 32px; text-align: center; }
-.gallery-heading h2 { margin: 0; color: #2f4d45; font: 400 30px "DM Serif Display", serif; letter-spacing: .05em; }
-.gallery-heading p { margin: 18px 0 34px; color: #60786e; font: 500 15px/1.85 "Gowun Batang", serif; white-space: pre-line; }
+.gallery-heading h2 { margin: 0; color: #2f4d45; font: 500 31px "DM Serif Display", serif; letter-spacing: .04em; }
+.gallery-heading p { margin: 18px 0 34px; color: #526b61; font: 600 16px/1.85 "Gowun Batang", serif; white-space: pre-line; }
 
 .gallery-wall { display: grid; width: min(calc(100% - 42px), 470px); margin: 0 auto; gap: clamp(8px, 3vw, 14px); }
 .gallery-wall-cluster { position: relative; width: 100%; aspect-ratio: 1.455 / 1; }
 .gallery-wall-item { position: absolute; display: block; aspect-ratio: var(--gallery-frame-ratio, 7 / 10); margin: 0; padding: 7px; overflow: hidden; border: 1px solid #51463a; background: linear-gradient(112deg, #4d4337 0%, #887b67 14%, #c8b99d 28%, #e4dac7 43%, #857865 57%, #cfc2a8 72%, #6a5d4d 87%, #40372e 100%); box-shadow: 0 5px 11px rgba(43, 35, 26, .24), inset 0 0 0 1px rgba(248, 241, 225, .44), inset 0 0 8px rgba(51, 42, 32, .32); cursor: zoom-in; }
 .gallery-wall-item::before { position: absolute; inset: 0; z-index: 0; content: ""; background: linear-gradient(180deg, rgba(255, 252, 238, .32), transparent 27%, rgba(56, 47, 36, .17) 72%, rgba(33, 28, 23, .3)); pointer-events: none; }
-.gallery-wall-item::after { position: absolute; inset: 4px; z-index: 2; content: ""; border: 1px solid rgba(252, 247, 232, .66); box-shadow: inset 0 0 0 1px rgba(75, 64, 50, .44); pointer-events: none; transition: border-color .25s ease; }
-.gallery-wall-item img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; background: #f4f0e6; object-fit: contain; object-position: 50% 50%; filter: saturate(.87) contrast(.97) brightness(1.02); transition: transform .45s cubic-bezier(.22, 1, .36, 1), filter .3s ease; }
+.gallery-wall-item::after { position: absolute; inset: 4px; z-index: 2; content: ""; border: 1px solid rgba(252, 247, 232, .8); box-shadow: inset 0 0 0 1px rgba(75, 64, 50, .62), 0 0 0 1px rgba(61, 51, 40, .48); pointer-events: none; transition: border-color .25s ease; }
+.gallery-wall-image { position: relative; z-index: 1; display: block; width: 100%; height: 100%; overflow: hidden; background: #f4f0e6; }
+.gallery-wall-item img { display: block; width: 100%; height: 100%; background: #f4f0e6; object-fit: contain; object-position: 50% 50%; filter: saturate(.87) contrast(.97) brightness(1.02); transition: transform .45s cubic-bezier(.22, 1, .36, 1), filter .3s ease; }
 .gallery-wall-item:hover img, .gallery-wall-item:focus-visible img { transform: scale(1.055); }
 .gallery-wall-item:focus-visible { outline: 2px solid #c9985b; outline-offset: 3px; }
 .gallery-wall-item.is-active::after { border-color: rgba(244, 232, 198, .9); }
@@ -31,12 +32,12 @@
 .gallery-wall-cluster--wide-grid .gallery-wall-item--5 { top: 52.17%; right: 0; }
 .gallery-wall-cluster--wide-grid .gallery-wall-item--6 { top: 52.17%; left: 28%; }
 .gallery-wall-item.is-landscape-thumbnail img { object-fit: cover; object-position: var(--thumbnail-position, 50% 50%); transform: scale(var(--thumbnail-scale, 1)); }
-.gallery-wall-item.is-landscape-thumbnail:hover img, .gallery-wall-item.is-landscape-thumbnail:focus-visible img { transform: scale(var(--thumbnail-scale, 1)); }
+.gallery-wall-item.is-landscape-thumbnail:hover img, .gallery-wall-item.is-landscape-thumbnail:focus-visible img { transform: scale(var(--thumbnail-hover-scale, 1.055)); }
 .gallery-wall-cluster--1 .gallery-wall-item--3 { left: 52%; }
 .gallery-wall-cluster--1 .gallery-wall-item--4, .gallery-wall-cluster--1 .gallery-wall-item--5 { left: 26%; right: auto; }
 .gallery-wall-cluster--2 .gallery-wall-item--1, .gallery-wall-cluster--2 .gallery-wall-item--2 { left: 51%; }
 .gallery-wall-cluster--2 .gallery-wall-item--3 { left: 0; }
-.gallery-hint { margin: 24px 0 0; color: #71857b; font: 600 11px "DM Serif Display", serif; letter-spacing: .14em; text-align: center; }
+.gallery-hint { margin: 24px 0 0; color: #60766d; font: 700 12px "DM Serif Display", serif; letter-spacing: .11em; text-align: center; }
 
 .gallery-lightbox { width: 100%; max-width: 560px; height: 100dvh; max-height: none; margin: 0 auto; padding: 52px 17px 35px; border: 0; background: rgba(24, 52, 47, .97); color: #fff; touch-action: none; }
 .gallery-lightbox::backdrop { background: rgba(15, 28, 26, .72); backdrop-filter: blur(4px); }

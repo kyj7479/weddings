@@ -45,6 +45,7 @@ const weddingConfig = {
     thumbnailLandscape: ["KKO000EX.jpg", "PYD03966.jpg"].includes(fileName),
     thumbnailObjectPosition: fileName === "KKO000EX.jpg" ? "50% 28%" : null,
     thumbnailZoom: fileName === "PYD03966.jpg" ? 1.16 : null,
+    thumbnailHoverZoom: fileName === "PYD03966.jpg" ? 1.22 : null,
     photoNumber: fileName.startsWith("PYD") ? fileName.match(/\d{5}/)[0].slice(-4) : null,
     alt: `김영진과 장예슬의 웨딩 사진 ${index + 1}`,
   })),
@@ -91,18 +92,18 @@ const weddingConfig = {
         title: "예식장 이용 안내",
         items: [
           {
-            title: "5층 단독홀",
-            description: "스타시티아트홀은 5층 전체를 사용하는 단독홀입니다.",
+            title: "홀 위치",
+            description: "스타시티영존 5층 전체 (단독 예식)",
           },
           {
             title: "주차 공간",
-            description: "동 건물 B1~B5층에 주차장이 마련되어 있습니다. (2시간 무료 주차) 인근 건대병원 주차장도 이용할 수 있습니다. (1시간 30분 무료 주차) 총 1,000대의 넉넉한 규모 입니다.\n주차권은 5층 주차 확인 데스크에서 받아가실 수 있습니다.",
+            description: "웨딩홀 건물 B1~B5층 · 2시간 무료\n인근 건대병원 주차장 · 1시간 30분 무료\n총 1,000대 수용\n주차권 - 5층 주차 확인 데스크 발급",
             actionLabel: "주차 · 대중교통 영상 보기",
             actionUrl: "https://www.youtube.com/watch?v=2RpMauyPUWU",
           },
           {
             title: "ATM & 휴식 공간",
-            description: "예식장과 같은 5층에 하객을 위한 카페테리아가 마련되어 있습니다. (ATM 이용 가능)",
+            description: "5층 카페테리아 · ATM 이용 가능\n하객 휴식 공간",
             image: "./photos/infos/cafeteria.webp",
             imageAlt: "스타시티아트홀 카페테리아",
           },
@@ -111,7 +112,7 @@ const weddingConfig = {
       {
         label: "STAR CITY ART HALL",
         title: "식사 안내",
-        description: "식사는 한식 한상 차림 & 세미 뷔페입니다.\n예식 30분 전(오전 11시 50분)부터 2시간 이용 가능합니다.\n대인은 식권이 필요하며, 소인은 무료입니다.",
+        description: "한식 한상차림 · 세미 뷔페\n이용 시간 - 오전 11시 50분(예식 30분 전)부터 2시간\n대인 · 식권 필요 / 소인 · 무료",
         images: [
           { src: "./photos/infos/dining1.webp", alt: "스타시티아트홀 한상 차림" },
           { src: "./photos/infos/dining2.webp", alt: "스타시티아트홀 세미 뷔페" },
@@ -141,7 +142,7 @@ const weddingConfig = {
         couple: { role: "신랑", name: "김영진", bank: "기업은행", account: "140-088241-01-011", holder: "김영진" },
         parents: [
           { role: "신랑 아버지", name: "김승환", bank: "기업은행", account: "010-2585-7479", holder: "김승환" },
-          { role: "신랑 어머니", name: "송은봉", bank: "신한은행", account: "110-456-789013", holder: "송은봉" },
+          { role: "신랑 어머니", name: "송은봉", bank: "신한은행", account: "110-443-797038", holder: "송은봉" },
         ],
       },
       {
@@ -160,7 +161,7 @@ const weddingConfig = {
   heroLabel: "WE ARE GETTING MARRIED",
   heroMessage: "두 사람이 함께 써 내려갈 영화의 첫 장면,\n그 자리에 여러분을 초대합니다.",
   invitationTitle: "소중한 분들을 초대합니다",
-  invitationMessage: "저마다의 인생이라는 영화의 주인공이었던 두 사람이\n우연히 서로의 영화 속으로 걸어 들어와\n웃고, 때론 기대며,\n서로의 영화에 없어서는 안 될 사람이 되어갔습니다.\n이제 두 사람은 평생이라는 새로운 영화를\n함께 만들어가려 합니다.\n그 첫 장면을 여는 날,\n소중한 여러분께서 함께하시어 축복해 주신다면\n두 사람에게 더없는 기쁨으로 오래도록 기억될 것입니다.",
+  invitationMessage: "저마다의 인생이라는 영화의 주인공이었던 두 사람이\n우연히 서로의 영화 속으로 걸어 들어와\n웃고, 때론 기대며,\n서로의 영화에 없어서는 안 될 사람이 되어갔습니다.\n이제 두 사람은 평생이라는 새로운 영화를\n함께 만들어가려 합니다.\n그 첫 장면을 여는 날,\n소중한 여러분께서 함께하시어 축복해 주신다면\n더없는 기쁨으로 오래도록 기억될 것입니다.",
   locationButton: "오시는 길",
   contactButton: "마음 전하기",
 };

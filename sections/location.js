@@ -119,6 +119,20 @@ export default function createLocation(content) {
     </div>
   `;
 
+  [
+    { href: location.kakaoDirections, src: "./photos/infos/kakao_map.png" },
+    { href: location.naverDirections, src: "./photos/infos/naver_map.png" },
+  ].forEach(({ href, src }) => {
+    const link = section.querySelector(`.location-links a[href="${href}"]`);
+    if (!link) return;
+    const icon = document.createElement("img");
+    icon.className = "location-link-icon";
+    icon.src = src;
+    icon.alt = "";
+    icon.setAttribute("aria-hidden", "true");
+    link.prepend(icon);
+  });
+
   const mapContainer = section.querySelector(".kakao-map");
   window.requestAnimationFrame(() => renderKakaoMap(mapContainer, content));
 

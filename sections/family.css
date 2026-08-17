@@ -22,7 +22,7 @@
   display: table-row;
   margin: 0;
   color: #2f4d45;
-  font: 500 16px/2.05 "Gowun Batang", serif;
+  font: 600 17px/2.05 "Gowun Batang", serif;
   word-break: keep-all;
 }
 
@@ -47,7 +47,7 @@
 .family-row .relationship { text-align: right; }
 
 @media (max-width: 370px) {
-  .family-row { font-size: 15px; }
+  .family-row { font-size: 16px; }
   .family-row span { padding-left: 7px; }
   .family-row .separator, .family-row .mother { padding-left: 4px; }
 }

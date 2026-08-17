@@ -264,12 +264,17 @@ h1 {
 .details .location { font-size: 13px; font-weight: 500; }
 .buttons .button { font-size: 13px; font-weight: 600; }
 
+.details h2 { font-weight: 600; letter-spacing: .035em; }
+.details .message { letter-spacing: -.035em; }
+.details .schedule,
+.details .location { letter-spacing: -.025em; }
+
 .heart-tabs button { font-size: 13px; font-weight: 500; }
 .heart-family-panel .heart-account-heading span { font-size: 13px; font-weight: 500; }
 .heart-family-panel .heart-account-heading strong { font-size: 14px; font-weight: 600; }
-.heart-family-panel .heart-account-heading small { font-size: 12px; }
-.heart-family-panel .heart-account-detail > span { font-size: 11px; font-weight: 500; }
-.heart-family-panel .heart-account-detail b { font-size: 12px; font-weight: 500; }
+.heart-family-panel .heart-account-heading small { margin-left: 5px; color: #3c4d47; font: inherit; }
+.heart-family-panel .heart-account-detail > span { color: #3c4d47; font-size: 12px; font-weight: 600; }
+.heart-family-panel .heart-account-detail b { color: #3c4d47; font-size: 13px; font-weight: 600; }
 .heart-family-panel .heart-account-detail button { font-size: 11px; font-weight: 600; }
 
 @media (max-width: 370px) {

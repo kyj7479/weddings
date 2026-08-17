@@ -9,14 +9,14 @@
 .about-heading h2 {
   margin: 0;
   color: #2f4d45;
-  font: 400 31px "DM Serif Display", serif;
+  font: 500 31px "DM Serif Display", serif;
   letter-spacing: .04em;
 }
 
 .about-heading p {
   margin: 19px 0 48px;
   color: #60786e;
-  font: 400 14px/1.85 "Gowun Batang", serif;
+  font: 600 16px/1.85 "Gowun Batang", serif;
   white-space: pre-line;
 }
 
@@ -68,8 +68,8 @@ button.portrait { display: block; cursor: zoom-in; }
 .bride-profile { grid-template-columns: minmax(0, 1fr) 96px; text-align: right; }
 .bride-profile .portrait { order: 2; }
 .bride-profile .profile-copy { order: 1; }
-.profile-role { margin: 0 0 4px; color: #bd8c52; font: 400 11px "DM Serif Display", serif; letter-spacing: .15em; }
-.profile-copy h3 { margin: 0; color: #2f4d45; font: 400 22px "Gowun Batang", serif; }
+.profile-role { margin: 0 0 4px; color: #8c6633; font: 700 13px "DM Serif Display", serif; letter-spacing: .11em; }
+.profile-copy h3 { margin: 0; color: #2f4d45; font: 600 22px "Gowun Batang", serif; }
 .profile-introduction { margin: 10px 0 0; color: #456056; font: 400 13px/1.75 "Gowun Batang", serif; white-space: pre-line; word-break: keep-all; }
 .profile-introduction-line { display: block; }
 
