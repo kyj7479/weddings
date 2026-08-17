@@ -1,21 +1,43 @@
 .gallery-section { padding: 66px 0 72px; overflow: hidden; background: #fdfcf8; }
 .gallery-heading { padding: 0 32px; text-align: center; }
 .gallery-heading h2 { margin: 0; color: #2f4d45; font: 400 30px "DM Serif Display", serif; letter-spacing: .05em; }
-.gallery-heading p { margin: 18px 0 38px; color: #60786e; font: 400 14px/1.85 "Gowun Batang", serif; white-space: pre-line; }
-.gallery-feature { position: relative; display: block; width: calc(100% - 80px); aspect-ratio: 4 / 5; margin: 0 auto 30px; padding: 4px; overflow: hidden; border: 1px solid #cda466; background: #fdfcf8; cursor: zoom-in; touch-action: pan-y; }
-.gallery-feature-image { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; transition: opacity .25s ease; }
-.gallery-feature-count { position: absolute; right: 14px; bottom: 13px; color: #fff; font: 400 12px "DM Serif Display", serif; letter-spacing: .1em; text-shadow: 0 1px 5px rgba(0, 0, 0, .4); }
-.gallery-unretouched-mark, .lightbox-unretouched-mark { position: absolute; top: 50%; right: 14px; color: rgba(255, 255, 255, .76); font: 400 30pt/1.13 "Gowun Batang", serif; letter-spacing: -.06em; text-align: right; text-shadow: 0 1px 5px rgba(20, 35, 31, .38); transform: translateY(-50%); pointer-events: none; }
-.gallery-unretouched-mark small, .lightbox-unretouched-mark small { display: block; margin-bottom: 4px; font: 400 12pt/1 "DM Serif Display", serif; letter-spacing: .12em; }
-.gallery-unretouched-mark[hidden], .lightbox-unretouched-mark[hidden] { display: none; }
-.gallery-carousel { overflow-x: auto; cursor: grab; scrollbar-width: none; -webkit-overflow-scrolling: touch; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
-.gallery-carousel::-webkit-scrollbar { display: none; }
-.gallery-carousel.is-dragging { cursor: grabbing; user-select: none; }
-.gallery-carousel-track { display: flex; width: max-content; gap: 14px; padding-block: 11px 17px; }
-.gallery-carousel-item { width: clamp(84px, 25vw, 116px); aspect-ratio: 1; flex: 0 0 auto; padding: 3px; overflow: hidden; border: 1px solid rgba(205, 164, 102, .7); border-radius: 50%; background: #fdfcf8; cursor: pointer; opacity: .42; transform: scale(.82); transition: opacity .32s ease, transform .32s ease, border-color .32s ease; }
-.gallery-carousel-item.is-active { border-color: #c9985b; opacity: 1; transform: scale(1); }
-.gallery-carousel-item img { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: 50% 35%; pointer-events: none; }
-.gallery-hint { margin: 18px 0 0; color: #83958c; font: 400 9px "DM Serif Display", serif; letter-spacing: .15em; text-align: center; }
+.gallery-heading p { margin: 18px 0 34px; color: #60786e; font: 400 14px/1.85 "Gowun Batang", serif; white-space: pre-line; }
+
+.gallery-wall { display: grid; width: min(calc(100% - 42px), 470px); margin: 0 auto; gap: clamp(8px, 3vw, 14px); }
+.gallery-wall-cluster { position: relative; width: 100%; aspect-ratio: 1.455 / 1; }
+.gallery-wall-item { position: absolute; display: block; aspect-ratio: var(--gallery-frame-ratio, 7 / 10); margin: 0; padding: 7px; overflow: hidden; border: 1px solid #51463a; background: linear-gradient(112deg, #4d4337 0%, #887b67 14%, #c8b99d 28%, #e4dac7 43%, #857865 57%, #cfc2a8 72%, #6a5d4d 87%, #40372e 100%); box-shadow: 0 5px 11px rgba(43, 35, 26, .24), inset 0 0 0 1px rgba(248, 241, 225, .44), inset 0 0 8px rgba(51, 42, 32, .32); cursor: zoom-in; }
+.gallery-wall-item::before { position: absolute; inset: 0; z-index: 0; content: ""; background: linear-gradient(180deg, rgba(255, 252, 238, .32), transparent 27%, rgba(56, 47, 36, .17) 72%, rgba(33, 28, 23, .3)); pointer-events: none; }
+.gallery-wall-item::after { position: absolute; inset: 4px; z-index: 2; content: ""; border: 1px solid rgba(252, 247, 232, .66); box-shadow: inset 0 0 0 1px rgba(75, 64, 50, .44); pointer-events: none; transition: border-color .25s ease; }
+.gallery-wall-item img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; background: #f4f0e6; object-fit: contain; object-position: 50% 50%; filter: saturate(.87) contrast(.97) brightness(1.02); transition: transform .45s cubic-bezier(.22, 1, .36, 1), filter .3s ease; }
+.gallery-wall-item:hover img, .gallery-wall-item:focus-visible img { transform: scale(1.055); }
+.gallery-wall-item:focus-visible { outline: 2px solid #c9985b; outline-offset: 3px; }
+.gallery-wall-item.is-active::after { border-color: rgba(244, 232, 198, .9); }
+.gallery-debug-index { position: absolute; z-index: 3; top: 8px; left: 8px; padding: 3px 5px; border-radius: 2px; background: rgba(28, 42, 36, .78); color: #fff; font: 600 10px/1 "DM Serif Display", serif; letter-spacing: .08em; pointer-events: none; }
+.gallery-wall-item--1, .gallery-wall-item--2, .gallery-wall-item--4, .gallery-wall-item--5 { width: 23%; }
+.gallery-wall-item--3 { width: 48%; }
+.gallery-wall-item--1 { top: 0; left: 0; }
+.gallery-wall-item--2 { top: 52.18%; left: 0; }
+.gallery-wall-item--3 { top: 0; left: 26%; }
+.gallery-wall-item--4 { top: 0; right: 0; }
+.gallery-wall-item--5 { top: 52.18%; right: 0; }
+.gallery-wall-item:only-child { left: 26%; width: 48%; }
+.gallery-wall-cluster--wide-grid { aspect-ratio: 1.449 / 1; }
+.gallery-wall-cluster--wide-grid .gallery-wall-item--1, .gallery-wall-cluster--wide-grid .gallery-wall-item--2, .gallery-wall-cluster--wide-grid .gallery-wall-item--4, .gallery-wall-cluster--wide-grid .gallery-wall-item--5 { width: 23%; }
+.gallery-wall-cluster--wide-grid .gallery-wall-item--3, .gallery-wall-cluster--wide-grid .gallery-wall-item--6 { width: 44%; aspect-ratio: 4 / 3; }
+.gallery-wall-cluster--wide-grid .gallery-wall-item--1 { top: 0; left: 0; }
+.gallery-wall-cluster--wide-grid .gallery-wall-item--2 { top: 52.17%; left: 0; }
+.gallery-wall-cluster--wide-grid .gallery-wall-item--3 { top: 0; left: 28%; }
+.gallery-wall-cluster--wide-grid .gallery-wall-item--4 { top: 0; right: 0; }
+.gallery-wall-cluster--wide-grid .gallery-wall-item--5 { top: 52.17%; right: 0; }
+.gallery-wall-cluster--wide-grid .gallery-wall-item--6 { top: 52.17%; left: 28%; }
+.gallery-wall-item.is-landscape-thumbnail img { object-fit: cover; object-position: var(--thumbnail-position, 50% 50%); transform: scale(var(--thumbnail-scale, 1)); }
+.gallery-wall-item.is-landscape-thumbnail:hover img, .gallery-wall-item.is-landscape-thumbnail:focus-visible img { transform: scale(var(--thumbnail-scale, 1)); }
+.gallery-wall-cluster--1 .gallery-wall-item--3 { left: 52%; }
+.gallery-wall-cluster--1 .gallery-wall-item--4, .gallery-wall-cluster--1 .gallery-wall-item--5 { left: 26%; right: auto; }
+.gallery-wall-cluster--2 .gallery-wall-item--1, .gallery-wall-cluster--2 .gallery-wall-item--2 { left: 51%; }
+.gallery-wall-cluster--2 .gallery-wall-item--3 { left: 0; }
+.gallery-hint { margin: 24px 0 0; color: #83958c; font: 400 9px "DM Serif Display", serif; letter-spacing: .17em; text-align: center; }
+
 .gallery-lightbox { width: 100%; max-width: 560px; height: 100dvh; max-height: none; margin: 0 auto; padding: 52px 17px 35px; border: 0; background: rgba(24, 52, 47, .97); color: #fff; touch-action: none; }
 .gallery-lightbox::backdrop { background: rgba(15, 28, 26, .72); backdrop-filter: blur(4px); }
 .lightbox-image { display: block; width: 100%; height: calc(100dvh - 130px); object-fit: contain; transform-origin: center; }
@@ -23,6 +45,11 @@
 .lightbox-close, .lightbox-arrow { position: absolute; border: 0; background: transparent; color: #fff; cursor: pointer; }
 .lightbox-close { top: 15px; right: 19px; font: 300 35px/1 sans-serif; }
 .lightbox-arrow { top: 50%; z-index: 1; padding: 13px; font: 300 45px/1 "DM Serif Display", serif; transform: translateY(-50%); }
-.lightbox-arrow.previous { left: 0; }.lightbox-arrow.next { right: 0; }
+.lightbox-arrow.previous { left: 0; }
+.lightbox-arrow.next { right: 0; }
 .lightbox-count { position: absolute; right: 0; bottom: 15px; left: 0; margin: 0; color: rgba(255, 255, 255, .72); font: 400 12px "DM Serif Display", serif; letter-spacing: .15em; text-align: center; }
-.lightbox-unretouched-mark { right: 27px; }
+.lightbox-unretouched-mark { position: absolute; top: 50%; right: 27px; color: rgba(255, 255, 255, .76); font: 400 30pt/1.13 "Gowun Batang", serif; letter-spacing: -.06em; text-align: right; text-shadow: 0 1px 5px rgba(20, 35, 31, .38); transform: translateY(-50%); pointer-events: none; }
+.lightbox-unretouched-mark small { display: block; margin-bottom: 4px; font: 400 12pt/1 "DM Serif Display", serif; letter-spacing: .12em; }
+.lightbox-unretouched-mark[hidden] { display: none; }
+
+@media (min-width: 561px) { .gallery-wall { width: min(86%, 470px); gap: 14px; } }

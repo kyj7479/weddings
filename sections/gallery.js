@@ -1,14 +1,49 @@
-function createCarouselItem(photo, index) {
+function createGalleryWallItem(photo, index, position, navigationNumber) {
+  const debugIndex = document.documentElement.dataset.debug === "viewport"
+    ? `<span class="gallery-debug-index">${String(navigationNumber).padStart(2, "0")}</span>`
+    : "";
+  const styleValues = [
+    photo.frameRatio && `--gallery-frame-ratio: ${photo.frameRatio}`,
+    photo.thumbnailObjectPosition && `--thumbnail-position: ${photo.thumbnailObjectPosition}`,
+    photo.thumbnailZoom && `--thumbnail-scale: ${photo.thumbnailZoom}`,
+  ].filter(Boolean);
+  const frameStyle = styleValues.length ? ` style="${styleValues.join("; ")}"` : "";
+  const thumbnailClass = photo.thumbnailLandscape ? " is-landscape-thumbnail" : "";
+
   return `
-    <button class="gallery-carousel-item" type="button" data-gallery-index="${index}" aria-label="${photo.alt} 크게 보기">
+    <button class="gallery-wall-item gallery-wall-item--${position}${thumbnailClass}${index === 0 ? " is-active" : ""}" type="button" data-gallery-index="${index}"${frameStyle} aria-label="${photo.alt} 크게 보기">
       <img src="${photo.thumb || photo.src}" alt="${photo.alt}" loading="lazy" draggable="false" />
+      ${debugIndex}
     </button>
   `;
 }
 
+function createGalleryWall(photos, navigation) {
+  const clusterSize = 5;
+  const useWideFinalCluster = photos.length > 6 && photos.length % clusterSize === 1;
+  const regularPhotos = useWideFinalCluster ? photos.slice(0, -6) : photos;
+  const clusters = Array.from({ length: Math.ceil(regularPhotos.length / clusterSize) }, (_, clusterIndex) => ({
+    startIndex: clusterIndex * clusterSize,
+    photos: regularPhotos.slice(clusterIndex * clusterSize, (clusterIndex + 1) * clusterSize),
+  }));
+
+  if (useWideFinalCluster) clusters.push({ startIndex: photos.length - 6, photos: photos.slice(-6), wide: true });
+
+  return clusters.map((cluster, clusterIndex) => {
+    return `
+      <div class="gallery-wall-cluster gallery-wall-cluster--${clusterIndex + 1}${cluster.wide ? " gallery-wall-cluster--wide-grid" : ""}">
+        ${cluster.photos.map((photo, index) => createGalleryWallItem(photo, cluster.startIndex + index, index + 1, navigation.indexOf(photo) + 1)).join("")}
+      </div>
+    `;
+  }).join("");
+}
+
 export default function createGallery(content) {
   const photos = content.gallery;
-  const repeatedPhotos = [...photos, ...photos, ...photos];
+  const requestedOrder = content.galleryNavigationOrder || [];
+  const navigation = requestedOrder.length === photos.length && new Set(requestedOrder).size === photos.length
+    ? requestedOrder.map((position) => photos[position - 1])
+    : photos;
   const section = document.createElement("section");
   section.className = "gallery-section";
   section.innerHTML = `
@@ -16,17 +51,10 @@ export default function createGallery(content) {
       <h2>${content.galleryTitle}</h2>
       <p>${content.galleryIntro}</p>
     </div>
-    <button class="gallery-feature" type="button" aria-label="대표 사진 크게 보기">
-      <img class="gallery-feature-image" src="${photos[0].src}" alt="${photos[0].alt}" />
-      <span class="gallery-feature-count">01 / ${String(photos.length).padStart(2, "0")}</span>
-      <span class="gallery-unretouched-mark" ${photos[0].isRetouched ? "hidden" : ""} aria-hidden="true"><small ${photos[0].photoNumber ? "" : "hidden"}>${photos[0].photoNumber || ""}</small>김앤장<br />미보정</span>
-    </button>
-    <div class="gallery-carousel" aria-label="웨딩 사진 갤러리">
-      <div class="gallery-carousel-track">
-        ${repeatedPhotos.map((photo, index) => createCarouselItem(photo, index % photos.length)).join("")}
-      </div>
+    <div class="gallery-wall" aria-label="웨딩 사진 갤러리">
+      ${createGalleryWall(photos, navigation)}
     </div>
-    <p class="gallery-hint">DRAG OR SWIPE TO EXPLORE</p>
+    <p class="gallery-hint">${String(photos.length).padStart(2, "0")} PHOTOS · TAP TO EXPLORE</p>
     <dialog class="gallery-lightbox" aria-label="웨딩 사진 크게 보기">
       <button class="lightbox-close" type="button" aria-label="닫기">×</button>
       <button class="lightbox-arrow previous" type="button" aria-label="이전 사진">‹</button>
@@ -37,27 +65,14 @@ export default function createGallery(content) {
     </dialog>
   `;
 
-  const carousel = section.querySelector(".gallery-carousel");
-  const track = section.querySelector(".gallery-carousel-track");
-  const feature = section.querySelector(".gallery-feature");
-  const featureImage = section.querySelector(".gallery-feature-image");
-  const featureCount = section.querySelector(".gallery-feature-count");
-  const featureMark = section.querySelector(".gallery-unretouched-mark");
-  const featureMarkNumber = featureMark.querySelector("small");
+  const items = [...section.querySelectorAll(".gallery-wall-item")];
   const dialog = section.querySelector(".gallery-lightbox");
   const lightboxImage = section.querySelector(".lightbox-image");
   const counter = section.querySelector(".lightbox-count");
   const lightboxMark = section.querySelector(".lightbox-unretouched-mark");
   const lightboxMarkNumber = lightboxMark.querySelector("small");
-  const items = [...section.querySelectorAll(".gallery-carousel-item")];
-  let activeIndex = 0;
-  let itemStep = 0;
-  let isDragging = false;
-  let dragMoved = false;
-  let dragStartX = 0;
-  let dragStartScroll = 0;
-  let animationFrame;
   const lightboxTouches = new Map();
+  let activeIndex = 0;
   let swipeStart = null;
   let panStart = null;
   let pinchStartDistance = 0;
@@ -66,107 +81,29 @@ export default function createGallery(content) {
   let zoomX = 0;
   let zoomY = 0;
   let lastTapTime = 0;
-  let featureSwipeStart = null;
-  let featureWasSwiped = false;
 
-  // Keep the full-size images warm in the browser cache so a swipe never waits
-  // for the next image file before the transition can begin.
-  photos.forEach(({ src }) => {
-    const image = new Image();
-    image.src = src;
-    image.decode?.().catch(() => {});
-  });
-
-  const getItemStep = () => {
-    const item = items[0];
-    const gap = Number.parseFloat(getComputedStyle(track).gap) || 0;
-    return item.offsetWidth + gap;
-  };
-
-  const updateFeature = () => {
-    const photo = photos[activeIndex];
-    featureImage.src = photo.src;
-    featureImage.alt = photo.alt;
-    featureCount.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(photos.length).padStart(2, "0")}`;
-    featureMark.hidden = photo.isRetouched;
-    featureMarkNumber.hidden = !photo.photoNumber;
-    featureMarkNumber.textContent = photo.photoNumber || "";
-  };
-
-  const updateFocusedItem = () => {
-    const carouselCenter = carousel.getBoundingClientRect().left + carousel.clientWidth / 2;
-    let closestItem;
-    let closestDistance = Infinity;
-    items.forEach((item) => {
-      const rect = item.getBoundingClientRect();
-      const distance = Math.abs(rect.left + rect.width / 2 - carouselCenter);
-      item.classList.toggle("is-active", distance < rect.width * .42);
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closestItem = item;
-      }
-    });
-
-    const nextIndex = Number(closestItem.dataset.galleryIndex);
-    if (nextIndex !== activeIndex) {
-      activeIndex = nextIndex;
-      updateFeature();
-    }
-  };
-
-  const keepInfinite = () => {
-    const cycleWidth = itemStep * photos.length;
-    if (!cycleWidth) return;
-    if (carousel.scrollLeft < cycleWidth * .45) carousel.scrollLeft += cycleWidth;
-    if (carousel.scrollLeft > cycleWidth * 2.55) carousel.scrollLeft -= cycleWidth;
-  };
-
-  const initializeCarousel = () => {
-    itemStep = getItemStep();
-    const sideSpace = Math.max((carousel.clientWidth - items[0].offsetWidth) / 2, 0);
-    track.style.paddingInline = `${sideSpace}px`;
-    carousel.scrollLeft = itemStep * photos.length;
-    updateFocusedItem();
-  };
-
-  const onScroll = () => {
-    window.cancelAnimationFrame(animationFrame);
-    animationFrame = window.requestAnimationFrame(() => {
-      keepInfinite();
-      updateFocusedItem();
-    });
+  const updateActiveItem = () => {
+    const activePhoto = navigation[activeIndex];
+    items.forEach((item, index) => item.classList.toggle("is-active", photos[index] === activePhoto));
   };
 
   const updateLightbox = (direction) => {
-    const photo = photos[activeIndex];
+    const photo = navigation[activeIndex];
     lightboxImage.src = photo.src;
     lightboxImage.alt = photo.alt;
-    counter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(photos.length).padStart(2, "0")}`;
+    counter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(navigation.length).padStart(2, "0")}`;
     lightboxMark.hidden = photo.isRetouched;
     lightboxMarkNumber.hidden = !photo.photoNumber;
     lightboxMarkNumber.textContent = photo.photoNumber || "";
 
     if (!direction || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
     lightboxImage.getAnimations().forEach((animation) => animation.cancel());
     const offset = direction === "next" ? 22 : -22;
     window.requestAnimationFrame(() => {
       lightboxImage.animate([
         { opacity: .15, transform: `translateX(${offset}px) scale(.99)` },
         { opacity: 1, transform: "translateX(0) scale(1)" },
-      ], {
-        duration: 220,
-        easing: "cubic-bezier(.22, 1, .36, 1)",
-      });
-    });
-  };
-
-  const syncCarouselToActivePhoto = () => {
-    const activeItem = items[photos.length + activeIndex];
-    if (!activeItem) return;
-    carousel.scrollTo({
-      left: activeItem.offsetLeft - (carousel.clientWidth - activeItem.offsetWidth) / 2,
-      behavior: "auto",
+      ], { duration: 220, easing: "cubic-bezier(.22, 1, .36, 1)" });
     });
   };
 
@@ -179,141 +116,44 @@ export default function createGallery(content) {
   };
 
   const applyZoom = () => {
-    if (zoomScale <= 1) {
-      resetZoom();
-      return;
-    }
+    if (zoomScale <= 1) return resetZoom();
     lightboxImage.style.transform = `translate(${zoomX}px, ${zoomY}px) scale(${zoomScale})`;
     lightboxImage.classList.add("is-zoomed");
   };
 
   const getTouchPoints = () => [...lightboxTouches.values()];
   const getDistance = ([first, second]) => Math.hypot(second.x - first.x, second.y - first.y);
-
-  const updateLightboxHistory = (method) => {
-    const state = { galleryLightbox: true, photoIndex: activeIndex };
-    const url = `#gallery-${activeIndex + 1}`;
-    window.history[method](state, "", url);
-  };
+  const updateHistory = (method) => window.history[method]({ galleryLightbox: true, photoIndex: activeIndex }, "", `#gallery-${activeIndex + 1}`);
 
   const openLightbox = () => {
     updateLightbox();
-    updateLightboxHistory("pushState");
+    updateHistory("pushState");
     dialog.showModal();
   };
 
-  const moveActivePhoto = (direction) => {
-    activeIndex = (activeIndex + direction + photos.length) % photos.length;
-    updateFeature();
-    syncCarouselToActivePhoto();
-  };
-
-  const showPreviousPhoto = () => {
+  const movePhoto = (direction) => {
+    activeIndex = (activeIndex + direction + navigation.length) % navigation.length;
+    updateActiveItem();
     resetZoom();
-    moveActivePhoto(-1);
-    updateLightbox("previous");
-    updateLightboxHistory("replaceState");
+    updateLightbox(direction > 0 ? "next" : "previous");
+    updateHistory("replaceState");
   };
 
-  const showNextPhoto = () => {
-    resetZoom();
-    moveActivePhoto(1);
-    updateLightbox("next");
-    updateLightboxHistory("replaceState");
-  };
-
-  carousel.addEventListener("scroll", onScroll, { passive: true });
-  carousel.addEventListener("pointerdown", (event) => {
-    if (event.pointerType === "touch") return;
-    isDragging = true;
-    dragMoved = false;
-    dragStartX = event.clientX;
-    dragStartScroll = carousel.scrollLeft;
-    carousel.setPointerCapture(event.pointerId);
-    carousel.classList.add("is-dragging");
-  });
-  carousel.addEventListener("pointermove", (event) => {
-    if (!isDragging) return;
-    const distance = event.clientX - dragStartX;
-    if (Math.abs(distance) > 4) dragMoved = true;
-    carousel.scrollLeft = dragStartScroll - distance;
-  });
-  carousel.addEventListener("pointerup", () => {
-    isDragging = false;
-    window.setTimeout(() => { dragMoved = false; }, 120);
-    carousel.classList.remove("is-dragging");
-  });
-  carousel.addEventListener("pointercancel", () => {
-    isDragging = false;
-    carousel.classList.remove("is-dragging");
-  });
-
-  const centerCarouselItem = (item) => {
-    carousel.scrollTo({
-      left: item.offsetLeft - (carousel.clientWidth - item.offsetWidth) / 2,
-      behavior: "smooth",
+  items.forEach((item) => {
+    item.addEventListener("click", () => {
+      activeIndex = navigation.indexOf(photos[Number(item.dataset.galleryIndex)]);
+      updateActiveItem();
+      openLightbox();
     });
-  };
-
-  carousel.addEventListener("click", (event) => {
-    if (isDragging || dragMoved) return;
-
-    const clickedItem = event.target.closest(".gallery-carousel-item");
-    if (clickedItem) {
-      activeIndex = Number(clickedItem.dataset.galleryIndex);
-      updateFeature();
-      centerCarouselItem(clickedItem);
-      return;
-    }
-
-    const bounds = carousel.getBoundingClientRect();
-    activeIndex = event.clientX < bounds.left + bounds.width / 2
-      ? (activeIndex - 1 + photos.length) % photos.length
-      : (activeIndex + 1) % photos.length;
-    updateFeature();
-    centerCarouselItem(items[photos.length + activeIndex]);
-  });
-
-  feature.addEventListener("pointerdown", (event) => {
-    if (event.pointerType !== "touch") return;
-    featureSwipeStart = { x: event.clientX, y: event.clientY };
-    featureWasSwiped = false;
-  });
-  feature.addEventListener("pointerup", (event) => {
-    if (event.pointerType !== "touch" || !featureSwipeStart) return;
-    const swipeX = event.clientX - featureSwipeStart.x;
-    const swipeY = event.clientY - featureSwipeStart.y;
-    featureSwipeStart = null;
-
-    if (Math.abs(swipeX) < 38 || Math.abs(swipeX) <= Math.abs(swipeY)) return;
-    featureWasSwiped = true;
-    moveActivePhoto(swipeX < 0 ? 1 : -1);
-  });
-  feature.addEventListener("pointercancel", () => {
-    featureSwipeStart = null;
-  });
-  feature.addEventListener("click", (event) => {
-    if (featureWasSwiped) {
-      event.preventDefault();
-      featureWasSwiped = false;
-      return;
-    }
-    openLightbox();
   });
 
   section.querySelector(".lightbox-close").addEventListener("click", () => dialog.close());
-  section.querySelector(".previous").addEventListener("click", () => {
-    showPreviousPhoto();
-  });
-  section.querySelector(".next").addEventListener("click", () => {
-    showNextPhoto();
-  });
-  dialog.addEventListener("click", (event) => {
-    if (event.target === dialog) dialog.close();
-  });
+  section.querySelector(".previous").addEventListener("click", () => movePhoto(-1));
+  section.querySelector(".next").addEventListener("click", () => movePhoto(1));
+  dialog.addEventListener("click", (event) => { if (event.target === dialog) dialog.close(); });
   dialog.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowLeft") showPreviousPhoto();
-    if (event.key === "ArrowRight") showNextPhoto();
+    if (event.key === "ArrowLeft") movePhoto(-1);
+    if (event.key === "ArrowRight") movePhoto(1);
   });
   dialog.addEventListener("wheel", (event) => {
     if (event.target.closest(".lightbox-close")) return;
@@ -326,7 +166,6 @@ export default function createGallery(content) {
     dialog.setPointerCapture(event.pointerId);
     lightboxTouches.set(event.pointerId, { x: event.clientX, y: event.clientY });
     const points = getTouchPoints();
-
     if (points.length === 1) {
       const now = Date.now();
       if (now - lastTapTime < 260) resetZoom();
@@ -334,7 +173,6 @@ export default function createGallery(content) {
       swipeStart = { x: event.clientX, y: event.clientY };
       panStart = { x: event.clientX, y: event.clientY, zoomX, zoomY };
     }
-
     if (points.length === 2) {
       swipeStart = null;
       pinchStartDistance = getDistance(points);
@@ -345,14 +183,10 @@ export default function createGallery(content) {
     if (event.pointerType !== "touch" || !lightboxTouches.has(event.pointerId)) return;
     lightboxTouches.set(event.pointerId, { x: event.clientX, y: event.clientY });
     const points = getTouchPoints();
-
     if (points.length >= 2) {
       zoomScale = Math.min(3, Math.max(1, pinchStartScale * (getDistance(points) / pinchStartDistance)));
       applyZoom();
-      return;
-    }
-
-    if (zoomScale > 1 && panStart) {
+    } else if (zoomScale > 1 && panStart) {
       zoomX = panStart.zoomX + event.clientX - panStart.x;
       zoomY = panStart.zoomY + event.clientY - panStart.y;
       applyZoom();
@@ -362,16 +196,11 @@ export default function createGallery(content) {
     if (event.pointerType !== "touch" || !lightboxTouches.has(event.pointerId)) return;
     const touchStart = swipeStart;
     lightboxTouches.delete(event.pointerId);
-
     if (lightboxTouches.size === 0 && zoomScale === 1 && touchStart) {
       const swipeX = event.clientX - touchStart.x;
       const swipeY = event.clientY - touchStart.y;
-      if (Math.abs(swipeX) > 42 && Math.abs(swipeX) > Math.abs(swipeY)) {
-        if (swipeX < 0) showNextPhoto();
-        else showPreviousPhoto();
-      }
+      if (Math.abs(swipeX) > 42 && Math.abs(swipeX) > Math.abs(swipeY)) movePhoto(swipeX < 0 ? 1 : -1);
     }
-
     if (lightboxTouches.size < 2) {
       const [remainingTouch] = getTouchPoints();
       if (remainingTouch) panStart = { x: remainingTouch.x, y: remainingTouch.y, zoomX, zoomY };
@@ -388,16 +217,13 @@ export default function createGallery(content) {
     if (window.history.state?.galleryLightbox) window.history.back();
   });
   window.addEventListener("popstate", (event) => {
-    const { state } = event;
-    if (state?.galleryLightbox) {
-      activeIndex = state.photoIndex;
+    if (event.state?.galleryLightbox) {
+      activeIndex = event.state.photoIndex;
+      updateActiveItem();
       updateLightbox();
       if (!dialog.open) dialog.showModal();
-    } else if (dialog.open) {
-      dialog.close();
-    }
+    } else if (dialog.open) dialog.close();
   });
 
-  window.requestAnimationFrame(initializeCarousel);
   return section;
 }

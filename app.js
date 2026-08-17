@@ -29,6 +29,7 @@ const content = formatWedding(weddingConfig);
 const invitation = document.querySelector("#invitation");
 
 if (new URLSearchParams(window.location.search).get("debug") === "viewport") {
+  document.documentElement.dataset.debug = "viewport";
   const viewportBadge = document.createElement("output");
   viewportBadge.className = "viewport-debug";
   viewportBadge.setAttribute("aria-label", "현재 반응형 화면 크기");
