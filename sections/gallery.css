@@ -1,7 +1,7 @@
 .gallery-section { padding: 66px 0 72px; overflow: hidden; background: #fdfcf8; }
 .gallery-heading { padding: 0 32px; text-align: center; }
 .gallery-heading h2 { margin: 0; color: #2f4d45; font: 400 30px "DM Serif Display", serif; letter-spacing: .05em; }
-.gallery-heading p { margin: 18px 0 34px; color: #60786e; font: 400 14px/1.85 "Gowun Batang", serif; white-space: pre-line; }
+.gallery-heading p { margin: 18px 0 34px; color: #60786e; font: 500 15px/1.85 "Gowun Batang", serif; white-space: pre-line; }
 
 .gallery-wall { display: grid; width: min(calc(100% - 42px), 470px); margin: 0 auto; gap: clamp(8px, 3vw, 14px); }
 .gallery-wall-cluster { position: relative; width: 100%; aspect-ratio: 1.455 / 1; }
@@ -36,7 +36,7 @@
 .gallery-wall-cluster--1 .gallery-wall-item--4, .gallery-wall-cluster--1 .gallery-wall-item--5 { left: 26%; right: auto; }
 .gallery-wall-cluster--2 .gallery-wall-item--1, .gallery-wall-cluster--2 .gallery-wall-item--2 { left: 51%; }
 .gallery-wall-cluster--2 .gallery-wall-item--3 { left: 0; }
-.gallery-hint { margin: 24px 0 0; color: #83958c; font: 400 9px "DM Serif Display", serif; letter-spacing: .17em; text-align: center; }
+.gallery-hint { margin: 24px 0 0; color: #71857b; font: 600 11px "DM Serif Display", serif; letter-spacing: .14em; text-align: center; }
 
 .gallery-lightbox { width: 100%; max-width: 560px; height: 100dvh; max-height: none; margin: 0 auto; padding: 52px 17px 35px; border: 0; background: rgba(24, 52, 47, .97); color: #fff; touch-action: none; }
 .gallery-lightbox::backdrop { background: rgba(15, 28, 26, .72); backdrop-filter: blur(4px); }

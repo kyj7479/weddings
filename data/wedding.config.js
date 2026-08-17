@@ -138,18 +138,18 @@ const weddingConfig = {
     families: [
       {
         title: "신랑측에게",
-        couple: { role: "신랑", name: "김영진", bank: "국민은행", account: "123-456-789012", holder: "김영진" },
+        couple: { role: "신랑", name: "김영진", bank: "기업은행", account: "140-088241-01-011", holder: "김영진" },
         parents: [
-          { role: "신랑 아버지", name: "김승환", bank: "국민은행", account: "123-456-789013", holder: "김승환" },
+          { role: "신랑 아버지", name: "김승환", bank: "기업은행", account: "010-2585-7479", holder: "김승환" },
           { role: "신랑 어머니", name: "송은봉", bank: "신한은행", account: "110-456-789013", holder: "송은봉" },
         ],
       },
       {
         title: "신부측에게",
-        couple: { role: "신부", name: "장예슬", bank: "신한은행", account: "110-456-789012", holder: "장예슬" },
+        couple: { role: "신부", name: "장예슬", bank: "우리은행", account: "1002-559-656017", holder: "장예슬" },
         parents: [
-          { role: "신부 아버지", name: "장자성", bank: "우리은행", account: "1002-456-789013", holder: "장자성" },
-          { role: "신부 어머니", name: "이인덕", bank: "하나은행", account: "357-456-789013", holder: "이인덕" },
+          { role: "신부 아버지", name: "장자성", bank: "국민은행", account: "033-21-0619-674", holder: "장자성" },
+          { role: "신부 어머니", name: "이인덕", bank: "국민은행", account: "582502-01-242196", holder: "이인덕" },
         ],
       },
     ],

@@ -81,6 +81,7 @@ export default function createGallery(content) {
   let zoomX = 0;
   let zoomY = 0;
   let lastTapTime = 0;
+  let didSwitchWhilePanning = false;
 
   const updateActiveItem = () => {
     const activePhoto = navigation[activeIndex];
@@ -115,8 +116,20 @@ export default function createGallery(content) {
     lightboxImage.classList.remove("is-zoomed");
   };
 
+  const getPanBounds = () => ({
+    x: Math.max(0, (lightboxImage.clientWidth * zoomScale - dialog.clientWidth) / 2),
+    y: Math.max(0, (lightboxImage.clientHeight * zoomScale - dialog.clientHeight) / 2),
+  });
+
+  const clampPan = () => {
+    const bounds = getPanBounds();
+    zoomX = Math.min(bounds.x, Math.max(-bounds.x, zoomX));
+    zoomY = Math.min(bounds.y, Math.max(-bounds.y, zoomY));
+  };
+
   const applyZoom = () => {
     if (zoomScale <= 1) return resetZoom();
+    clampPan();
     lightboxImage.style.transform = `translate(${zoomX}px, ${zoomY}px) scale(${zoomScale})`;
     lightboxImage.classList.add("is-zoomed");
   };
@@ -167,6 +180,7 @@ export default function createGallery(content) {
     lightboxTouches.set(event.pointerId, { x: event.clientX, y: event.clientY });
     const points = getTouchPoints();
     if (points.length === 1) {
+      didSwitchWhilePanning = false;
       const now = Date.now();
       if (now - lastTapTime < 260) resetZoom();
       lastTapTime = now;
@@ -187,8 +201,27 @@ export default function createGallery(content) {
       zoomScale = Math.min(3, Math.max(1, pinchStartScale * (getDistance(points) / pinchStartDistance)));
       applyZoom();
     } else if (zoomScale > 1 && panStart) {
-      zoomX = panStart.zoomX + event.clientX - panStart.x;
-      zoomY = panStart.zoomY + event.clientY - panStart.y;
+      const intendedX = panStart.zoomX + event.clientX - panStart.x;
+      const intendedY = panStart.zoomY + event.clientY - panStart.y;
+      const bounds = getPanBounds();
+      const isHorizontalDrag = Math.abs(event.clientX - panStart.x) > Math.abs(event.clientY - panStart.y);
+      const overflow = 48;
+
+      if (!didSwitchWhilePanning && isHorizontalDrag && bounds.x > 0) {
+        if (intendedX < -bounds.x - overflow) {
+          didSwitchWhilePanning = true;
+          movePhoto(1);
+          return;
+        }
+        if (intendedX > bounds.x + overflow) {
+          didSwitchWhilePanning = true;
+          movePhoto(-1);
+          return;
+        }
+      }
+
+      zoomX = intendedX;
+      zoomY = intendedY;
       applyZoom();
     }
   });
@@ -196,7 +229,7 @@ export default function createGallery(content) {
     if (event.pointerType !== "touch" || !lightboxTouches.has(event.pointerId)) return;
     const touchStart = swipeStart;
     lightboxTouches.delete(event.pointerId);
-    if (lightboxTouches.size === 0 && zoomScale === 1 && touchStart) {
+    if (lightboxTouches.size === 0 && !didSwitchWhilePanning && zoomScale === 1 && touchStart) {
       const swipeX = event.clientX - touchStart.x;
       const swipeY = event.clientY - touchStart.y;
       if (Math.abs(swipeX) > 42 && Math.abs(swipeX) > Math.abs(swipeY)) movePhoto(swipeX < 0 ? 1 : -1);
@@ -210,6 +243,7 @@ export default function createGallery(content) {
   dialog.addEventListener("pointercancel", (event) => {
     lightboxTouches.delete(event.pointerId);
     swipeStart = null;
+    didSwitchWhilePanning = false;
   });
   dialog.addEventListener("close", () => {
     lightboxTouches.clear();

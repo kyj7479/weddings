@@ -255,6 +255,23 @@ h1 {
   pointer-events: none;
 }
 
+/* 소개 섹션을 제외한 본문 가독성 보정 */
+.topline { font-size: 11px; font-weight: 600; }
+.date { font-size: 16px; font-weight: 500; }
+.notice { font-size: 14px; font-weight: 500; }
+.details .message { font-size: 15px; font-weight: 500; line-height: 2.05; }
+.details .schedule { font-size: 16px; font-weight: 600; }
+.details .location { font-size: 13px; font-weight: 500; }
+.buttons .button { font-size: 13px; font-weight: 600; }
+
+.heart-tabs button { font-size: 13px; font-weight: 500; }
+.heart-family-panel .heart-account-heading span { font-size: 13px; font-weight: 500; }
+.heart-family-panel .heart-account-heading strong { font-size: 14px; font-weight: 600; }
+.heart-family-panel .heart-account-heading small { font-size: 12px; }
+.heart-family-panel .heart-account-detail > span { font-size: 11px; font-weight: 500; }
+.heart-family-panel .heart-account-detail b { font-size: 12px; font-weight: 500; }
+.heart-family-panel .heart-account-detail button { font-size: 11px; font-weight: 600; }
+
 @media (max-width: 370px) {
   .details {
     padding-right: 24px;
@@ -262,7 +279,7 @@ h1 {
   }
 
   .details .message {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .details .schedule strong {

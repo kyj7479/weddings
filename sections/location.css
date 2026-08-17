@@ -1,41 +1,41 @@
 .location-section { padding: 66px 30px 70px; background: #f7f6f0; color: #2f4d45; }
 .location-heading { text-align: center; }
 .location-heading h2 { margin: 0; font: 400 30px "DM Serif Display", serif; letter-spacing: .05em; }
-.location-heading p { margin: 18px 0 0; color: #456258; font: 700 16px "Gowun Batang", serif; }
+.location-heading p { margin: 18px 0 0; color: #456258; font: 700 17px "Gowun Batang", serif; }
 .location-address { margin-top: 20px; text-align: center; }
-.location-address p { margin: 0; color: #61786e; font: 400 13px/1.8 "Gowun Batang", serif; }
-.location-address a { display: inline-block; margin-top: 7px; color: #9d753d; font: 400 12px "DM Serif Display", serif; letter-spacing: .05em; text-decoration: none; }
+.location-address p { margin: 0; color: #61786e; font: 500 14px/1.8 "Gowun Batang", serif; }
+.location-address a { display: inline-block; margin-top: 7px; color: #9d753d; font: 500 13px "DM Serif Display", serif; letter-spacing: .05em; text-decoration: none; }
 .kakao-map { display: grid; height: 214px; margin-top: 29px; place-items: center; overflow: hidden; border: 1px solid #cbb27e; background: #eceee9; }
-.kakao-map > p { color: #6b8177; font: 400 12px "Gowun Batang", serif; }
+.kakao-map > p { color: #6b8177; font: 500 13px "Gowun Batang", serif; }
 .kakao-map.map-unavailable { background: #eef0eb; }
 .kakao-map.map-unavailable > p { display: block; }
 .kakao-map:not(.map-unavailable) > p { display: none; }
 .location-map-label { padding: 7px 10px; border: 1px solid #b99761; background: rgba(253, 252, 248, .96); color: #2f4d45; font: 600 11px "Noto Sans KR", sans-serif; white-space: nowrap; box-shadow: 0 3px 10px rgba(39, 63, 56, .13); }
 .location-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 31px; }
-.location-links a { display: grid; min-height: 48px; place-items: center; border: 1px solid #b99761; color: #34564c; font: 500 12px "Noto Sans KR", sans-serif; text-decoration: none; transition: background-color .2s ease, color .2s ease; }
+.location-links a { display: grid; min-height: 48px; place-items: center; border: 1px solid #b99761; color: #34564c; font: 600 13px "Noto Sans KR", sans-serif; text-decoration: none; transition: background-color .2s ease, color .2s ease; }
 .location-links a:active, .location-links a:hover { background: #34564c; color: #fff; }
 .location-rule { height: 1px; margin: 54px 0 33px; background: #d9ddd7; }
 .driving-guide { margin-bottom: 42px; }
-.driving-guide h3, .transport-guide h3 { margin: 0 0 24px; color: #9d753d; font: 400 13px "DM Serif Display", serif; letter-spacing: .13em; text-align: center; }
+.driving-guide h3, .transport-guide h3 { margin: 0 0 24px; color: #9d753d; font: 600 14px "DM Serif Display", serif; letter-spacing: .13em; text-align: center; }
 .transport-row { display: grid; grid-template-columns: 73px 1fr; gap: 15px; padding: 18px 0; border-top: 1px solid rgba(133, 151, 142, .28); }
 .transport-row:last-child { border-bottom: 1px solid rgba(133, 151, 142, .28); }
-.transport-row strong { padding-top: 2px; color: #3d6158; font: 400 11px "DM Serif Display", serif; letter-spacing: .08em; }
-.transport-row p { margin: 0; color: #526b61; font: 400 13px/1.75 "Gowun Batang", serif; word-break: keep-all; }
+.transport-row strong { padding-top: 2px; color: #3d6158; font: 600 12px "DM Serif Display", serif; letter-spacing: .08em; }
+.transport-row p { margin: 0; color: #526b61; font: 500 14px/1.75 "Gowun Batang", serif; word-break: keep-all; }
 .driving-row { border-bottom: 1px solid rgba(133, 151, 142, .28); }
 .driving-row p { white-space: pre-line; }
-.driving-row small { display: block; margin-top: 7px; color: #89978f; font: 400 11px/1.65 "Gowun Batang", serif; }
+.driving-row small { display: block; margin-top: 7px; color: #71857b; font: 500 12px/1.65 "Gowun Batang", serif; }
 .subway-guide { min-width: 0; }
 .subway-station { display: flex; align-items: center; gap: 5px; min-height: 25px; }
-.subway-station b { margin-left: 4px; color: #2f4d45; font: 700 15px "Gowun Batang", serif; }
-.subway-badge { display: inline-grid; width: 20px; height: 20px; place-items: center; border-radius: 50%; color: #fff; font: 600 12px "Noto Sans KR", sans-serif; }
+.subway-station b { margin-left: 4px; color: #2f4d45; font: 700 16px "Gowun Batang", serif; }
+.subway-badge { display: inline-grid; width: 21px; height: 21px; place-items: center; border-radius: 50%; color: #fff; font: 700 12px "Noto Sans KR", sans-serif; }
 .subway-badge.line-2 { background: #5f9a72; }
 .subway-badge.line-7 { background: #85905c; }
 .subway-guide p { margin-top: 9px; color: #526b61; }
-.subway-guide small { display: block; margin-top: 4px; color: #89978f; font: 400 11px/1.65 "Gowun Batang", serif; }
+.subway-guide small { display: block; margin-top: 4px; color: #71857b; font: 500 12px/1.65 "Gowun Batang", serif; }
 .bus-list { margin: 13px 0 0; }
 .bus-list div { display: grid; grid-template-columns: 38px 1fr; gap: 8px; margin-top: 7px; }
-.bus-list dt { display: grid; min-height: 21px; place-items: center; border: 1px solid currentColor; border-radius: 3px; font: 500 10px "Noto Sans KR", sans-serif; }
-.bus-list dd { margin: 1px 0 0; color: #61786e; font: 400 12px/1.7 "Gowun Batang", serif; }
+.bus-list dt { display: grid; min-height: 22px; place-items: center; border: 1px solid currentColor; border-radius: 3px; font: 600 11px "Noto Sans KR", sans-serif; }
+.bus-list dd { margin: 1px 0 0; color: #61786e; font: 500 13px/1.7 "Gowun Batang", serif; }
 .bus-list .bus-trunk { color: #547d9e; }
 .bus-list .bus-branch { color: #5c9474; }
 .bus-list .bus-express { color: #b6844d; }
