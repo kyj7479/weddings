@@ -277,28 +277,140 @@ h1 {
 .heart-family-panel .heart-account-detail b { color: #3c4d47; font-size: 13px; font-weight: 600; }
 .heart-family-panel .heart-account-detail button { font-size: 11px; font-weight: 600; }
 
-@media (max-width: 370px) {
-  .details {
-    padding-right: 24px;
-    padding-left: 24px;
+/* 컨테이너 폭을 기준으로 한 유동 타이포그래피 */
+.page {
+  container-name: invitation-page;
+  container-type: inline-size;
+  --type-hero-name: clamp(1.875rem, calc(1.125rem + 3.7cqw), 2.3125rem);
+  --type-section-title: clamp(1.75rem, calc(1.375rem + 1.85cqw), 1.9375rem);
+  --type-compact-title: clamp(1.5625rem, calc(1.1875rem + 1.85cqw), 1.6875rem);
+  --type-subtitle: clamp(.875rem, calc(.6875rem + .93cqw), 1rem);
+  --type-body: clamp(.8125rem, calc(.625rem + .93cqw), .9375rem);
+  --type-body-strong: clamp(.875rem, calc(.6875rem + .93cqw), 1rem);
+  --type-schedule-date: clamp(.875rem, calc(.5rem + 2cqw), 1.125rem);
+  --type-label: clamp(.6875rem, calc(.5rem + .93cqw), .8125rem);
+  --type-profile-name: clamp(1.1875rem, calc(.90625rem + 1.39cqw), 1.375rem);
+  --section-gutter: clamp(18px, calc(3px + 5cqw), 30px);
+  --hero-gutter: clamp(24px, calc(7px + 5.4cqw), 36px);
+}
+
+.hero { padding-right: var(--hero-gutter); padding-left: var(--hero-gutter); }
+.details { padding-right: var(--hero-gutter); padding-left: var(--hero-gutter); }
+.about-section,
+.calendar-section,
+.family-section,
+.location-section,
+.guestbook-section,
+.share-section { padding-right: var(--section-gutter); padding-left: var(--section-gutter); }
+.gallery-heading,
+.venue-guide-heading { padding-right: var(--section-gutter); padding-left: var(--section-gutter); }
+
+.hero h1 { font-size: var(--type-hero-name); font-weight: 700; letter-spacing: .035em; }
+.topline { font-size: var(--type-label); font-weight: 700; letter-spacing: .11em; }
+.topline span { white-space: nowrap; }
+.hero .intro { font-size: var(--type-label); font-weight: 700; letter-spacing: .18em; white-space: nowrap; }
+.date { font-size: var(--type-subtitle); font-weight: 700; letter-spacing: .08em; white-space: nowrap; }
+.notice { font-size: var(--type-body); font-weight: 700; letter-spacing: -.035em; }
+
+.details .eyebrow { font-size: clamp(1.125rem, calc(.9375rem + .93cqw), 1.25rem); font-weight: 400; }
+.details h2 { font-size: clamp(1.1875rem, calc(.625rem + 2.78cqw), 1.5625rem); font-weight: 700; letter-spacing: -.025em; white-space: nowrap; }
+.details .message { font-size: var(--type-body); font-weight: 700; letter-spacing: -.055em; }
+.details .schedule { font-size: var(--type-body-strong); font-weight: 700; letter-spacing: -.035em; }
+.details .schedule strong {
+  font-size: var(--type-schedule-date);
+  font-weight: 700;
+  letter-spacing: -.035em;
+  white-space: nowrap;
+}
+.details .schedule span {
+  font-size: var(--type-body-strong);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.details .location,
+.buttons .button { font-size: var(--type-label); font-weight: 700; }
+.details .location { font-weight: 600; line-height: 1.7; letter-spacing: -.05em; text-wrap: balance; }
+.buttons .button { letter-spacing: -.015em; white-space: nowrap; }
+
+:is(
+  .about-heading,
+  .gallery-heading,
+  .location-heading,
+  .venue-guide-heading,
+  .guestbook-heading
+) h2 {
+  font-size: var(--type-section-title);
+  font-weight: 400;
+}
+
+:is(
+  .about-heading,
+  .gallery-heading,
+  .venue-guide-heading,
+  .guestbook-heading
+) > p {
+  font-size: var(--type-subtitle);
+  font-weight: 700;
+  line-height: 1.85;
+  text-wrap: balance;
+}
+
+.calendar-title { font-size: clamp(1.6875rem, calc(1.3125rem + 1.85cqw), 1.8125rem); }
+.calendar-korean-date,
+.countdown-message { font-size: var(--type-subtitle); font-weight: 700; }
+.calendar-english-date,
+.countdown-item span { font-size: var(--type-label); }
+.calendar-korean-date,
+.calendar-english-date { letter-spacing: -.02em; white-space: nowrap; }
+.calendar-day { width: clamp(32px, calc(24px + 2.6cqw), 38px); height: clamp(32px, calc(24px + 2.6cqw), 38px); font-size: clamp(1.0625rem, calc(.875rem + .93cqw), 1.1875rem); }
+
+.location-heading > p { font-size: var(--type-body-strong); white-space: nowrap; }
+.location-address p { font-size: clamp(.6875rem, calc(.375rem + 1.67cqw), .9375rem); letter-spacing: -.025em; text-wrap: balance; }
+.subway-station { white-space: nowrap; }
+.transport-row p,
+.venue-guide-card p,
+.guestbook-form input,
+.guestbook-form textarea,
+.guestbook-message p { font-size: var(--type-body); }
+
+.profile-role,
+.venue-guide-card-label,
+.driving-guide h3,
+.transport-guide h3 { font-size: var(--type-label); }
+.profile-copy h3 { font-size: var(--type-profile-name); }
+.profile-introduction { font-size: var(--type-body); font-weight: 700; }
+
+.share-heading h2 { font-size: var(--type-compact-title); font-weight: 400; }
+.share-heading p { font-size: var(--type-body); font-weight: 700; }
+.share-actions button { font-size: var(--type-body); }
+
+.family-row { font-size: clamp(.875rem, calc(.5rem + 1.67cqw), 1.0625rem); }
+.family-row span { padding-left: clamp(7px, calc(4px + 1.1cqw), 10px); }
+.family-row .separator,
+.family-row .mother { padding-left: clamp(4px, calc(1px + 1.1cqw), 7px); }
+
+@supports not (font-size: 1cqw) {
+  .page {
+    --type-hero-name: clamp(1.875rem, calc(1.125rem + 3.7vw), 2.3125rem);
+    --type-section-title: clamp(1.75rem, calc(1.375rem + 1.85vw), 1.9375rem);
+    --type-compact-title: clamp(1.5625rem, calc(1.1875rem + 1.85vw), 1.6875rem);
+    --type-subtitle: clamp(.875rem, calc(.6875rem + .93vw), 1rem);
+    --type-body: clamp(.8125rem, calc(.625rem + .93vw), .9375rem);
+    --type-body-strong: clamp(.875rem, calc(.6875rem + .93vw), 1rem);
+    --type-schedule-date: clamp(.875rem, calc(.5rem + 2vw), 1.125rem);
+    --type-label: clamp(.6875rem, calc(.5rem + .93vw), .8125rem);
+    --type-profile-name: clamp(1.1875rem, calc(.90625rem + 1.39vw), 1.375rem);
+    --section-gutter: clamp(18px, calc(3px + 5vw), 30px);
+    --hero-gutter: clamp(24px, calc(7px + 5.4vw), 36px);
   }
 
-  .details .message {
-    font-size: 13px;
-  }
-
-  .details .schedule strong {
-    font-size: 15px;
-    letter-spacing: -.02em;
-    white-space: nowrap;
-  }
-
-  .details .schedule span {
-    font-size: 16px;
-  }
-
-  .details .location {
-    font-size: 11px;
-    line-height: 1.7;
-  }
+  .details .eyebrow { font-size: clamp(1.125rem, calc(.9375rem + .93vw), 1.25rem); }
+  .details h2 { font-size: clamp(1.1875rem, calc(.625rem + 2.78vw), 1.5625rem); }
+  .calendar-title { font-size: clamp(1.6875rem, calc(1.3125rem + 1.85vw), 1.8125rem); }
+  .calendar-day { width: clamp(32px, calc(24px + 2.6vw), 38px); height: clamp(32px, calc(24px + 2.6vw), 38px); font-size: clamp(1.0625rem, calc(.875rem + .93vw), 1.1875rem); }
+  .location-address p { font-size: clamp(.6875rem, calc(.375rem + 1.67vw), .9375rem); }
+  .family-row { font-size: clamp(.875rem, calc(.5rem + 1.67vw), 1.0625rem); }
+  .family-row span { padding-left: clamp(7px, calc(4px + 1.1vw), 10px); }
+  .family-row .separator,
+  .family-row .mother { padding-left: clamp(4px, calc(1px + 1.1vw), 7px); }
 }
