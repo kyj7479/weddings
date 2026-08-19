@@ -53,7 +53,7 @@ const weddingConfig = {
   date: "2026-11-22T12:20:00+09:00",
   venueName: "스타시티아트홀",
   hallName: "",
-  address: "서울특별시 광진구 화양동 능동로 110 스타시티영존 5층",
+  address: ["서울특별시 광진구 화양동 능동로 110", "스타시티영존 5층"],
   location: {
     title: "LOCATION",
     kakaoMapKey: "886e9a6033ce9ce9d2a60e10e2f7dcc0",
@@ -157,6 +157,7 @@ const weddingConfig = {
   },
   contactPhone: "010-0000-0000",
   heroPhoto: "./photos/PYD00070.webp",
+  heroFullPhoto: "./photos/PYD00070_full.webp",
   heroPhotoAlt: "김영진과 장예슬의 웨딩 사진",
   heroLabel: "WE ARE GETTING MARRIED",
   heroMessage: "두 사람이 함께 써 내려갈 영화의 첫 장면,\n그 자리에 여러분을 초대합니다.",

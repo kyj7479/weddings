@@ -45,6 +45,46 @@ html::after {
   width: min(72vw, 270px);
 }
 
+.hero-photo-trigger {
+  display: block;
+  appearance: none;
+  color: inherit;
+  cursor: zoom-in;
+}
+
+.hero-photo-trigger:focus-visible {
+  outline: 2px solid #c9985b;
+  outline-offset: 4px;
+}
+
+.hero-lightbox {
+  width: 100%;
+  max-width: 560px;
+  height: 100dvh;
+  max-height: none;
+  margin: 0 auto;
+  padding: 52px 17px 35px;
+  overflow: hidden;
+  border: 0;
+  background: rgba(24, 52, 47, .97);
+}
+
+.hero-lightbox::backdrop {
+  background: rgba(15, 28, 26, .72);
+  backdrop-filter: blur(4px);
+}
+
+.hero-lightbox-image {
+  display: block;
+  width: 100%;
+  height: calc(100dvh - 100px);
+  object-fit: contain;
+  transform-origin: center;
+}
+
+.hero-lightbox-image.is-zoomed { cursor: zoom-out; }
+.hero-lightbox-close { position: absolute; z-index: 1; top: 15px; right: 19px; border: 0; background: transparent; color: #fff; cursor: pointer; font: 300 35px/1 sans-serif; }
+
 h1 {
   font-size: 32px;
 }
@@ -56,7 +96,7 @@ h1 {
 }
 
 .notice {
-  color: #b78443;
+  color: #95642d;
 }
 
 .message {
@@ -95,7 +135,7 @@ h1 {
 
 /* 초대 문구와 첫 번째 일정 섹션 사이의 여백을 다른 섹션과 맞춥니다. */
 .details {
-  padding: 52px 36px 78px;
+  padding: 42px 36px 62px;
 }
 
 .heart-sheet-trigger {
@@ -220,8 +260,8 @@ h1 {
   right: max(16px, calc((100vw - 560px) / 2 + 18px));
   bottom: calc(22px + env(safe-area-inset-bottom));
   display: grid;
-  width: 43px;
-  height: 43px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   place-items: center;
   border: 1px solid rgba(196, 208, 199, .7);
@@ -287,6 +327,9 @@ h1 {
   --type-subtitle: clamp(.875rem, calc(.6875rem + .93cqw), 1rem);
   --type-body: clamp(.8125rem, calc(.625rem + .93cqw), .9375rem);
   --type-body-strong: clamp(.875rem, calc(.6875rem + .93cqw), 1rem);
+  --type-location-body: clamp(.875rem, calc(.75rem + .56cqw), .9375rem);
+  --type-hero-message: clamp(.75rem, calc(.046875rem + 3.75cqw), 1.0625rem);
+  --type-invitation-message: clamp(.6875rem, calc(3.75cqw - .015625rem), 1rem);
   --type-schedule-date: clamp(.875rem, calc(.5rem + 2cqw), 1.125rem);
   --type-label: clamp(.6875rem, calc(.5rem + .93cqw), .8125rem);
   --type-profile-name: clamp(1.1875rem, calc(.90625rem + 1.39cqw), 1.375rem);
@@ -310,11 +353,11 @@ h1 {
 .topline span { white-space: nowrap; }
 .hero .intro { font-size: var(--type-label); font-weight: 700; letter-spacing: .18em; white-space: nowrap; }
 .date { font-size: var(--type-subtitle); font-weight: 700; letter-spacing: .08em; white-space: nowrap; }
-.notice { font-size: var(--type-body); font-weight: 700; letter-spacing: -.035em; }
+.notice { font-size: var(--type-hero-message); font-weight: 700; letter-spacing: -.035em; }
 
 .details .eyebrow { font-size: clamp(1.125rem, calc(.9375rem + .93cqw), 1.25rem); font-weight: 400; }
 .details h2 { font-size: clamp(1.1875rem, calc(.625rem + 2.78cqw), 1.5625rem); font-weight: 700; letter-spacing: -.025em; white-space: nowrap; }
-.details .message { font-size: var(--type-body); font-weight: 700; letter-spacing: -.055em; }
+.details .message { font-size: var(--type-invitation-message); font-weight: 700; letter-spacing: -.055em; }
 .details .schedule { font-size: var(--type-body-strong); font-weight: 700; letter-spacing: -.035em; }
 .details .schedule strong {
   font-size: var(--type-schedule-date);
@@ -365,13 +408,22 @@ h1 {
 .calendar-day { width: clamp(32px, calc(24px + 2.6cqw), 38px); height: clamp(32px, calc(24px + 2.6cqw), 38px); font-size: clamp(1.0625rem, calc(.875rem + .93cqw), 1.1875rem); }
 
 .location-heading > p { font-size: var(--type-body-strong); white-space: nowrap; }
-.location-address p { font-size: clamp(.6875rem, calc(.375rem + 1.67cqw), .9375rem); letter-spacing: -.025em; text-wrap: balance; }
+.location-address p { letter-spacing: -.025em; text-wrap: balance; }
 .subway-station { white-space: nowrap; }
 .transport-row p,
 .venue-guide-card p,
 .guestbook-form input,
 .guestbook-form textarea,
 .guestbook-message p { font-size: var(--type-body); }
+
+.location-address p,
+.transport-row p,
+.driving-row small,
+.subway-guide small,
+.bus-list dd {
+  font-size: var(--type-location-body);
+  font-weight: 700;
+}
 
 .profile-role,
 .venue-guide-card-label,
@@ -397,6 +449,9 @@ h1 {
     --type-subtitle: clamp(.875rem, calc(.6875rem + .93vw), 1rem);
     --type-body: clamp(.8125rem, calc(.625rem + .93vw), .9375rem);
     --type-body-strong: clamp(.875rem, calc(.6875rem + .93vw), 1rem);
+    --type-location-body: clamp(.875rem, calc(.75rem + .56vw), .9375rem);
+    --type-hero-message: clamp(.75rem, calc(.046875rem + 3.75vw), 1.0625rem);
+    --type-invitation-message: clamp(.6875rem, calc(3.75vw - .015625rem), 1rem);
     --type-schedule-date: clamp(.875rem, calc(.5rem + 2vw), 1.125rem);
     --type-label: clamp(.6875rem, calc(.5rem + .93vw), .8125rem);
     --type-profile-name: clamp(1.1875rem, calc(.90625rem + 1.39vw), 1.375rem);
@@ -408,7 +463,6 @@ h1 {
   .details h2 { font-size: clamp(1.1875rem, calc(.625rem + 2.78vw), 1.5625rem); }
   .calendar-title { font-size: clamp(1.6875rem, calc(1.3125rem + 1.85vw), 1.8125rem); }
   .calendar-day { width: clamp(32px, calc(24px + 2.6vw), 38px); height: clamp(32px, calc(24px + 2.6vw), 38px); font-size: clamp(1.0625rem, calc(.875rem + .93vw), 1.1875rem); }
-  .location-address p { font-size: clamp(.6875rem, calc(.375rem + 1.67vw), .9375rem); }
   .family-row { font-size: clamp(.875rem, calc(.5rem + 1.67vw), 1.0625rem); }
   .family-row span { padding-left: clamp(7px, calc(4px + 1.1vw), 10px); }
   .family-row .separator,

@@ -64,6 +64,9 @@ function renderKakaoMap(container, content) {
 
 export default function createLocation(content) {
   const { location } = content;
+  const displayAddress = content.addressParts
+    .map((part) => `<span>${part}</span>`)
+    .join("<wbr> ");
   const section = document.createElement("section");
   section.className = "location-section";
   section.id = "location";
@@ -73,7 +76,7 @@ export default function createLocation(content) {
       <p>${content.venue}</p>
     </header>
     <div class="location-address">
-      <p>${content.address}</p>
+      <p>${displayAddress}</p>
       <a href="tel:${location.phone.replaceAll("-", "")}">${location.phone}</a>
     </div>
     <div class="kakao-map" aria-label="${content.venue} 위치 지도">
