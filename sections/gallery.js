@@ -63,7 +63,10 @@ export default function createGallery(content) {
     <dialog class="gallery-lightbox" aria-label="웨딩 사진 크게 보기">
       <button class="lightbox-close" type="button" aria-label="닫기">×</button>
       <button class="lightbox-arrow previous" type="button" aria-label="이전 사진">‹</button>
-      <img class="lightbox-image" alt="" />
+      <div class="lightbox-stage">
+        <img class="lightbox-image" alt="" />
+        <img class="lightbox-image" alt="" hidden />
+      </div>
       <span class="lightbox-unretouched-mark" aria-hidden="true"><small></small>김앤장<br />미보정</span>
       <button class="lightbox-arrow next" type="button" aria-label="다음 사진">›</button>
       <p class="lightbox-count"></p>
@@ -72,7 +75,9 @@ export default function createGallery(content) {
 
   const items = [...section.querySelectorAll(".gallery-wall-item")];
   const dialog = section.querySelector(".gallery-lightbox");
-  const lightboxImage = section.querySelector(".lightbox-image");
+  const lightboxImages = [...section.querySelectorAll(".lightbox-image")];
+  let lightboxImage = lightboxImages[0];
+  let standbyImage = lightboxImages[1];
   const counter = section.querySelector(".lightbox-count");
   const lightboxMark = section.querySelector(".lightbox-unretouched-mark");
   const lightboxMarkNumber = lightboxMark.querySelector("small");
@@ -87,29 +92,84 @@ export default function createGallery(content) {
   let zoomY = 0;
   let lastTapTime = 0;
   let didSwitchWhilePanning = false;
+  let isTransitioning = false;
+  let transitionToken = 0;
 
   const updateActiveItem = () => {
     const activePhoto = navigation[activeIndex];
     items.forEach((item, index) => item.classList.toggle("is-active", photos[index] === activePhoto));
   };
 
-  const updateLightbox = (direction) => {
-    const photo = navigation[activeIndex];
-    lightboxImage.src = photo.src;
-    lightboxImage.alt = photo.alt;
+  const updateLightboxMeta = (photo) => {
     counter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(navigation.length).padStart(2, "0")}`;
     lightboxMark.hidden = photo.isRetouched;
     lightboxMarkNumber.hidden = !photo.photoNumber;
     lightboxMarkNumber.textContent = photo.photoNumber || "";
+  };
 
-    if (!direction || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    lightboxImage.getAnimations().forEach((animation) => animation.cancel());
-    const offset = direction === "next" ? 22 : -22;
-    window.requestAnimationFrame(() => {
-      lightboxImage.animate([
-        { opacity: .15, transform: `translateX(${offset}px) scale(.99)` },
-        { opacity: 1, transform: "translateX(0) scale(1)" },
-      ], { duration: 220, easing: "cubic-bezier(.22, 1, .36, 1)" });
+  const preloadAdjacentPhotos = () => {
+    [-1, 1].forEach((offset) => {
+      const image = new Image();
+      image.src = navigation[(activeIndex + offset + navigation.length) % navigation.length].src;
+    });
+  };
+
+  const updateLightbox = (direction) => {
+    const photo = navigation[activeIndex];
+
+    if (!direction) {
+      transitionToken += 1;
+      lightboxImages.forEach((image) => image.getAnimations().forEach((animation) => animation.cancel()));
+      lightboxImage.src = photo.src;
+      lightboxImage.alt = photo.alt;
+      lightboxImage.hidden = false;
+      standbyImage.hidden = true;
+      updateLightboxMeta(photo);
+      preloadAdjacentPhotos();
+      return Promise.resolve(true);
+    }
+
+    const token = ++transitionToken;
+    standbyImage.src = photo.src;
+    standbyImage.alt = photo.alt;
+    const imageReady = standbyImage.decode
+      ? standbyImage.decode().catch(() => {})
+      : new Promise((resolve) => {
+        if (standbyImage.complete) resolve();
+        else {
+          standbyImage.addEventListener("load", resolve, { once: true });
+          standbyImage.addEventListener("error", resolve, { once: true });
+        }
+      });
+
+    return imageReady.then(() => {
+      if (token !== transitionToken || !standbyImage.naturalWidth) return false;
+
+      updateLightboxMeta(photo);
+      standbyImage.hidden = false;
+
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const offset = direction === "next" ? 34 : -34;
+        const timing = { duration: 260, easing: "cubic-bezier(.22, 1, .36, 1)" };
+        const outgoing = lightboxImage.animate([
+          { opacity: 1, transform: "translateX(0) scale(1)" },
+          { opacity: 0, transform: `translateX(${-offset}px) scale(.985)` },
+        ], timing);
+        const incoming = standbyImage.animate([
+          { opacity: 0, transform: `translateX(${offset}px) scale(.985)` },
+          { opacity: 1, transform: "translateX(0) scale(1)" },
+        ], timing);
+        return Promise.allSettled([outgoing.finished, incoming.finished]).then(() => true);
+      }
+
+      return true;
+    }).then((completed) => {
+      if (!completed || token !== transitionToken) return false;
+      lightboxImage.hidden = true;
+      lightboxImages.forEach((image) => image.getAnimations().forEach((animation) => animation.cancel()));
+      [lightboxImage, standbyImage] = [standbyImage, lightboxImage];
+      preloadAdjacentPhotos();
+      return true;
     });
   };
 
@@ -150,11 +210,22 @@ export default function createGallery(content) {
   };
 
   const movePhoto = (direction) => {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    const previousIndex = activeIndex;
     activeIndex = (activeIndex + direction + navigation.length) % navigation.length;
+    const requestedIndex = activeIndex;
     updateActiveItem();
     resetZoom();
-    updateLightbox(direction > 0 ? "next" : "previous");
     updateHistory("replaceState");
+    updateLightbox(direction > 0 ? "next" : "previous").then((completed) => {
+      if (!completed && dialog.open && activeIndex === requestedIndex) {
+        activeIndex = previousIndex;
+        updateActiveItem();
+        updateHistory("replaceState");
+      }
+      isTransitioning = false;
+    });
   };
 
   items.forEach((item) => {
@@ -180,7 +251,7 @@ export default function createGallery(content) {
     applyZoom();
   }, { passive: false });
   dialog.addEventListener("pointerdown", (event) => {
-    if (event.pointerType !== "touch" || event.target.closest(".lightbox-close")) return;
+    if (isTransitioning || event.pointerType !== "touch" || event.target.closest(".lightbox-close")) return;
     dialog.setPointerCapture(event.pointerId);
     lightboxTouches.set(event.pointerId, { x: event.clientX, y: event.clientY });
     const points = getTouchPoints();
@@ -251,6 +322,8 @@ export default function createGallery(content) {
     didSwitchWhilePanning = false;
   });
   dialog.addEventListener("close", () => {
+    transitionToken += 1;
+    isTransitioning = false;
     lightboxTouches.clear();
     resetZoom();
     if (window.history.state?.galleryLightbox) window.history.back();

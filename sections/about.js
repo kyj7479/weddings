@@ -18,12 +18,14 @@ function createProfile(role, name, profile) {
 
   return `
     <article class="about-profile ${role.toLowerCase()}-profile">
-      ${createPortrait(profile, name, role.toLowerCase())}
-      <div class="profile-copy">
-        <p class="profile-role">${role}</p>
-        <h3>${name}</h3>
-        <p class="profile-introduction">${introduction}</p>
+      <div class="profile-card-header">
+        ${createPortrait(profile, name, role.toLowerCase())}
+        <div class="profile-copy">
+          <p class="profile-role">${role}</p>
+          <h3>${name}</h3>
+        </div>
       </div>
+      <p class="profile-introduction">${introduction}</p>
     </article>
   `;
 }

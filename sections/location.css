@@ -20,6 +20,22 @@
 .location-links a:last-child,
 .location-links a:last-child:active,
 .location-links a:last-child:hover { border-color: #03c75a; background: #03c75a; color: #fff; }
+
+@media (max-width: 438px) {
+  .location-links { gap: clamp(5px, 1.72vw, 10px); }
+  .location-links a {
+    gap: clamp(4px, calc(5.72vw - 16.6px), 8px);
+    min-width: 0;
+    font-size: clamp(11px, calc(2.86vw + 1.7px), 14px);
+    letter-spacing: -.04em;
+    white-space: nowrap;
+  }
+  .location-link-icon {
+    width: clamp(14px, calc(5.72vw - 4.6px), 20px);
+    height: clamp(14px, calc(5.72vw - 4.6px), 20px);
+    flex: 0 0 auto;
+  }
+}
 .location-rule { height: 1px; margin: 54px 0 33px; background: #d9ddd7; }
 .driving-guide { margin-bottom: 42px; }
 .driving-guide h3, .transport-guide h3 { margin: 0 0 24px; color: #8c6633; font: 700 15px "DM Serif Display", serif; letter-spacing: .11em; text-align: center; }

@@ -15,23 +15,37 @@
 
 .about-heading p {
   margin: 19px 0 48px;
-  color: #60786e;
+  color: #526b61;
   font: 600 16px/1.85 "Gowun Batang", serif;
   white-space: pre-line;
 }
 
-.about-profiles { display: grid; gap: 31px; }
+.about-profiles { display: grid; gap: 70px; }
 
 .about-profile {
-  display: grid;
-  grid-template-columns: 96px minmax(0, 1fr);
+  position: relative;
+  min-width: 0;
+  padding: 0 24px 23px;
+  border: 1px solid rgba(205, 164, 102, .72);
+  border-radius: 3px;
+  background: rgba(253, 252, 248, .78);
+  box-shadow: 0 9px 24px rgba(47, 77, 69, .055);
+  text-align: center;
+}
+
+.profile-card-header {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 9px;
 }
 
 .portrait {
-  width: 96px;
-  height: 96px;
+  position: relative;
+  z-index: 1;
+  width: 104px;
+  height: 104px;
+  margin-top: -52px;
   padding: 4px;
   overflow: hidden;
   border: 1px solid #cda466;
@@ -64,13 +78,11 @@ button.portrait { display: block; cursor: zoom-in; }
   text-align: center;
 }
 
-.profile-copy { min-width: 0; }
-.bride-profile { grid-template-columns: minmax(0, 1fr) 96px; text-align: right; }
-.bride-profile .portrait { order: 2; }
-.bride-profile .profile-copy { order: 1; }
-.profile-role { margin: 0 0 4px; color: #8c6633; font: 700 13px "DM Serif Display", serif; letter-spacing: .11em; }
+.profile-copy { display: flex; min-width: 0; align-items: baseline; justify-content: center; gap: 11px; }
+.bride-profile { text-align: center; }
+.profile-role { margin: 0; color: #8c6633; font: 700 13px "DM Serif Display", serif; letter-spacing: .11em; }
 .profile-copy h3 { margin: 0; color: #2f4d45; font: 600 22px "Gowun Batang", serif; }
-.profile-introduction { margin: 10px 0 0; color: #456056; font: 400 13px/1.75 "Gowun Batang", serif; white-space: pre-line; word-break: keep-all; }
+.profile-introduction { margin: 13px 0 0; color: #456056; font: 700 15px/1.82 "Gowun Batang", serif; text-align: center; white-space: pre-line; word-break: keep-all; }
 .profile-introduction-line { display: block; }
 
 .about-lightbox { width: 100%; max-width: 560px; height: 100dvh; max-height: none; margin: 0 auto; padding: 52px 17px 35px; overflow: hidden; border: 0; background: rgba(24, 52, 47, .97); }
@@ -81,27 +93,18 @@ button.portrait { display: block; cursor: zoom-in; }
 
 @media (min-width: 439px) and (max-width: 480px) {
   .about-section { padding-right: 22px; padding-left: 22px; }
-  .about-profile { gap: 14px; }
+  .about-profile { padding-right: 20px; padding-left: 20px; }
 }
 
 @media (max-width: 438px) {
   .about-section { padding-right: 15px; padding-left: 15px; }
-  .about-profile { grid-template-columns: clamp(58px, calc(20.5vw - 2px), 86px) minmax(0, 1fr); grid-template-areas: "photo role" "photo name" "photo intro"; column-gap: 12px; row-gap: 0; }
-  .profile-copy { display: contents; }
-  .portrait { width: clamp(58px, calc(20.5vw - 2px), 86px); height: clamp(58px, calc(20.5vw - 2px), 86px); }
-  .about-profile .portrait { grid-area: photo; order: 0; }
-  .profile-role { grid-area: role; }
-  .profile-copy h3 { grid-area: name; }
-  .profile-role { align-self: end; }
-  .profile-copy h3 { align-self: start; font-size: clamp(17px, calc(2.56vw + 8.8px), 19px); }
-  .profile-introduction { grid-area: intro; margin-top: 6px; font-size: clamp(9.5px, calc(1.28vw + 6.4px), 12px); line-height: 1.68; }
-  .profile-introduction-line { white-space: nowrap; letter-spacing: -.035em; }
-  .bride-profile { grid-template-columns: minmax(0, 1fr) clamp(58px, calc(20.5vw - 2px), 86px); grid-template-areas: "role photo" "name photo" "intro photo"; }
-  .groom-profile { margin-right: -8px; }
-  .bride-profile { margin-left: -8px; }
-  .groom-profile .portrait { transform: translateX(4px); }
-  .bride-profile .portrait { transform: translateX(-4px); }
-  .bride-profile .portrait { grid-area: photo; order: 0; }
-  .bride-profile .profile-role, .bride-profile .profile-copy h3 { text-align: right; }
-  .bride-profile .profile-introduction { grid-area: intro; text-align: right; }
+  .about-heading p { margin-bottom: 56px; }
+  .about-profiles { gap: 62px; }
+  .about-profile { padding: 0 15px 18px; }
+  .profile-card-header { gap: 8px; }
+  .portrait { width: clamp(76px, 23vw, 92px); height: clamp(76px, 23vw, 92px); margin-top: clamp(-46px, -11.5vw, -38px); }
+  .profile-copy h3 { font-size: clamp(17px, calc(2.56vw + 8.8px), 19px); }
+  .profile-role { font-size: 11px; }
+  .profile-introduction { margin-top: 11px; font-size: clamp(13px, 3.6vw, 14px); line-height: 1.75; }
+  .profile-introduction-line { letter-spacing: -.025em; }
 }

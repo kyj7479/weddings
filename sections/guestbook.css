@@ -1,7 +1,7 @@
 .guestbook-section { padding: 66px 30px 72px; background: #fdfcf8; color: #2f4d45; }
 .guestbook-heading { text-align: center; }
 .guestbook-heading h2 { margin: 0; font: 500 31px "DM Serif Display", serif; letter-spacing: .04em; }
-.guestbook-heading p { margin: 17px 0 34px; color: #526b61; font: 600 16px/1.8 "Gowun Batang", serif; white-space: pre-line; }
+.guestbook-heading p { margin: 17px 0 34px; color: #526b61; font: 600 16px/1.85 "Gowun Batang", serif; white-space: pre-line; }
 .guestbook-form { display: grid; gap: 15px; padding: 27px 23px 22px; border: 1px solid #ddd7ca; background: #fdfcf8; }
 .guestbook-form label { display: grid; gap: 7px; }
 .guestbook-form label > span, .guestbook-list-header { color: #8c6633; font: 700 12px "DM Serif Display", serif; letter-spacing: .11em; }

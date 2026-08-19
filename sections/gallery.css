@@ -41,7 +41,9 @@
 
 .gallery-lightbox { width: 100%; max-width: 560px; height: 100dvh; max-height: none; margin: 0 auto; padding: 52px 17px 35px; border: 0; background: rgba(24, 52, 47, .97); color: #fff; touch-action: none; }
 .gallery-lightbox::backdrop { background: rgba(15, 28, 26, .72); backdrop-filter: blur(4px); }
-.lightbox-image { display: block; width: 100%; height: calc(100dvh - 130px); object-fit: contain; transform-origin: center; }
+.lightbox-stage { position: relative; width: 100%; height: calc(100dvh - 130px); overflow: hidden; }
+.lightbox-image { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; transform-origin: center; will-change: opacity, transform; }
+.lightbox-image[hidden] { display: none; }
 .lightbox-image.is-zoomed { cursor: grab; }
 .lightbox-close, .lightbox-arrow { position: absolute; border: 0; background: transparent; color: #fff; cursor: pointer; }
 .lightbox-close { top: 15px; right: 19px; font: 300 35px/1 sans-serif; }
