@@ -2,6 +2,7 @@ import weddingConfig from "./data/wedding.config.js";
 import sectionOrder from "./data/sections.config.js";
 import createHero from "./sections/hero.js";
 import createInvitation from "./sections/invitation.js";
+import createMonogram from "./sections/monogram.js";
 import createCalendar from "./sections/calendar.js";
 import createFamily from "./sections/family.js";
 import createAbout from "./sections/about.js";
@@ -15,6 +16,7 @@ import formatWedding from "./lib/format-wedding.js";
 const sectionRegistry = {
   hero: createHero,
   invitation: createInvitation,
+  monogram: createMonogram,
   calendar: createCalendar,
   family: createFamily,
   about: createAbout,

@@ -6,6 +6,7 @@
 const sectionOrder = [
   { id: "hero", enabled: true },
   { id: "invitation", enabled: true },
+  { id: "monogram", enabled: true },
   { id: "calendar", enabled: true },
   { id: "family", enabled: true },
   { id: "about", enabled: true },

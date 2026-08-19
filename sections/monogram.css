@@ -1,0 +1,36 @@
+.monogram-section {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  max-width: 330px;
+  margin: -18px auto -17px;
+  padding: 8px 30px;
+  align-items: center;
+  gap: 14px;
+  background: #fdfcf8;
+  color: #95642d;
+}
+
+.monogram-line {
+  flex: 1 1 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(149, 100, 45, .58));
+}
+
+.monogram-line:last-child {
+  background: linear-gradient(90deg, rgba(149, 100, 45, .58), transparent);
+}
+
+.monogram-mark {
+  flex: 0 0 auto;
+  font: 400 12px/1 "DM Serif Display", serif;
+  letter-spacing: .2em;
+  white-space: nowrap;
+}
+
+.monogram-mark i {
+  margin: 0 2px;
+  font-size: 14px;
+  font-style: italic;
+  letter-spacing: 0;
+}
