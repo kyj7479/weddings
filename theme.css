@@ -370,10 +370,24 @@ h1 {
   font-weight: 700;
   white-space: nowrap;
 }
-.details .location,
-.buttons .button { font-size: var(--type-label); font-weight: 700; }
-.details .location { font-weight: 600; line-height: 1.7; letter-spacing: -.05em; text-wrap: balance; }
-.buttons .button { letter-spacing: -.015em; white-space: nowrap; }
+.details .location {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: var(--type-location-body);
+  font-weight: 700;
+  line-height: 1.75;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+.details .location span { white-space: nowrap; }
+.buttons .button {
+  min-height: 52px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: var(--type-body-strong);
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+}
 
 :is(
   .about-heading,
@@ -426,9 +440,9 @@ h1 {
 }
 
 .profile-role,
-.venue-guide-card-label,
+.venue-guide-card-label { font-size: var(--type-label); }
 .driving-guide h3,
-.transport-guide h3 { font-size: var(--type-label); }
+.transport-guide h3 { font-size: var(--type-body-strong); }
 .profile-copy h3 { font-size: var(--type-profile-name); }
 .profile-introduction { font-size: var(--type-body); font-weight: 700; }
 

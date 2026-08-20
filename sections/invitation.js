@@ -109,6 +109,9 @@ function createHeartSheet(content) {
 }
 
 export default function createInvitation(content) {
+  const displayAddress = content.addressParts
+    .map((part) => `<span>${part}</span>`)
+    .join("<wbr> ");
   const section = document.createElement("section");
   section.className = "details";
   section.id = "invitation";
@@ -118,7 +121,7 @@ export default function createInvitation(content) {
     <p class="message">${content.invitationMessage}</p>
     <hr class="divider" />
     <div class="schedule"><strong>${content.koreanDate}</strong><span>${content.venue}</span></div>
-    <p class="location">${content.address}</p>
+    <p class="location">${displayAddress}</p>
     <div class="buttons">
       <a class="button" href="#location">${content.locationButton}</a>
       <button class="button primary heart-sheet-trigger" type="button">${content.contactButton}</button>

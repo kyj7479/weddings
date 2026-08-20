@@ -112,7 +112,7 @@ const weddingConfig = {
       {
         label: "STAR CITY ART HALL",
         title: "식사 안내",
-        description: "한식 한상차림 · 세미 뷔페\n이용 시간 - 오전 11시 50분(예식 30분 전)부터 2시간\n대인 · 식권 필요 / 소인 · 무료",
+        description: "한식 한상차림 · 세미 뷔페\n예식 30분 전(11:50)부터 이용 가능\n(최대 이용 2시간)\n대인 · 식권 필요 / 소인 · 무료",
         images: [
           { src: "./photos/infos/dining1.webp", alt: "스타시티아트홀 한상 차림" },
           { src: "./photos/infos/dining2.webp", alt: "스타시티아트홀 세미 뷔페" },

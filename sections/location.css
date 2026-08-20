@@ -45,7 +45,10 @@
 .transport-row strong { padding-top: 2px; color: #3d6158; font: 700 13px "DM Serif Display", serif; letter-spacing: .06em; }
 .transport-row p { margin: 0; color: #405e54; font: 700 15px/1.75 "Gowun Batang", serif; word-break: keep-all; }
 .driving-row { border-bottom: 1px solid rgba(133, 151, 142, .28); }
-.driving-row p { white-space: pre-line; }
+.parking-entry { display: block; }
+.parking-entry + .parking-entry { margin-top: 7px; }
+.parking-place, .parking-time { display: block; }
+.parking-time { white-space: nowrap; }
 .driving-row small { display: block; margin-top: 7px; color: #60766d; font: 700 14px/1.65 "Gowun Batang", serif; }
 .subway-guide { min-width: 0; }
 .subway-station { display: flex; align-items: center; gap: 5px; min-height: 25px; }

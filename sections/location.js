@@ -67,6 +67,18 @@ export default function createLocation(content) {
   const displayAddress = content.addressParts
     .map((part) => `<span>${part}</span>`)
     .join("<wbr> ");
+  const parkingDescription = location.driving.description
+    .split("\n")
+    .map((entry) => {
+      const [place, time] = entry.split(" · ");
+      return `
+        <span class="parking-entry">
+          <span class="parking-place">${place}</span>
+          ${time ? `<span class="parking-time">${time}</span>` : ""}
+        </span>
+      `;
+    })
+    .join("");
   const section = document.createElement("section");
   section.className = "location-section";
   section.id = "location";
@@ -92,7 +104,7 @@ export default function createLocation(content) {
       <div class="transport-row driving-row">
         <strong>${location.driving.label}</strong>
         <div>
-          <p>${location.driving.description}</p>
+          <p class="parking-list">${parkingDescription}</p>
           <small>${location.driving.capacity}</small>
         </div>
       </div>
