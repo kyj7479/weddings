@@ -19,6 +19,11 @@
 .guestbook-list { margin-top: 15px; }
 .guestbook-message { padding: 18px 0; border-top: 1px solid rgba(133, 151, 142, .28); }
 .guestbook-message:last-child { border-bottom: 1px solid rgba(133, 151, 142, .28); }
+.guestbook-pagination { display: grid; grid-template-columns: minmax(72px, 1fr) auto minmax(72px, 1fr); align-items: center; gap: 10px; margin-top: 18px; }
+.guestbook-pagination[hidden] { display: none; }
+.guestbook-page-button { min-height: 44px; border: 1px solid #b8aa91; background: transparent; color: #405e54; font: 700 13px "Noto Sans KR", sans-serif; cursor: pointer; }
+.guestbook-page-button:disabled { opacity: .38; cursor: default; }
+.guestbook-page-indicator { min-width: 43px; color: #60766d; font: 700 13px "DM Serif Display", serif; letter-spacing: .06em; text-align: center; white-space: nowrap; }
 .guestbook-message-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .guestbook-message-identity { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
 .guestbook-message-meta strong { color: #3d6158; font: 700 15px "Gowun Batang", serif; }

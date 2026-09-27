@@ -25,6 +25,8 @@ function createMessage(message, onDelete) {
   return item;
 }
 
+const MESSAGES_PER_PAGE = 5;
+
 export default function createGuestbook(content) {
   const guestbook = content.guestbook;
   const section = document.createElement("section");
@@ -61,6 +63,11 @@ export default function createGuestbook(content) {
     <div class="guestbook-rule"></div>
     <div class="guestbook-list-header"><span>MESSAGES</span><span class="guestbook-status">불러오는 중</span></div>
     <div class="guestbook-list" aria-live="polite"></div>
+    <nav class="guestbook-pagination" aria-label="방명록 메시지 페이지" hidden>
+      <button class="guestbook-page-button" type="button" data-page-direction="previous">이전</button>
+      <span class="guestbook-page-indicator" aria-live="polite"></span>
+      <button class="guestbook-page-button" type="button" data-page-direction="next">다음</button>
+    </nav>
   `;
 
   const form = section.querySelector(".guestbook-form");
@@ -70,8 +77,14 @@ export default function createGuestbook(content) {
   const notice = form.querySelector(".guestbook-form-notice");
   const list = section.querySelector(".guestbook-list");
   const status = section.querySelector(".guestbook-status");
+  const pagination = section.querySelector(".guestbook-pagination");
+  const previousPageButton = pagination.querySelector('[data-page-direction="previous"]');
+  const nextPageButton = pagination.querySelector('[data-page-direction="next"]');
+  const pageIndicator = pagination.querySelector(".guestbook-page-indicator");
   let pendingDeletionId = null;
   let submittedMessage = false;
+  let messages = [];
+  let currentPage = 1;
 
   const showEmpty = (text) => {
     const empty = document.createElement("p");
@@ -80,18 +93,43 @@ export default function createGuestbook(content) {
     list.replaceChildren(empty);
   };
 
-  const loadMessages = () => {
+  const formatMessageStatus = ({ start, end }) => (
+    messages.length ? `${messages.length}개의 축하 메시지 · ${start}–${end} 표시` : "0개의 축하 메시지"
+  );
+
+  const renderMessages = () => {
+    if (!messages.length) {
+      currentPage = 1;
+      pagination.hidden = true;
+      showEmpty("첫 번째 축하의 마음을 기다리고 있습니다.");
+      return { start: 0, end: 0 };
+    }
+
+    const totalPages = Math.ceil(messages.length / MESSAGES_PER_PAGE);
+    currentPage = Math.min(currentPage, totalPages);
+    const startIndex = (currentPage - 1) * MESSAGES_PER_PAGE;
+    const pageMessages = messages.slice(startIndex, startIndex + MESSAGES_PER_PAGE);
+    list.replaceChildren(...pageMessages.map((message) => createMessage(message, requestDelete)));
+
+    pagination.hidden = totalPages === 1;
+    previousPageButton.disabled = currentPage === 1;
+    nextPageButton.disabled = currentPage === totalPages;
+    pageIndicator.textContent = `${currentPage} / ${totalPages}`;
+    return { start: startIndex + 1, end: startIndex + pageMessages.length };
+  };
+
+  const loadMessages = ({ resetPage = false } = {}) => {
     const callbackName = `guestbookFeed${Date.now()}${Math.floor(Math.random() * 1000)}`;
     const feed = document.createElement("script");
 
     window[callbackName] = (payload) => {
-      const messages = payload?.messages || [];
+      messages = payload?.messages || [];
       const deleted = pendingDeletionId && !messages.some((message) => message.id === pendingDeletionId);
-      if (!messages.length) showEmpty("첫 번째 축하의 마음을 기다리고 있습니다.");
-      else list.replaceChildren(...messages.map((message) => createMessage(message, requestDelete)));
+      if (resetPage) currentPage = 1;
+      const pageRange = renderMessages();
       status.textContent = pendingDeletionId
         ? (deleted ? "메시지를 삭제했습니다." : "삭제 번호가 맞지 않거나 처리하지 못했습니다.")
-        : `${messages.length} MESSAGE${messages.length === 1 ? "" : "S"}`;
+        : formatMessageStatus(pageRange);
       pendingDeletionId = null;
       delete window[callbackName];
       feed.remove();
@@ -108,6 +146,16 @@ export default function createGuestbook(content) {
     };
     document.head.append(feed);
   };
+
+  previousPageButton.addEventListener("click", () => {
+    currentPage -= 1;
+    status.textContent = formatMessageStatus(renderMessages());
+  });
+
+  nextPageButton.addEventListener("click", () => {
+    currentPage += 1;
+    status.textContent = formatMessageStatus(renderMessages());
+  });
 
   const requestDelete = (id) => {
     const deleteCode = window.prompt("작성 시 입력한 4자리 삭제 번호를 입력해 주세요.");
@@ -140,7 +188,7 @@ export default function createGuestbook(content) {
     form.reset();
     submitButton.disabled = false;
     submitButton.textContent = guestbook.submitLabel;
-    loadMessages();
+    loadMessages({ resetPage: true });
   });
 
   return section;

@@ -9,7 +9,7 @@ import createAbout from "./sections/about.js";
 import createGallery from "./sections/gallery.js";
 import createLocation from "./sections/location.js?v=20260821-2";
 import createVenueGuide from "./sections/venue-guide.js";
-import createGuestbook from "./sections/guestbook.js";
+import createGuestbook from "./sections/guestbook.js?v=20260927-1";
 import createShare from "./sections/share.js";
 import formatWedding from "./lib/format-wedding.js";
 
